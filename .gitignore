@@ -1,0 +1,13 @@
+# Data files - never commit raw data
+*.csv
+*.xlsx
+
+#Python
+__pycache__/
+*.pyc
+.env
+venv/
+
+#OS
+.DS_Store
+Thumbs.db
