@@ -1,0 +1,73 @@
+table 'Metrics Stats'
+	lineageTag: 9aa0ebd6-d229-4bc6-9d6a-500af8faf795
+
+	calculationGroup
+		precedence: 12
+
+		calculationItem CY = SELECTEDMEASURE()
+
+			formatStringDefinition = "$#,##0"
+
+		calculationItem PY = ```
+				
+				CALCULATE(
+				    SELECTEDMEASURE(), 
+				    DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR)
+				)
+				
+				```
+
+			formatStringDefinition = "$#,##0"
+
+		calculationItem 'YOY Δ' = ```
+				
+				VAR __CurrentYear = SELECTEDMEASURE()
+				VAR __PreviousYear = 
+				    CALCULATE(
+				        SELECTEDMEASURE(), 
+				        DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR)
+				    )
+				RETURN
+				__CurrentYear - __PreviousYear
+				
+				```
+
+			formatStringDefinition = "+$#,###;-$#,###;$#,###"
+
+		calculationItem 'YOY %' = ```
+				
+				VAR __CurrentYear = SELECTEDMEASURE()
+				VAR __PreviousYear = 
+				    CALCULATE(
+				        SELECTEDMEASURE(), 
+				        DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR)
+				    )
+				RETURN
+				DIVIDE(
+				   __CurrentYear - __PreviousYear,
+				   __PreviousYear,
+				   0
+				)
+				
+				```
+
+			formatStringDefinition = "0.0%;-0.0%;0.0%"
+
+	column Aggregation
+		dataType: string
+		lineageTag: a178b8bc-fc96-468a-929a-fd8ea32af184
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		formatString: 0
+		lineageTag: a6f53134-09b6-4310-86e7-a07ec1a9000b
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

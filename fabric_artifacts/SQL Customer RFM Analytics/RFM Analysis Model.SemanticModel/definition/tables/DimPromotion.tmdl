@@ -1,0 +1,203 @@
+/// Promotional campaigns with discount %, type, category and date range.
+table DimPromotion
+	lineageTag: 7bd76825-166e-42f2-aa87-201096a93b7e
+	sourceLineageTag: [dbo].[DimPromotion]
+
+	/// Unique promotion identifier. Primary key.
+	column PromotionKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a324c2ce-b585-4974-8c9c-07fee81fc5fe
+		sourceLineageTag: PromotionKey
+		isDefaultLabel
+		summarizeBy: none
+		sourceColumn: PromotionKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Alternate integer key for the promotion.
+	column PromotionAlternateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: dc462d4b-1d56-4849-b493-fd769779e96b
+		sourceLineageTag: PromotionAlternateKey
+		summarizeBy: none
+		sourceColumn: PromotionAlternateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Promotion name in English.
+	column EnglishPromotionName
+		dataType: string
+		lineageTag: 11749ae3-95b8-4733-b0db-eac4c5c37cc6
+		sourceLineageTag: EnglishPromotionName
+		summarizeBy: none
+		sourceColumn: EnglishPromotionName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Promotion name translated to Spanish.
+	column SpanishPromotionName
+		dataType: string
+		lineageTag: 5358768b-14d7-4798-9404-4fe205586ec5
+		sourceLineageTag: SpanishPromotionName
+		summarizeBy: none
+		sourceColumn: SpanishPromotionName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Promotion name translated to French.
+	column FrenchPromotionName
+		dataType: string
+		lineageTag: 9855a762-e0b4-4c8b-a47c-7b214f5ef1df
+		sourceLineageTag: FrenchPromotionName
+		summarizeBy: none
+		sourceColumn: FrenchPromotionName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Discount percentage applied by this promotion.
+	column DiscountPct
+		dataType: double
+		lineageTag: 7c92b197-6d05-4af5-94eb-865b24518e9d
+		sourceLineageTag: DiscountPct
+		summarizeBy: none
+		sourceColumn: DiscountPct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Type of promotion (e.g. Excess Inventory, Seasonal Discount).
+	column EnglishPromotionType
+		dataType: string
+		lineageTag: c7a38def-1a21-4434-a3b8-8cbc117d96b8
+		sourceLineageTag: EnglishPromotionType
+		summarizeBy: none
+		sourceColumn: EnglishPromotionType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Promotion type translated to Spanish.
+	column SpanishPromotionType
+		dataType: string
+		lineageTag: ebaf1972-861b-4822-a32d-f9af6160a826
+		sourceLineageTag: SpanishPromotionType
+		summarizeBy: none
+		sourceColumn: SpanishPromotionType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Promotion type translated to French.
+	column FrenchPromotionType
+		dataType: string
+		lineageTag: 2c7195fc-5168-43a9-8d37-9fd0468d1284
+		sourceLineageTag: FrenchPromotionType
+		summarizeBy: none
+		sourceColumn: FrenchPromotionType
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Promotion category (e.g. Reseller, Customer).
+	column EnglishPromotionCategory
+		dataType: string
+		lineageTag: 333a0739-f524-49d6-9a99-b8c2f4fe9a8e
+		sourceLineageTag: EnglishPromotionCategory
+		summarizeBy: none
+		sourceColumn: EnglishPromotionCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Promotion category translated to Spanish.
+	column SpanishPromotionCategory
+		dataType: string
+		lineageTag: b56950b8-41e7-4a2c-98cf-3c7647f71c4b
+		sourceLineageTag: SpanishPromotionCategory
+		summarizeBy: none
+		sourceColumn: SpanishPromotionCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Promotion category translated to French.
+	column FrenchPromotionCategory
+		dataType: string
+		lineageTag: 9357cca5-1298-40e1-a0d7-493284b6646d
+		sourceLineageTag: FrenchPromotionCategory
+		summarizeBy: none
+		sourceColumn: FrenchPromotionCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date the promotion became active.
+	column StartDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 0846c4fa-f1ce-422e-af1b-0a18c3c3380d
+		sourceLineageTag: StartDate
+		summarizeBy: none
+		sourceColumn: StartDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Date the promotion expired.
+	column EndDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 95bacee2-4658-4241-9656-12fea9138db3
+		sourceLineageTag: EndDate
+		summarizeBy: none
+		sourceColumn: EndDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Minimum quantity required to qualify for the promotion.
+	column MinQty
+		dataType: int64
+		formatString: 0
+		lineageTag: 730dc3ae-e90a-4fa6-81cc-df385e9b4bda
+		sourceLineageTag: MinQty
+		summarizeBy: none
+		sourceColumn: MinQty
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Maximum quantity eligible for the discount.
+	column MaxQty
+		dataType: int64
+		formatString: 0
+		lineageTag: 24ddbffd-d8aa-4dbc-b0cc-d72462f815ac
+		sourceLineageTag: MaxQty
+		summarizeBy: none
+		sourceColumn: MaxQty
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimPromotion = entity
+		mode: directLake
+		source
+			entityName: DimPromotion
+			schemaName: dbo
+			expressionSource: 'DirectLake - sales_warehouse'
+

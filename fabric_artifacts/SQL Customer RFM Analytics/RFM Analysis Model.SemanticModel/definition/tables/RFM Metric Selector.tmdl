@@ -1,0 +1,34 @@
+/// Calculation group with three items: Orders, Revenue, Profit. Place on a tile slicer to switch all IBCS visuals between metrics simultaneously.
+table 'RFM Metric Selector'
+	lineageTag: f219bf89-c11d-4d35-bbc7-0b92b5d5a58e
+
+	/// Switch between Total Orders, Total Revenue and Total Profit in visuals
+	calculationGroup
+		precedence: 10
+
+		multipleOrEmptySelectionExpression = SELECTEDMEASURE()
+
+		noSelectionExpression = SELECTEDMEASURE()
+
+		/// Total number of orders
+		calculationItem Orders = [Total Orders]
+
+			formatStringDefinition = "#,0"
+
+		/// Total Revenue
+		calculationItem Revenue = [Total Revenue]
+
+			formatStringDefinition = "$#,##0.00"
+
+		/// Total Profit
+		calculationItem Profit = [Total Profit]
+
+			formatStringDefinition = "$#,##0.00"
+
+	/// Calculation group item name. Values: Orders, Revenue, Profit. Place on a tile slicer to switch all IBCS visuals between metrics.
+	column Metric
+		dataType: string
+		lineageTag: ffcd4b5e-3280-4d20-8314-cfb18b4cba3a
+
+	partition 'Partition_Metric Selector' = calculationGroup
+

@@ -1,0 +1,71 @@
+/// Top-level product category (e.g. Bikes, Accessories, Clothing).
+table DimProductCategory
+	lineageTag: cedf2885-4d29-4c59-a428-0b2e214a2545
+	sourceLineageTag: [dbo].[DimProductCategory]
+
+	/// Unique category identifier. Primary key.
+	column ProductCategoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 36c4fa88-5bb5-4bee-b85f-65cedacc33db
+		sourceLineageTag: ProductCategoryKey
+		isDefaultLabel
+		summarizeBy: none
+		sourceColumn: ProductCategoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Alternate integer key for the category.
+	column ProductCategoryAlternateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9503041c-1720-4925-abe2-fee4e4ea1a87
+		sourceLineageTag: ProductCategoryAlternateKey
+		summarizeBy: none
+		sourceColumn: ProductCategoryAlternateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Top-level product category (Bikes, Accessories, Clothing, or Components).
+	column EnglishProductCategoryName
+		dataType: string
+		lineageTag: 4d5d2d15-80bc-4a43-a8ab-381ee6b18c54
+		sourceLineageTag: EnglishProductCategoryName
+		summarizeBy: none
+		sourceColumn: EnglishProductCategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Category name translated to Spanish.
+	column SpanishProductCategoryName
+		dataType: string
+		lineageTag: 9811aed3-0555-47d2-acd2-e1c508042ed5
+		sourceLineageTag: SpanishProductCategoryName
+		summarizeBy: none
+		sourceColumn: SpanishProductCategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Category name translated to French.
+	column FrenchProductCategoryName
+		dataType: string
+		lineageTag: caea9aea-ba2b-462a-b11b-529771307609
+		sourceLineageTag: FrenchProductCategoryName
+		summarizeBy: none
+		sourceColumn: FrenchProductCategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimProductCategory = entity
+		mode: directLake
+		source
+			entityName: DimProductCategory
+			schemaName: dbo
+			expressionSource: 'DirectLake - sales_warehouse'
+

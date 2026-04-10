@@ -1,0 +1,187 @@
+/// One row per customer with RFM scores (Recency, Frequency, Monetary), profit, and segment label. Bridges customer segments to sales data via CustomerKey.
+table FactCustomerRFM
+	lineageTag: 643cfbe0-6024-4aee-878f-90b703346008
+	sourceLineageTag: [dbo].[FactCustomerRFM]
+
+	/// Unique customer identifier. Foreign key to DimCustomer.
+	column CustomerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c0fb6539-e88c-459f-bfce-b65b9f9c62b9
+		sourceLineageTag: CustomerKey
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer full name (first + last).
+	column FullName
+		dataType: string
+		lineageTag: c0dce3f6-54c9-474f-8026-5176fef19b86
+		sourceLineageTag: FullName
+		summarizeBy: none
+		sourceColumn: FullName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date of the customer's most recent order.
+	column LastOrderDate
+		dataType: dateTime
+		isHidden
+		formatString: d mmm yyyy
+		lineageTag: bb70df70-1f5e-4ded-8cd6-dc9e29bd23d0
+		sourceLineageTag: LastOrderDate
+		summarizeBy: none
+		sourceColumn: LastOrderDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Days since the customer's last order. Lower = more recent.
+	column Recency
+		dataType: int64
+		formatString: 0
+		lineageTag: 12a04fb3-5bf2-4810-bec6-9062ed17c278
+		sourceLineageTag: Recency
+		summarizeBy: none
+		sourceColumn: Recency
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Total number of orders placed by the customer.
+	column Frequency
+		dataType: int64
+		formatString: 0
+		lineageTag: ff896c03-465b-40a7-87fa-bd302d96d00d
+		sourceLineageTag: Frequency
+		summarizeBy: none
+		sourceColumn: Frequency
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Total amount spent by the customer.
+	column Monetary
+		dataType: double
+		lineageTag: 0d665824-4dcb-4fc6-8faa-2dcecb322407
+		sourceLineageTag: Monetary
+		summarizeBy: none
+		sourceColumn: Monetary
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Total cost of goods for this customer's orders.
+	column TotalCost
+		dataType: double
+		lineageTag: 6519b896-9867-485b-b41f-4752ee0ad0a7
+		sourceLineageTag: TotalCost
+		summarizeBy: none
+		sourceColumn: TotalCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Recency score 1–5. Score 5 = bought very recently.
+	column Recency_Score
+		dataType: int64
+		formatString: 0
+		lineageTag: b0552163-1ae0-47a5-8445-6f8fbbf14594
+		sourceLineageTag: Recency_Score
+		summarizeBy: none
+		sourceColumn: Recency_Score
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Frequency score 1–5. Score 5 = orders very often.
+	column Frequency_Score
+		dataType: int64
+		formatString: 0
+		lineageTag: 7cc248a3-316d-4ad2-887a-fc986a54ad44
+		sourceLineageTag: Frequency_Score
+		summarizeBy: none
+		sourceColumn: Frequency_Score
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Monetary score 1–5. Score 5 = highest spender.
+	column Monetary_Score
+		dataType: int64
+		formatString: 0
+		lineageTag: 129dffb2-92f7-4326-ad5d-882835f26a14
+		sourceLineageTag: Monetary_Score
+		summarizeBy: none
+		sourceColumn: Monetary_Score
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer gross profit (Monetary minus TotalCost).
+	column Profit
+		dataType: double
+		lineageTag: 87c241b4-5371-4500-bc69-f327f0b0efb5
+		sourceLineageTag: Profit
+		summarizeBy: none
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Profit as a % of total spend for this customer.
+	column ProfitMarginPercent
+		dataType: double
+		lineageTag: 1746def6-6cba-4dcf-89d6-0d2351d09de3
+		sourceLineageTag: ProfitMarginPercent
+		summarizeBy: none
+		sourceColumn: ProfitMarginPercent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// RFM segment label: Champions, VIPs, Loyalists, or At Risk.
+	column Segment
+		dataType: string
+		lineageTag: 6c143742-f007-4727-91c5-c9fcb429dc6f
+		sourceLineageTag: Segment
+		summarizeBy: none
+		sourceColumn: Segment
+		sortByColumn: SegmentIndex
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column SegmentIndex
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5ff744a4-cf02-4219-a57d-72a8ba3593dc
+		sourceLineageTag: SegmentIndex
+		summarizeBy: sum
+		sourceColumn: SegmentIndex
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactCustomerRFM = entity
+		mode: directLake
+		source
+			entityName: FactCustomerRFM
+			schemaName: dbo
+			expressionSource: 'DirectLake - sales_warehouse'
+

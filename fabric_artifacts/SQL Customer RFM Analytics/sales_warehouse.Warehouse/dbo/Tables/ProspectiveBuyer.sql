@@ -1,0 +1,27 @@
+CREATE TABLE [dbo].[ProspectiveBuyer] (
+
+	[ProspectiveBuyerKey] int NULL, 
+	[ProspectAlternateKey] varchar(8000) NULL, 
+	[FirstName] varchar(8000) NULL, 
+	[MiddleName] varchar(8000) NULL, 
+	[LastName] varchar(8000) NULL, 
+	[BirthDate] datetime2(3) NULL, 
+	[MaritalStatus] char(1) NULL, 
+	[Gender] varchar(8000) NULL, 
+	[EmailAddress] varchar(8000) NULL, 
+	[YearlyIncome] decimal(19,4) NULL, 
+	[TotalChildren] int NULL, 
+	[NumberChildrenAtHome] int NULL, 
+	[Education] varchar(8000) NULL, 
+	[Occupation] varchar(8000) NULL, 
+	[HouseOwnerFlag] char(1) NULL, 
+	[NumberCarsOwned] int NULL, 
+	[AddressLine1] varchar(8000) NULL, 
+	[AddressLine2] varchar(8000) NULL, 
+	[City] varchar(8000) NULL, 
+	[StateProvinceCode] varchar(8000) NULL, 
+	[PostalCode] varchar(8000) NULL, 
+	[Phone] varchar(8000) NULL, 
+	[Salutation] varchar(8000) NULL, 
+	[Unknown] int NULL
+);

@@ -1,0 +1,372 @@
+/// Employee directory with HR data including name, department, hire date, pay and reporting structure. Not used in current report measures — included as part of the source schema.
+table DimEmployee
+	lineageTag: 372bc5c1-7f24-4fb4-be4f-c329d3b87a03
+	sourceLineageTag: [dbo].[DimEmployee]
+
+	/// Unique employee identifier. Primary key.
+	column EmployeeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 22a8376c-fcd4-45b6-86c3-cda6bb9a9138
+		sourceLineageTag: EmployeeKey
+		summarizeBy: count
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	/// FK to the employee's direct manager. Used to build org hierarchy.
+	column ParentEmployeeKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ef3b9334-6808-4b9b-91cf-eae64aebb32e
+		sourceLineageTag: ParentEmployeeKey
+		summarizeBy: count
+		sourceColumn: ParentEmployeeKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// National ID or tax identifier for the employee.
+	column EmployeeNationalIDAlternateKey
+		dataType: string
+		isHidden
+		lineageTag: b5a374dd-4ef8-4691-ae83-304bdb3a30bb
+		sourceLineageTag: EmployeeNationalIDAlternateKey
+		summarizeBy: none
+		sourceColumn: EmployeeNationalIDAlternateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// National ID of the employee's direct manager.
+	column ParentEmployeeNationalIDAlternateKey
+		dataType: string
+		isHidden
+		lineageTag: 0c360fcb-127b-447b-9f48-ab9d819bed34
+		sourceLineageTag: ParentEmployeeNationalIDAlternateKey
+		summarizeBy: none
+		sourceColumn: ParentEmployeeNationalIDAlternateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// FK to DimSalesTerritory — territory the employee is assigned to.
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b60186c1-b846-4d9f-9dc0-303d4b98515f
+		sourceLineageTag: SalesTerritoryKey
+		summarizeBy: count
+		sourceColumn: SalesTerritoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Employee first name.
+	column FirstName
+		dataType: string
+		lineageTag: d3f80354-5dbd-48f4-bb78-3cd2c7274306
+		sourceLineageTag: FirstName
+		summarizeBy: none
+		sourceColumn: FirstName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Employee last name.
+	column LastName
+		dataType: string
+		lineageTag: ebc49db1-92d2-4919-bb6c-2b9c352d1cf4
+		sourceLineageTag: LastName
+		summarizeBy: none
+		sourceColumn: LastName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Employee middle name or initial.
+	column MiddleName
+		dataType: string
+		lineageTag: 35c983a8-560e-4fb5-ba35-673b75153cce
+		sourceLineageTag: MiddleName
+		summarizeBy: none
+		sourceColumn: MiddleName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name display style flag (Eastern vs Western order).
+	column NameStyle
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 50da45a6-7e0a-49a1-874e-21acaf79875f
+		sourceLineageTag: NameStyle
+		summarizeBy: none
+		sourceColumn: NameStyle
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Job title (e.g. Sales Manager, VP of Sales).
+	column Title
+		dataType: string
+		lineageTag: 40a8a595-d9de-442d-9e83-af48f854b5f3
+		sourceLineageTag: Title
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date the employee was hired.
+	column HireDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 4688bbdc-8230-44b2-977d-ea1dbe6bb77d
+		sourceLineageTag: HireDate
+		summarizeBy: none
+		sourceColumn: HireDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Employee date of birth.
+	column BirthDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 1ef20ae9-3ea3-4bcd-b437-0608b37b487a
+		sourceLineageTag: BirthDate
+		summarizeBy: none
+		sourceColumn: BirthDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// System login ID for the employee.
+	column LoginID
+		dataType: string
+		lineageTag: 9d808704-4195-4881-9e85-fe3eb57fdd80
+		sourceLineageTag: LoginID
+		summarizeBy: none
+		sourceColumn: LoginID
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Employee work email address.
+	column EmailAddress
+		dataType: string
+		lineageTag: cedaf27d-6dc0-456f-9d51-d3c5199be568
+		sourceLineageTag: EmailAddress
+		summarizeBy: none
+		sourceColumn: EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Employee phone number.
+	column Phone
+		dataType: string
+		lineageTag: b72ebea7-a6a1-4892-ad03-2990eb0266f1
+		sourceLineageTag: Phone
+		summarizeBy: none
+		sourceColumn: Phone
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Marital status: S = Single, M = Married.
+	column MaritalStatus
+		dataType: string
+		lineageTag: 18c04ae2-bc7d-4ebe-b577-c486740c648a
+		sourceLineageTag: MaritalStatus
+		summarizeBy: none
+		sourceColumn: MaritalStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name of the employee's emergency contact.
+	column EmergencyContactName
+		dataType: string
+		lineageTag: 016ac56e-fd9d-4541-ba79-ee5e0a67dbb8
+		sourceLineageTag: EmergencyContactName
+		summarizeBy: none
+		sourceColumn: EmergencyContactName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Phone number for the employee's emergency contact.
+	column EmergencyContactPhone
+		dataType: string
+		lineageTag: a3b5e9cf-24e0-407f-8a55-fe3118da76ec
+		sourceLineageTag: EmergencyContactPhone
+		summarizeBy: none
+		sourceColumn: EmergencyContactPhone
+
+		annotation SummarizationSetBy = Automatic
+
+	/// True = salaried employee; False = hourly.
+	column SalariedFlag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f6ed377e-3644-4c36-bd97-6ea4b4104907
+		sourceLineageTag: SalariedFlag
+		summarizeBy: none
+		sourceColumn: SalariedFlag
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gender: M = Male, F = Female.
+	column Gender
+		dataType: string
+		lineageTag: b356c70d-f28a-4ff1-9ece-905774e7a72f
+		sourceLineageTag: Gender
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Pay frequency code (1 = monthly, 2 = bi-weekly).
+	column PayFrequency
+		dataType: int64
+		formatString: 0
+		lineageTag: e5de823d-783f-48b3-a068-ab1b029217cd
+		sourceLineageTag: PayFrequency
+		summarizeBy: none
+		sourceColumn: PayFrequency
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Hourly or base salary rate.
+	column BaseRate
+		dataType: double
+		lineageTag: b97d571d-23d9-4510-9d5d-f433688c269f
+		sourceLineageTag: BaseRate
+		summarizeBy: none
+		sourceColumn: BaseRate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Accrued vacation hours remaining.
+	column VacationHours
+		dataType: int64
+		formatString: 0
+		lineageTag: ef7a52f5-8d28-486c-bc8d-d5bc98835968
+		sourceLineageTag: VacationHours
+		summarizeBy: none
+		sourceColumn: VacationHours
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Accrued sick leave hours remaining.
+	column SickLeaveHours
+		dataType: int64
+		formatString: 0
+		lineageTag: b8e6b77e-1fb6-4f83-9f0c-acdc7b485a5f
+		sourceLineageTag: SickLeaveHours
+		summarizeBy: none
+		sourceColumn: SickLeaveHours
+
+		annotation SummarizationSetBy = Automatic
+
+	/// True = currently active employee; False = former employee.
+	column CurrentFlag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d0c91643-456e-4364-8d23-256d4b4a3b02
+		sourceLineageTag: CurrentFlag
+		summarizeBy: none
+		sourceColumn: CurrentFlag
+
+		annotation SummarizationSetBy = Automatic
+
+	/// True = employee is a salesperson linked to sales transactions.
+	column SalesPersonFlag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: fa1efb0c-e963-45cd-a9da-61edb3e6bd9f
+		sourceLineageTag: SalesPersonFlag
+		summarizeBy: none
+		sourceColumn: SalesPersonFlag
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Department the employee belongs to (e.g. Sales, Engineering).
+	column DepartmentName
+		dataType: string
+		lineageTag: cea74883-06ba-4434-a669-a913881ffc09
+		sourceLineageTag: DepartmentName
+		summarizeBy: none
+		sourceColumn: DepartmentName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date this employee record became effective.
+	column StartDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: e4c5e273-1180-485c-8248-599d239ef8b6
+		sourceLineageTag: StartDate
+		summarizeBy: none
+		sourceColumn: StartDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Date this employee record was superseded. Blank if current.
+	column EndDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 0a489086-5945-493e-a8c1-eb063a5eb27d
+		sourceLineageTag: EndDate
+		summarizeBy: none
+		sourceColumn: EndDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Employment status: Current or historical.
+	column Status
+		dataType: string
+		lineageTag: 90b0a18d-03ff-4e3c-89c0-857b53b16703
+		sourceLineageTag: Status
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimEmployee = entity
+		mode: directLake
+		source
+			entityName: DimEmployee
+			schemaName: dbo
+			expressionSource: 'DirectLake - sales_warehouse'
+

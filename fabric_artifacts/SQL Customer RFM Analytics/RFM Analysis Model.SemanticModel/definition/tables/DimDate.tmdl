@@ -1,0 +1,240 @@
+/// Date dimension with calendar and fiscal breakdowns. Use FullDateAlternateKey in time intelligence filters and CalendarYear for yearly analysis.
+table DimDate
+	lineageTag: 2008242e-4713-4dc5-8a45-47fccc80f5bd
+	sourceLineageTag: [dbo].[DimDate]
+	dataCategory: Time
+
+	/// Integer surrogate key in YYYYMMDD format. Used as FK in fact tables.
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1e2d9183-57a0-43f6-8cf9-d424c3b21a7a
+		sourceLineageTag: DateKey
+		isDefaultLabel
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Full calendar date value. Use this column in time intelligence functions (SAMEPERIODLASTYEAR, etc.).
+	column FullDateAlternateKey
+		dataType: dateTime
+		isKey
+		formatString: Short Date
+		lineageTag: 26738535-64f5-440d-97c6-c353b354a173
+		sourceLineageTag: FullDateAlternateKey
+		summarizeBy: none
+		sourceColumn: FullDateAlternateKey
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Day of the week (1 = Sunday, 7 = Saturday).
+	column DayNumberOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: de186512-85e3-46ea-8821-c89e35498e4e
+		sourceLineageTag: DayNumberOfWeek
+		summarizeBy: none
+		sourceColumn: DayNumberOfWeek
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Day name in English (e.g. Monday, Tuesday).
+	column EnglishDayNameOfWeek
+		dataType: string
+		lineageTag: 8c246c85-53b4-44db-8035-6dd785524169
+		sourceLineageTag: EnglishDayNameOfWeek
+		summarizeBy: none
+		sourceColumn: EnglishDayNameOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Day number within the month (1–31).
+	column DayNumberOfMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: 4d13349d-6c4d-4abd-9a42-2e83b653b07d
+		sourceLineageTag: DayNumberOfMonth
+		summarizeBy: none
+		sourceColumn: DayNumberOfMonth
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Day number within the calendar year (1–366).
+	column DayNumberOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: ff2841c1-e04e-451a-9d44-d1c5eaae5c4b
+		sourceLineageTag: DayNumberOfYear
+		summarizeBy: none
+		sourceColumn: DayNumberOfYear
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Week number within the calendar year (1–53).
+	column WeekNumberOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: b76f2afd-6536-4a62-b687-b77c6d217bb8
+		sourceLineageTag: WeekNumberOfYear
+		summarizeBy: none
+		sourceColumn: WeekNumberOfYear
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Full month name in English (e.g. January).
+	column EnglishMonthName
+		dataType: string
+		lineageTag: 659d8835-a71b-49fc-8505-3d9d483a1542
+		sourceLineageTag: EnglishMonthName
+		summarizeBy: none
+		sourceColumn: EnglishMonthName
+		sortByColumn: MonthNumberOfYear
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Month number within the year (1 = January, 12 = December).
+	column MonthNumberOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 92399618-6248-400c-afaa-15d7e8d865f3
+		sourceLineageTag: MonthNumberOfYear
+		summarizeBy: none
+		sourceColumn: MonthNumberOfYear
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Calendar quarter (1–4).
+	column CalendarQuarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 4001806e-c292-4cbe-a226-3c023d22a013
+		sourceLineageTag: CalendarQuarter
+		summarizeBy: none
+		sourceColumn: CalendarQuarter
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Calendar year (e.g. 2023). Use in matrix Columns for yearly analysis.
+	column CalendarYear
+		dataType: int64
+		formatString: 0
+		lineageTag: bded0499-8190-4986-b926-f7a9b0c24400
+		sourceLineageTag: CalendarYear
+		summarizeBy: none
+		sourceColumn: CalendarYear
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Calendar semester (1 = Jan–Jun, 2 = Jul–Dec).
+	column CalendarSemester
+		dataType: int64
+		formatString: 0
+		lineageTag: 5f9bb866-ffd2-45e1-baa8-9e32367ec748
+		sourceLineageTag: CalendarSemester
+		summarizeBy: none
+		sourceColumn: CalendarSemester
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Fiscal quarter (1–4).
+	column FiscalQuarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 3fa52c2b-0308-4bef-91f8-b4f9bf7ca1fa
+		sourceLineageTag: FiscalQuarter
+		summarizeBy: none
+		sourceColumn: FiscalQuarter
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Fiscal year number.
+	column FiscalYear
+		dataType: int64
+		formatString: 0
+		lineageTag: d77a2cf9-9211-4b00-8808-86c8dc941e5b
+		sourceLineageTag: FiscalYear
+		summarizeBy: none
+		sourceColumn: FiscalYear
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Fiscal semester (1 or 2).
+	column FiscalSemester
+		dataType: int64
+		formatString: 0
+		lineageTag: 912cfcca-f80b-471c-a1bb-9de1f5667d94
+		sourceLineageTag: FiscalSemester
+		summarizeBy: none
+		sourceColumn: FiscalSemester
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Single-letter month initial (J, F, M…). Used as compact axis label in IBCS charts.
+	column MonthInitial
+		dataType: string
+		lineageTag: 95f36f34-a022-4007-9d22-ed67af931260
+		sourceLineageTag: MonthInitial
+		summarizeBy: none
+		sourceColumn: MonthInitial
+		sortByColumn: MonthInitialIndex
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sort order for MonthInitial to ensure correct month sequence in visuals.
+	column MonthInitialIndex
+		dataType: int64
+		formatString: 0
+		lineageTag: 134e1c39-765c-40c0-a312-8a9296375cf7
+		sourceLineageTag: MonthInitialIndex
+		summarizeBy: none
+		sourceColumn: MonthInitialIndex
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	partition DimDate = entity
+		mode: directLake
+		source
+			entityName: DimDate
+			schemaName: dbo
+			expressionSource: 'DirectLake - sales_warehouse'
+

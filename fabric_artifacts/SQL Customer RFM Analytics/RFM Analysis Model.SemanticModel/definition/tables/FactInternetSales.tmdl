@@ -1,0 +1,352 @@
+/// One row per sales order line. Source of all revenue, cost and order volume metrics. Linked to DimDate via OrderDateKey.
+table FactInternetSales
+	lineageTag: a4c0afaf-a95a-4a95-9d2a-e9e37e25f2ff
+	sourceLineageTag: [dbo].[FactInternetSales]
+
+	/// Foreign key to DimProduct.
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 624f7378-ede8-4384-a98f-c915f54333ca
+		sourceLineageTag: ProductKey
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// FK to DimDate for order date (main active relationship).
+	column OrderDateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 58464deb-1b3b-4d85-b4af-122dd611b148
+		sourceLineageTag: OrderDateKey
+		summarizeBy: none
+		sourceColumn: OrderDateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// FK to DimDate for due date.
+	column DueDateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 55022eaf-d70b-4f97-8d38-560892057e69
+		sourceLineageTag: DueDateKey
+		summarizeBy: count
+		sourceColumn: DueDateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// FK to DimDate for ship date.
+	column ShipDateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c68bf67b-0e81-485e-887d-e2d2c273f495
+		sourceLineageTag: ShipDateKey
+		summarizeBy: count
+		sourceColumn: ShipDateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key to DimCustomer.
+	column CustomerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: faa00540-6504-45b4-a4ea-d60a8b12ddde
+		sourceLineageTag: CustomerKey
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key to DimPromotion.
+	column PromotionKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b7cdd602-cc96-4552-a2ee-ef1cf728b862
+		sourceLineageTag: PromotionKey
+		summarizeBy: none
+		sourceColumn: PromotionKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// FK to currency dimension (not modeled in current schema).
+	column CurrencyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 75277fff-3ed9-4f5f-b477-b4085a25457f
+		sourceLineageTag: CurrencyKey
+		summarizeBy: count
+		sourceColumn: CurrencyKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key to DimSalesTerritory.
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 120f9c8b-b63b-4cb7-b13b-cd182f7d3358
+		sourceLineageTag: SalesTerritoryKey
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Unique sales order number (groups multiple lines in one order).
+	column SalesOrderNumber
+		dataType: string
+		lineageTag: 45655d62-279d-477d-be52-f9d8766739e1
+		sourceLineageTag: SalesOrderNumber
+		summarizeBy: none
+		sourceColumn: SalesOrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Line item number within an order.
+	column SalesOrderLineNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 6419f6bf-4764-4c89-95b4-8fb68c6f5588
+		sourceLineageTag: SalesOrderLineNumber
+		summarizeBy: none
+		sourceColumn: SalesOrderLineNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Internal revision number for the order line.
+	column RevisionNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 133bc416-c7b8-415a-9e02-753d67054da6
+		sourceLineageTag: RevisionNumber
+		summarizeBy: none
+		sourceColumn: RevisionNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Number of units ordered on this line.
+	column OrderQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 4432cfa4-151b-4a5a-b773-efdae6f1f050
+		sourceLineageTag: OrderQuantity
+		summarizeBy: none
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Price per unit before discounts.
+	column UnitPrice
+		dataType: double
+		lineageTag: 022b1bcb-5257-4f95-a64a-cbe073ff6f07
+		sourceLineageTag: UnitPrice
+		summarizeBy: none
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Total line amount after discounts (UnitPrice x Quantity - discount).
+	column ExtendedAmount
+		dataType: double
+		lineageTag: c60ceedd-486b-44ab-aa69-81c999d5e0e6
+		sourceLineageTag: ExtendedAmount
+		summarizeBy: none
+		sourceColumn: ExtendedAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Discount % applied to the unit price.
+	column UnitPriceDiscountPct
+		dataType: double
+		lineageTag: e5a4dcce-f414-438c-b8c0-07e32f155c3c
+		sourceLineageTag: UnitPriceDiscountPct
+		summarizeBy: none
+		sourceColumn: UnitPriceDiscountPct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Total discount dollar amount applied to this line.
+	column DiscountAmount
+		dataType: double
+		lineageTag: 484f8a1c-ecc1-49ac-b3be-50d0c4b04e53
+		sourceLineageTag: DiscountAmount
+		summarizeBy: none
+		sourceColumn: DiscountAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Standard cost of the product at time of sale.
+	column ProductStandardCost
+		dataType: double
+		lineageTag: cbf9551d-3117-4a82-a946-e4eacca5c80e
+		sourceLineageTag: ProductStandardCost
+		summarizeBy: none
+		sourceColumn: ProductStandardCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Total cost of goods for this line (cost x quantity).
+	column TotalProductCost
+		dataType: double
+		lineageTag: 2a45ea91-496b-4b13-a91c-835dce79e547
+		sourceLineageTag: TotalProductCost
+		summarizeBy: none
+		sourceColumn: TotalProductCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Net sales amount for this order line. Primary revenue column.
+	column SalesAmount
+		dataType: double
+		lineageTag: 9cad253b-3aa5-4244-ab45-254a1540e560
+		sourceLineageTag: SalesAmount
+		summarizeBy: none
+		sourceColumn: SalesAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Tax amount on this line.
+	column TaxAmt
+		dataType: double
+		lineageTag: 0c784785-06a7-4f83-9101-0556c83f9362
+		sourceLineageTag: TaxAmt
+		summarizeBy: none
+		sourceColumn: TaxAmt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Freight/shipping cost on this line.
+	column Freight
+		dataType: double
+		lineageTag: 8affdf48-2fa6-441a-b043-1a2c8ea8e6a2
+		sourceLineageTag: Freight
+		summarizeBy: none
+		sourceColumn: Freight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Shipping carrier tracking number.
+	column CarrierTrackingNumber
+		dataType: string
+		lineageTag: d789832a-71f1-4aa9-a56b-fbf37e9b7c84
+		sourceLineageTag: CarrierTrackingNumber
+		summarizeBy: none
+		sourceColumn: CarrierTrackingNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer purchase order reference number.
+	column CustomerPONumber
+		dataType: string
+		lineageTag: f12d131e-e34c-4188-9e07-8c4d024924a6
+		sourceLineageTag: CustomerPONumber
+		summarizeBy: none
+		sourceColumn: CustomerPONumber
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Actual order date value (date type, as opposed to OrderDateKey integer).
+	column OrderDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 57b17b4c-d9b7-4648-ac01-93512cbdaaa9
+		sourceLineageTag: OrderDate
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Expected delivery due date.
+	column DueDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 818c5e24-437a-44da-b963-a38b5bf0ebeb
+		sourceLineageTag: DueDate
+		summarizeBy: none
+		sourceColumn: DueDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Date the order was shipped.
+	column ShipDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 45ec2cf3-c4ca-48e3-94c6-1363ce156767
+		sourceLineageTag: ShipDate
+		summarizeBy: none
+		sourceColumn: ShipDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	partition FactInternetSales = entity
+		mode: directLake
+		source
+			entityName: FactInternetSales
+			schemaName: dbo
+			expressionSource: 'DirectLake - sales_warehouse'
+

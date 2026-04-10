@@ -1,0 +1,145 @@
+/// City, state and country lookup for customers and sales territories.
+table DimGeography
+	lineageTag: a6cd0575-4242-41b3-a4b5-4babc6c1867f
+	sourceLineageTag: [dbo].[DimGeography]
+
+	/// Unique geography identifier. Primary key.
+	column GeographyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a70bf514-58a8-4dad-a311-37382153b043
+		sourceLineageTag: GeographyKey
+		summarizeBy: count
+		sourceColumn: GeographyKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// City name.
+	column City
+		dataType: string
+		lineageTag: 99d2bc70-4fae-4296-a1f1-d3158e043e03
+		sourceLineageTag: City
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	/// State or province abbreviation code.
+	column StateProvinceCode
+		dataType: string
+		lineageTag: 56e89340-73a9-4cc4-ae80-721f8892174b
+		sourceLineageTag: StateProvinceCode
+		summarizeBy: none
+		sourceColumn: StateProvinceCode
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Full state or province name.
+	column StateProvinceName
+		dataType: string
+		lineageTag: eb243f2c-4dfb-48cc-b194-af104a40843d
+		sourceLineageTag: StateProvinceName
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: StateProvinceName
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	/// ISO country code (e.g. US, AU, GB).
+	column CountryRegionCode
+		dataType: string
+		lineageTag: ae109bd7-e1d3-4997-9dc9-ad5b28fe778e
+		sourceLineageTag: CountryRegionCode
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: CountryRegionCode
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Country or region name in English.
+	column EnglishCountryRegionName
+		dataType: string
+		lineageTag: a61e1813-cd83-4cb7-bc59-61516e60c53a
+		sourceLineageTag: EnglishCountryRegionName
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: EnglishCountryRegionName
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Country or region name translated to Spanish.
+	column SpanishCountryRegionName
+		dataType: string
+		lineageTag: 72981b4c-cbe5-4aab-a197-1a46bee88046
+		sourceLineageTag: SpanishCountryRegionName
+		summarizeBy: none
+		sourceColumn: SpanishCountryRegionName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Country or region name translated to French.
+	column FrenchCountryRegionName
+		dataType: string
+		lineageTag: a6cd6da9-8949-4419-a15d-d924ee7266d5
+		sourceLineageTag: FrenchCountryRegionName
+		summarizeBy: none
+		sourceColumn: FrenchCountryRegionName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Postal or ZIP code.
+	column PostalCode
+		dataType: string
+		lineageTag: 0af01f9b-67ac-49e7-a850-8152f54a96a9
+		sourceLineageTag: PostalCode
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: PostalCode
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key to DimSalesTerritory.
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 06e2514b-078f-4c2a-b782-ccf3716b1ebb
+		sourceLineageTag: SalesTerritoryKey
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// IP address range for geolocation lookup (not used in reports).
+	column IpAddressLocator
+		dataType: string
+		lineageTag: cd17a621-83c2-4791-9c4b-d1d6ee559fc9
+		sourceLineageTag: IpAddressLocator
+		summarizeBy: none
+		sourceColumn: IpAddressLocator
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimGeography = entity
+		mode: directLake
+		source
+			entityName: DimGeography
+			schemaName: dbo
+			expressionSource: 'DirectLake - sales_warehouse'
+

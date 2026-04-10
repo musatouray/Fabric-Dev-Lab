@@ -1,0 +1,168 @@
+{
+  "properties": {
+    "jobMode": "CDC",
+    "fullLoadBehavior": "Truncate",
+    "source": {
+      "type": "SqlServerTable",
+      "connectionSettings": {
+        "type": "SqlServer",
+        "typeProperties": {
+          "database": "AdventureWorksDW2022"
+        },
+        "externalReferences": {
+          "connection": "45a97d05-e55e-4e7f-8e87-d5113242ef42"
+        }
+      }
+    },
+    "destination": {
+      "type": "DataWarehouseTable",
+      "connectionSettings": {
+        "type": "DataWarehouse",
+        "typeProperties": {
+          "workspaceId": "aca4b91c-3a43-4f0a-b169-85f40788c6e7",
+          "artifactId": "a810b6e0-b584-49ed-aef6-467235466701",
+          "endPoint": "ukzp3z4akpyebawyuo2uyh4bp4-ds42jlcdhife7mljqx2apcgg44.datawarehouse.fabric.microsoft.com"
+        }
+      }
+    },
+    "policy": {
+      "timeout": "0.12:00:00",
+      "retry": 0
+    }
+  },
+  "activities": [
+    {
+      "id": "f8681cd8-8498-4fe9-843e-413b35656f11",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "FactFinance"
+          },
+          "changeDataSettings": {
+            "readMethod": "SnapshotPlusIncremental",
+            "columns": [
+              {
+                "name": "FinanceKey",
+                "type": "Int32",
+                "physicalType": "int"
+              }
+            ]
+          },
+          "partitionSettings": {
+            "partitionOption": "None"
+          }
+        },
+        "destination": {
+          "tableOption": "autoCreate",
+          "writeBehavior": "Append",
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "FactFinance"
+          }
+        },
+        "enableStaging": true,
+        "translator": {
+          "type": "TabularTranslator",
+          "mappings": [
+            {
+              "source": {
+                "name": "FinanceKey",
+                "type": "Int32",
+                "physicalType": "int"
+              },
+              "destination": {
+                "name": "FinanceKey",
+                "physicalType": "int"
+              }
+            },
+            {
+              "source": {
+                "name": "DateKey",
+                "type": "Int32",
+                "physicalType": "int"
+              },
+              "destination": {
+                "name": "DateKey",
+                "physicalType": "int"
+              }
+            },
+            {
+              "source": {
+                "name": "OrganizationKey",
+                "type": "Int32",
+                "physicalType": "int"
+              },
+              "destination": {
+                "name": "OrganizationKey",
+                "physicalType": "int"
+              }
+            },
+            {
+              "source": {
+                "name": "DepartmentGroupKey",
+                "type": "Int32",
+                "physicalType": "int"
+              },
+              "destination": {
+                "name": "DepartmentGroupKey",
+                "physicalType": "int"
+              }
+            },
+            {
+              "source": {
+                "name": "ScenarioKey",
+                "type": "Int32",
+                "physicalType": "int"
+              },
+              "destination": {
+                "name": "ScenarioKey",
+                "physicalType": "int"
+              }
+            },
+            {
+              "source": {
+                "name": "AccountKey",
+                "type": "Int32",
+                "physicalType": "int"
+              },
+              "destination": {
+                "name": "AccountKey",
+                "physicalType": "int"
+              }
+            },
+            {
+              "source": {
+                "name": "Amount",
+                "type": "Double",
+                "physicalType": "float"
+              },
+              "destination": {
+                "name": "Amount",
+                "physicalType": "float"
+              }
+            },
+            {
+              "source": {
+                "name": "Date",
+                "type": "DateTime",
+                "physicalType": "datetime"
+              },
+              "destination": {
+                "name": "Date",
+                "physicalType": "datetime2",
+                "precision": 6
+              }
+            }
+          ]
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    }
+  ]
+}

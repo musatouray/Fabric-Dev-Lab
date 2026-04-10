@@ -1,0 +1,340 @@
+/// Customer profiles including name, demographics, income, education and first purchase date. Joined to sales via CustomerKey.
+table DimCustomer
+	lineageTag: 0f5923f2-25b2-4407-8f50-8f6c8f2206bc
+	sourceLineageTag: [dbo].[DimCustomer]
+
+	/// Unique customer identifier. Primary key, links to FactInternetSales and FactCustomerRFM.
+	column CustomerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2ef8c9d9-fcb6-4b06-824a-808d658b32b7
+		sourceLineageTag: CustomerKey
+		isDefaultLabel
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key to DimGeography for the customer's location.
+	column GeographyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 794123dd-0ce5-4e53-a249-8ed72da9a866
+		sourceLineageTag: GeographyKey
+		summarizeBy: none
+		sourceColumn: GeographyKey
+
+		changedProperty = IsHidden
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	/// Business alternate key for the customer.
+	column CustomerAlternateKey
+		dataType: string
+		isHidden
+		lineageTag: 332a994f-6d4c-4e08-863f-61ddbb0a268e
+		sourceLineageTag: CustomerAlternateKey
+		summarizeBy: none
+		sourceColumn: CustomerAlternateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer name title (e.g. Mr., Ms., Dr.).
+	column Title
+		dataType: string
+		lineageTag: 2316354d-2ddd-43ad-bf4f-6942697532cc
+		sourceLineageTag: Title
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer first name.
+	column FirstName
+		dataType: string
+		lineageTag: 8fecf672-8537-4143-a9f0-037cf15ff2b0
+		sourceLineageTag: FirstName
+		summarizeBy: none
+		sourceColumn: FirstName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer middle name or initial.
+	column MiddleName
+		dataType: string
+		lineageTag: a828df69-290b-40f9-88b7-99062797f731
+		sourceLineageTag: MiddleName
+		summarizeBy: none
+		sourceColumn: MiddleName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer last name.
+	column LastName
+		dataType: string
+		lineageTag: ff4a8cc1-180b-4485-b09b-8737e3f1b379
+		sourceLineageTag: LastName
+		summarizeBy: none
+		sourceColumn: LastName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name display style flag (Eastern vs Western order).
+	column NameStyle
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e0b745a9-ff86-458d-8943-61137911a17f
+		sourceLineageTag: NameStyle
+		summarizeBy: none
+		sourceColumn: NameStyle
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer's date of birth.
+	column BirthDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 682082fc-2b77-4c03-9ee0-58b518273ea0
+		sourceLineageTag: BirthDate
+		summarizeBy: none
+		sourceColumn: BirthDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Marital status: S = Single, M = Married.
+	column MaritalStatus
+		dataType: string
+		lineageTag: dacb6e7c-30a0-4c40-a463-a6e957fc1dbc
+		sourceLineageTag: MaritalStatus
+		summarizeBy: none
+		sourceColumn: MaritalStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name suffix (e.g. Jr., Sr.).
+	column Suffix
+		dataType: string
+		lineageTag: 965712f6-516a-4cc1-9560-41d8bab3c96e
+		sourceLineageTag: Suffix
+		summarizeBy: none
+		sourceColumn: Suffix
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gender: M = Male, F = Female.
+	column Gender
+		dataType: string
+		lineageTag: 04866f96-7188-48e2-8311-b4e510d41cb7
+		sourceLineageTag: Gender
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer email address.
+	column EmailAddress
+		dataType: string
+		lineageTag: 742687a5-6f8a-4d87-a94b-ea15995251b1
+		sourceLineageTag: EmailAddress
+		summarizeBy: none
+		sourceColumn: EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer's annual household income.
+	column YearlyIncome
+		dataType: double
+		lineageTag: e974328c-090c-4fa3-8f74-2f010d8f1158
+		sourceLineageTag: YearlyIncome
+		summarizeBy: none
+		sourceColumn: YearlyIncome
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Total number of children the customer has.
+	column TotalChildren
+		dataType: int64
+		formatString: 0
+		lineageTag: 3803df23-051e-472f-a46c-94b6f107058b
+		sourceLineageTag: TotalChildren
+		summarizeBy: none
+		sourceColumn: TotalChildren
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Number of children living at home.
+	column NumberChildrenAtHome
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c18fe8c-6d2c-44ec-9133-6e632b46e9ca
+		sourceLineageTag: NumberChildrenAtHome
+		summarizeBy: none
+		sourceColumn: NumberChildrenAtHome
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Highest education level achieved (e.g. Bachelors, Graduate Degree).
+	column EnglishEducation
+		dataType: string
+		lineageTag: 11f49572-d44a-4f75-8dc4-f71b9b98bb50
+		sourceLineageTag: EnglishEducation
+		summarizeBy: none
+		sourceColumn: EnglishEducation
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Education level translated to Spanish.
+	column SpanishEducation
+		dataType: string
+		lineageTag: a1bdec0b-2457-4882-947f-e262662b1f0d
+		sourceLineageTag: SpanishEducation
+		summarizeBy: none
+		sourceColumn: SpanishEducation
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Education level translated to French.
+	column FrenchEducation
+		dataType: string
+		lineageTag: 7bea8332-debe-43d6-9947-0417d798b0c2
+		sourceLineageTag: FrenchEducation
+		summarizeBy: none
+		sourceColumn: FrenchEducation
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer's job occupation (e.g. Professional, Skilled Manual).
+	column EnglishOccupation
+		dataType: string
+		lineageTag: e0bad49c-8430-4660-bb21-7d32e0923a73
+		sourceLineageTag: EnglishOccupation
+		summarizeBy: none
+		sourceColumn: EnglishOccupation
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Occupation translated to Spanish.
+	column SpanishOccupation
+		dataType: string
+		lineageTag: 7c825503-b31b-4af0-b94c-3b6458e48c57
+		sourceLineageTag: SpanishOccupation
+		summarizeBy: none
+		sourceColumn: SpanishOccupation
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Occupation translated to French.
+	column FrenchOccupation
+		dataType: string
+		lineageTag: 51308bc9-d0d0-4c89-91af-e4a2adb0c5f3
+		sourceLineageTag: FrenchOccupation
+		summarizeBy: none
+		sourceColumn: FrenchOccupation
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Whether the customer owns their home (1 = yes).
+	column HouseOwnerFlag
+		dataType: string
+		lineageTag: 430905c4-7947-42eb-8f11-e506616b2e79
+		sourceLineageTag: HouseOwnerFlag
+		summarizeBy: none
+		sourceColumn: HouseOwnerFlag
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Number of cars owned by the customer.
+	column NumberCarsOwned
+		dataType: int64
+		formatString: 0
+		lineageTag: d8fea407-77ae-47aa-8bee-6b01e91e5534
+		sourceLineageTag: NumberCarsOwned
+		summarizeBy: none
+		sourceColumn: NumberCarsOwned
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer primary street address.
+	column AddressLine1
+		dataType: string
+		lineageTag: 663e7410-ba0b-4855-accc-9fa67673c0ed
+		sourceLineageTag: AddressLine1
+		summarizeBy: none
+		sourceColumn: AddressLine1
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer secondary address line (apartment, suite, etc.).
+	column AddressLine2
+		dataType: string
+		lineageTag: f3850e2a-4241-4b6f-aa69-c597e4e5abee
+		sourceLineageTag: AddressLine2
+		summarizeBy: none
+		sourceColumn: AddressLine2
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Customer phone number.
+	column Phone
+		dataType: string
+		lineageTag: 9af6d68d-e30a-4f67-925a-c7403c516ab1
+		sourceLineageTag: Phone
+		summarizeBy: none
+		sourceColumn: Phone
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date the customer placed their first order.
+	column DateFirstPurchase
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 7431a2a2-1b3a-4c4d-b72b-2b705632f1f3
+		sourceLineageTag: DateFirstPurchase
+		summarizeBy: none
+		sourceColumn: DateFirstPurchase
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Commute distance band (e.g. 0-1 Miles, 5-10 Miles).
+	column CommuteDistance
+		dataType: string
+		lineageTag: bcea4116-3b76-48ee-b098-429f45238eb2
+		sourceLineageTag: CommuteDistance
+		summarizeBy: none
+		sourceColumn: CommuteDistance
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCustomer = entity
+		mode: directLake
+		source
+			entityName: DimCustomer
+			schemaName: dbo
+			expressionSource: 'DirectLake - sales_warehouse'
+

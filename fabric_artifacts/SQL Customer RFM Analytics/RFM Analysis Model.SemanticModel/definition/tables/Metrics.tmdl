@@ -1,0 +1,670 @@
+/// Virtual table that holds all DAX measures. No data rows — only used to organise measures in the field list.
+table Metrics
+	lineageTag: 1a487961-fb03-477f-afbc-73197a0e69dd
+
+	/// Total sales amount across all internet orders. Sum of FactInternetSales[SalesAmount].
+	measure 'Total Revenue' = SUM(FactCustomerRFM[Monetary])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: RFM\Sales Health
+		lineageTag: 46c32a7b-11ca-4765-bcbb-a7aac8495d97
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Number of distinct sales orders placed.
+	measure 'Total Orders' = SUM(FactCustomerRFM[Frequency])
+		formatString: #,0
+		displayFolder: RFM\Sales Health
+		lineageTag: 3e770b6b-ad71-4521-8795-18c11cc7f9fb
+
+	/// Average value per order (Total Revenue ÷ Total Orders).
+	measure 'Avg Order Value' = DIVIDE([Total Revenue], [Total Orders])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: RFM\Sales Health
+		lineageTag: 02cafbb9-bc8b-4960-8cd6-a42d6f2cbdc6
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Number of distinct customers who placed at least one order.
+	measure 'Total Customers' = DISTINCTCOUNT(FactCustomerRFM[CustomerKey])
+		formatString: #,0
+		displayFolder: RFM\Sales Health
+		lineageTag: 42fbd993-5768-4a8e-b776-d241a37ec6b6
+
+	/// Customers who bought in a prior period but have not bought in the current period.
+	measure 'Churned Customers' = ```
+			
+			VAR __ChurnCutOff = 180
+			RETURN
+			CALCULATE(
+			    [Total Transactions], 
+			    FactCustomerRFM[Recency] > __ChurnCutOff
+			)
+			
+			```
+		formatString: #,0
+		displayFolder: RFM\Grow and Risk
+		lineageTag: de6239c2-987b-4d63-9524-d228c9062e3d
+
+	/// Total number of individual order line transactions.
+	measure 'Total Transactions' = COUNTROWS(FactCustomerRFM)
+		formatString: #,0
+		displayFolder: RFM\Sales Health
+		lineageTag: 204e898a-68dc-4386-9ca9-15b9ba4c7127
+
+	/// Churned Customers as a % of Total Customers. Tracks how much of the customer base was lost.
+	measure 'Churn Rate %' =
+			
+			DIVIDE([Churned Customers], [Total Transactions])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: RFM\Grow and Risk
+		lineageTag: 9ce57603-6f85-4374-bf33-f62004971715
+
+	/// Total cost of goods sold across all orders.
+	measure 'Total Cost' = ```
+			SUM(FactCustomerRFM[TotalCost])
+			
+			```
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: RFM\Sales Health
+		lineageTag: cb0303ab-8f4d-4f68-92c3-0c1c9e816da6
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Gross profit: Total Revenue minus Total Cost.
+	measure 'Total Profit' = ```
+			SUM(FactCustomerRFM[Profit])
+			
+			```
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: RFM\Sales Health
+		lineageTag: c6f1ab40-e8a0-4e2a-886a-a2dd6c06f553
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	/// Total Revenue in the previous month.
+	measure 'Total Revenue PM' = CALCULATE([Total Revenue], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Previous Period
+		lineageTag: 3b48c465-4bc3-4b76-880c-319c011e5c3f
+
+	/// Total Revenue in the same period last year.
+	measure 'Total Revenue PY' = CALCULATE([Total Revenue], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Previous Period
+		lineageTag: c11c8a3c-c438-4a21-8947-5a85305b3104
+
+	/// Total Orders in the previous month.
+	measure 'Total Orders PM' = CALCULATE([Total Orders], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Previous Period
+		lineageTag: c47aceb3-8cd8-431b-a2d0-09bdc71722ef
+
+	/// Total Orders in the same period last year.
+	measure 'Total Orders PY' = CALCULATE([Total Orders], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Previous Period
+		lineageTag: 8693113c-0979-4586-a840-ca6a9d7cd2ff
+
+	/// Total Profit in the previous month.
+	measure 'Total Profit PM' = CALCULATE([Total Profit], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Previous Period
+		lineageTag: 0ca04342-3184-4ae5-b9a0-3017f1ff7735
+
+	/// Total Profit in the same period last year.
+	measure 'Total Profit PY' = CALCULATE([Total Profit], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Previous Period
+		lineageTag: 13b7d2db-130c-4cdb-a374-454359623278
+
+	/// Total Customers in the previous month.
+	measure 'Total Customers PM' = CALCULATE([Total Customers], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
+		formatString: #,0
+		displayFolder: Time Intelligence\Grow and Risk\Previous Period
+		lineageTag: 04723e87-e1d3-4b08-b93b-da434fd229e7
+
+	/// Total Customers in the same period last year.
+	measure 'Total Customers PY' = CALCULATE([Total Customers], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
+		formatString: #,0
+		displayFolder: Time Intelligence\Grow and Risk\Previous Period
+		lineageTag: 580c55cf-c2f6-493f-a823-a3372ca7d64f
+
+	/// Churned Customers in the previous month.
+	measure 'Churned Customers PM' = CALCULATE([Churned Customers], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
+		formatString: #,0
+		displayFolder: Time Intelligence\Grow and Risk\Previous Period
+		lineageTag: fb858b51-34f1-48c3-9545-f33c21881f58
+
+	/// Churned Customers in the same period last year.
+	measure 'Churned Customers PY' = CALCULATE([Churned Customers], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
+		formatString: #,0
+		displayFolder: Time Intelligence\Grow and Risk\Previous Period
+		lineageTag: a242cbaf-ba27-450d-874e-f2bc96e44be5
+
+	/// Revenue change vs previous month (absolute Δ).
+	measure 'Total Revenue MOM Δ' = [Total Revenue] - [Total Revenue PM]
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Period Change
+		lineageTag: 1f6a0f54-c1a8-4b6b-974b-d38da68ac3dd
+
+	/// Revenue change vs same period last year (absolute Δ).
+	measure 'Total Revenue YOY Δ' = [Total Revenue] - [Total Revenue PY]
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Period Change
+		lineageTag: fd027ea0-cf5f-48a5-b102-1556aaf3d8b0
+
+	/// Order count change vs previous month (absolute Δ).
+	measure 'Total Orders MOM Δ' = [Total Orders] - [Total Orders PM]
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Period Change
+		lineageTag: 240642e2-36ea-43ce-9f7d-1ab03c80d841
+
+	/// Order count change vs same period last year (absolute Δ).
+	measure 'Total Orders YOY Δ' = [Total Orders] - [Total Orders PY]
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Period Change
+		lineageTag: 1b3a637d-b0b9-428a-b637-e47d0fb4188e
+
+	/// Profit change vs previous month (absolute Δ).
+	measure 'Total Profit MOM Δ' = [Total Profit] - [Total Profit PM]
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Period Change
+		lineageTag: ce1714f0-ff87-4afa-aca5-92f2b000b1f6
+
+	/// Profit change vs same period last year (absolute Δ).
+	measure 'Total Profit YOY Δ' = [Total Profit] - [Total Profit PY]
+		formatString: #,0
+		displayFolder: Time Intelligence\Sales Health\Period Change
+		lineageTag: 6f494cf2-4a10-4fd5-a11f-39264443f22e
+
+	/// Customer count change vs previous month (absolute Δ).
+	measure 'Total Customers MOM Δ' = [Total Customers] - [Total Customers PM]
+		formatString: #,0
+		displayFolder: Time Intelligence\Grow and Risk\Period Change
+		lineageTag: 9678639f-0db2-4189-8968-61857178389d
+
+	/// Customer count change vs same period last year (absolute Δ).
+	measure 'Total Customers YOY Δ' = [Total Customers] - [Total Customers PY]
+		formatString: #,0
+		displayFolder: Time Intelligence\Grow and Risk\Period Change
+		lineageTag: 9e61c8ce-9457-433a-b1f1-a7f8fb5b7698
+
+	/// Churned customer count change vs previous month (absolute Δ).
+	measure 'Churned Customers MOM Δ' = [Churned Customers] - [Churned Customers PM]
+		formatString: #,0
+		displayFolder: Time Intelligence\Grow and Risk\Period Change
+		lineageTag: 1ea97175-33ff-46ea-9e96-746d894f4cf8
+
+	/// Churned customer count change vs same period last year (absolute Δ).
+	measure 'Churned Customers YOY Δ' = [Churned Customers] - [Churned Customers PY]
+		formatString: #,0
+		displayFolder: Time Intelligence\Grow and Risk\Period Change
+		lineageTag: 31f6b5d5-e7c7-45b4-8f02-0d5287e01838
+
+	/// Revenue % change vs previous month.
+	measure 'Total Revenue MOM %' = DIVIDE([Total Revenue MOM Δ], [Total Revenue PM])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Time Intelligence\Sales Health\Period Change %
+		lineageTag: c6198cb3-e7f7-41c7-9638-0d53dec44b8f
+
+	/// Revenue % change vs same period last year.
+	measure 'Total Revenue YOY %' = DIVIDE([Total Revenue YOY Δ], [Total Revenue PY])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Time Intelligence\Sales Health\Period Change %
+		lineageTag: 956663ab-f828-496d-85ec-26f753d3b0ab
+
+	/// Order count % change vs previous month.
+	measure 'Total Orders MOM %' = DIVIDE([Total Orders MOM Δ], [Total Orders PM])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Time Intelligence\Sales Health\Period Change %
+		lineageTag: e0abfa4b-d830-436b-8c8c-ffeed97c5dbc
+
+	/// Order count % change vs same period last year.
+	measure 'Total Orders YOY %' = DIVIDE([Total Orders YOY Δ], [Total Orders PY])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Time Intelligence\Sales Health\Period Change %
+		lineageTag: 6c7d7b3b-6837-4a8f-9426-f310b3d24812
+
+	/// Profit % change vs previous month.
+	measure 'Total Profit MOM %' = DIVIDE([Total Profit MOM Δ], [Total Profit PM])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Time Intelligence\Sales Health\Period Change %
+		lineageTag: 3ac7dfbc-c9a6-4807-95f8-b7e5ef381b1f
+
+	/// Profit % change vs same period last year.
+	measure 'Total Profit YOY %' = DIVIDE([Total Profit YOY Δ], [Total Profit PY])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Time Intelligence\Sales Health\Period Change %
+		lineageTag: 1de20e9b-d516-4d35-9b2e-9fea2863ac49
+
+	/// Customer count % change vs previous month.
+	measure 'Total Customers MOM %' = DIVIDE([Total Customers MOM Δ], [Total Customers PM])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Time Intelligence\Grow and Risk\Period Change %
+		lineageTag: d0f68b35-a155-4f6d-90e0-b312c0039927
+
+	/// Customer count % change vs same period last year.
+	measure 'Total Customers YOY %' = DIVIDE([Total Customers YOY Δ], [Total Customers PY])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Time Intelligence\Grow and Risk\Period Change %
+		lineageTag: 1eb41063-9fad-4ee2-89ba-154118eca843
+
+	/// Churned customers % change vs previous month.
+	measure 'Churned Customers MOM %' = DIVIDE([Churned Customers MOM Δ], [Churned Customers PM])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Time Intelligence\Grow and Risk\Period Change %
+		lineageTag: 002c8765-5eea-45fd-b7bd-9b6150f845ba
+
+	/// Churned customers % change vs same period last year.
+	measure 'Churned Customers YOY %' = DIVIDE([Churned Customers YOY Δ], [Churned Customers PY])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Time Intelligence\Grow and Risk\Period Change %
+		lineageTag: 032cd6b9-3ee8-476f-b562-bc13b55b5b94
+
+	/// SVG chip badge highlighting the customer segment. Requires Image URL data category. Uses Bacci.SVG.Chip UDF.
+	measure 'Customer Segment Chip' =
+			
+			VAR _segment = SELECTEDVALUE(FactCustomerRFM[Segment])
+			VAR _colour =
+			    SWITCH(
+			        _segment,
+			        "Champions",  "green",
+			        "VIPs",       "amber",
+			        "Loyalists",  "blue",
+			        "At Risk",    "red",
+			        "grey"
+			    )
+			RETURN
+			    IF(
+			        NOT ISBLANK(_segment),
+			        Bacci.SVG.Chip(_segment, _colour)
+			    )
+		formatString: @
+		displayFolder: SVG Visuals
+		lineageTag: 7205592b-7cb8-4554-86ba-85e7563f84fb
+		dataCategory: ImageUrl
+
+	/// Total revenue from internet sales transactions
+	measure 'Fact Revenue' = SUM(FactInternetSales[SalesAmount])
+		formatString: $#,##0.00
+		displayFolder: Fact Sales Performance
+		lineageTag: 54b066f2-687e-4662-abcf-2b7a9416db43
+
+	/// Distinct order count from internet sales transactions
+	measure 'Fact Orders' = DISTINCTCOUNT(FactInternetSales[SalesOrderNumber])
+		formatString: #,0
+		displayFolder: Fact Sales Performance
+		lineageTag: e1f24d2e-e369-4806-b282-6638eaec9e31
+
+	/// Gross profit from internet sales (SalesAmount minus TotalProductCost)
+	measure 'Fact Profit' = [Fact Revenue] - SUM(FactInternetSales[TotalProductCost])
+		formatString: $#,##0.00
+		displayFolder: Fact Sales Performance
+		lineageTag: 992a10e7-5858-461a-9c45-48154a79e2b4
+
+	/// Reads the Metric Selector slicer and returns IS Orders, IS Revenue or IS Profit accordingly. Use this measure in all visuals.
+	measure 'Fact Selected Metric' = ```
+			
+			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
+			RETURN
+			    SWITCH(
+			        _selected,
+			        "Orders",  CALCULATE([Fact Orders]),
+			        "Revenue", CALCULATE([Fact Revenue]),
+			        "Profit",  CALCULATE([Fact Profit]),
+			        CALCULATE([Fact Revenue])
+			    )
+			    
+			```
+		displayFolder: Fact Sales Performance
+		lineageTag: ce4f5dbb-a79e-4ba3-aa00-7d228e65dbb0
+
+		formatStringDefinition =
+				VAR _selected = SELECTEDVALUE('RFM Metric Selector'[Metric])
+				RETURN
+				    SWITCH(
+				        _selected,
+				        "Orders",  "#,0",
+				        "Revenue", "$#,##0.00",
+				        "Profit",  "$#,##0.00",
+				        "$#,##0.00"
+				    )
+
+	/// Dynamic title that updates to show which metric is currently selected (Orders / Revenue / Profit).
+	measure 'Title Selected Metric' = ```
+			
+			VAR __SelectedMetric = SELECTEDVALUE('RFM Metric Selector'[Metric])
+			VAR __SelectedYear = SELECTEDVALUE(DimDate[CalendarYear])
+			VAR __MeasureValue = CALCULATE( SELECTEDMEASURE(), ALLSELECTED() )
+			VAR __FormattedMeasure =
+			   SWITCH(
+			       TRUE(),
+			       __MeasureValue <= 1E3, FORMAT(__MeasureValue, "#,0.00 K"),
+			       __MeasureValue <= 1E6, FORMAT(__MeasureValue, "#,0,.00 K"),
+			       __MeasureValue <= 1E9, FORMAT(__MeasureValue, "#,0,,.00 M"),
+			       __MeasureValue <= 1E12, FORMAT(__MeasureValue, "#,0,,,.00 B")
+			   )
+			
+			RETURN
+			SWITCH(
+			    __SelectedMetric,
+			    "Orders", "Total Orders in " & __SelectedYear & " is " & __FormattedMeasure,
+			    "Revenue", "Total Revenue in " & __SelectedYear & " is " & __FormattedMeasure,
+			    "Profit", "Total Profit in " & __SelectedYear & " is " & __FormattedMeasure
+			)
+			
+			```
+		displayFolder: RFM\Sales Health
+		lineageTag: 3cc27484-c280-4580-85f1-845a9cf44bba
+
+	/// Bridge measure: filters [Selected Metric] by the current FactCustomerRFM[Segment] filter context. Use as salesByProductGroupMeasure in ColumnChart.Stacked.
+	measure 'RFM Metric by Segment' =
+			
+			VAR _SegmentCustomers = VALUES(FactCustomerRFM[CustomerKey])
+			RETURN
+			    CALCULATE(
+			        [Selected Metric (Orders, Rev, Profit)],
+			        TREATAS(_SegmentCustomers, DimCustomer[CustomerKey])
+			    )
+		displayFolder: RFM\Sales Health
+		lineageTag: 95373000-e27d-4b92-91d8-939ce52d3630
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Absolute change in [Selected Metric] vs same period previous year.
+	measure 'IS Change PY' =
+			
+			VAR _AC = [Fact Selected Metric]
+			VAR _PY = CALCULATE([Fact Selected Metric], SAMEPERIODLASTYEAR(DimDate[FullDateAlternateKey]))
+			RETURN
+			    IF(NOT ISBLANK(_PY), _AC - _PY)
+		displayFolder: Fact Sales Performance
+		lineageTag: 69d15d4b-e36e-4916-8ccf-3ba6f74cc8f4
+
+		formatStringDefinition =
+				VAR _s = SELECTEDVALUE('RFM Metric Selector'[Metric])
+				RETURN SWITCH(_s, "Orders", "+#,0;-#,0;0", "+$#,##0.00;-$#,##0.00;0")
+
+	/// Relative change (%) in [Selected Metric] vs same period previous year.
+	measure 'IS Change PY %' =
+			
+			VAR _AC = [Fact Selected Metric]
+			VAR _PY = CALCULATE([Fact Selected Metric], SAMEPERIODLASTYEAR(DimDate[FullDateAlternateKey]))
+			RETURN
+			    IF(NOT ISBLANK(_PY), DIVIDE(_AC - _PY, ABS(_PY)))
+		formatString: +0.0%;-0.0%;0%
+		displayFolder: Fact Sales Performance
+		lineageTag: 331fad7d-7e8a-403f-968f-6fe3abf6cd90
+
+	/// IBCS stacked column chart showing Champions/VIPs/Loyalists/At Risk segment contributions per period. Place DimDate[FullDateAlternateKey] in matrix columns. Set visual image size in Format pane. Use Segment Slicer to highlight a segment.
+	measure 'IBCS Segment Stacked' =
+			
+			PowerofBI.IBCS.ColumnChart.Stacked(
+			    [IS Metric by Segment],
+			    FactCustomerRFM[Segment],
+			    'Segment Slicer'[Segment],
+			    DimDate[FullDateAlternateKey],
+			    0,
+			    0
+			)
+		formatString: @
+		displayFolder: SVG Visuals
+		lineageTag: 0f95390c-267b-4800-851a-5e5a27088069
+		dataCategory: ImageUrl
+
+	/// IBCS vertical column chart showing [Selected Metric] AC (black) vs PY (grey) with red/green variance bar per period. Place DimDate[FullDateAlternateKey] in matrix columns. businessImpact=1 means higher is better.
+	measure 'IBCS Variance Column' =
+			PowerofBI.IBCS.ColumnChart.WithAbsoluteVariance(
+			    [Fact Selected Metric],
+			    CALCULATE([Fact Selected Metric], SAMEPERIODLASTYEAR(DimDate[FullDateAlternateKey])),
+			    BLANK(),
+			    BLANK(),
+			    DimDate[CalendarYear],
+			    1)
+		formatString: @
+		displayFolder: SVG Visuals
+		lineageTag: 0bf23d3d-bb46-41ac-a644-512cf5870bf3
+		dataCategory: ImageUrl
+
+	/// IBCS horizontal bar chart: black bar = AC, grey bar = PY. Scale is relative to the max across all visible segments. DataCategory = ImageUrl.
+	measure 'IBCS Bar AbsoluteValues' =
+			VAR _PY = CALCULATE([RFM Metric by Segment], SAMEPERIODLASTYEAR(DimDate[FullDateAlternateKey]))
+			VAR _FmtLabel = SWITCH(SELECTEDVALUE('RFM Metric Selector'[Metric]), "Orders", "#,0", "Revenue", "$#,##0", "Profit", "$#,##0", "$#,##0")
+			RETURN
+			PowerofBI.IBCS.BarChart.AbsoluteValues(
+			    FactCustomerRFM[Segment],
+			    [RFM Metric by Segment],
+			    BLANK(),
+			    _PY,
+			    [RFM Metric by Segment],
+			    "grey",
+			    NOT ISINSCOPE(FactCustomerRFM[Segment]),
+			    FORMAT([RFM Metric by Segment], _FmtLabel),
+			    200,
+			    35)
+		formatString: @
+		displayFolder: SVG Visuals
+		lineageTag: 15c14af5-c7da-4596-966b-cff853e85ec2
+		dataCategory: ImageUrl
+
+	/// IBCS horizontal bar chart showing AC vs PY bars plus a small green/red absolute variance bar. Green = favorable, red = unfavorable. DataCategory = ImageUrl.
+	measure 'IBCS Bar AbsoluteVariance' =
+			VAR _AC = [RFM Metric by Segment]
+			VAR _PY = CALCULATE([RFM Metric by Segment], SAMEPERIODLASTYEAR(DimDate[FullDateAlternateKey]))
+			VAR _FmtLabel = SWITCH(SELECTEDVALUE('RFM Metric Selector'[Metric]), "Orders", "+#,0;-#,0;=", "Revenue", "+$#,##0;-$#,##0;=", "Profit", "+$#,##0;-$#,##0;=", "+$#,##0;-$#,##0;=")
+			RETURN
+			PowerofBI.IBCS.BarChart.AbsoluteVariance(
+			    FactCustomerRFM[Segment],
+			    _AC,
+			    BLANK(),
+			    _PY,
+			    [RFM Metric by Segment],
+			    "grey",
+			    NOT ISINSCOPE(FactCustomerRFM[Segment]),
+			    FORMAT(_AC - _PY, _FmtLabel),
+			    200,
+			    35,
+			    1)
+		formatString: @
+		displayFolder: SVG Visuals
+		lineageTag: 9ca87a0e-abaa-4b17-8c8c-139f9cbcea1f
+		dataCategory: ImageUrl
+
+	/// IBCS pin chart showing % variance vs PY on a centered zero baseline. Pin length = magnitude, green/red = direction. DataCategory = ImageUrl.
+	measure 'IBCS Bar RelativeVariance' =
+			VAR _AC = [RFM Metric by Segment]
+			VAR _PY = CALCULATE([RFM Metric by Segment], SAMEPERIODLASTYEAR(DimDate[FullDateAlternateKey]))
+			RETURN
+			PowerofBI.IBCS.BarChart.RelativeVariance(
+			    FactCustomerRFM[Segment],
+			    _AC,
+			    BLANK(),
+			    _PY,
+			    "grey",
+			    NOT ISINSCOPE(FactCustomerRFM[Segment]),
+			    FORMAT(DIVIDE(_AC - _PY, ABS(_PY)) * 100, "+#,0.0;-#,0.0;=" ) & "%",
+			    200,
+			    35,
+			    1)
+		formatString: @
+		displayFolder: SVG Visuals
+		lineageTag: 96c4cb32-d250-4524-8574-846103ed7295
+		dataCategory: ImageUrl
+
+	/// Gross profit as a % of internet sales revenue. Higher is better.
+	measure 'IS Gross Margin %' = DIVIDE([Fact Profit], [Fact Revenue])
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: Fact Sales Performance
+		lineageTag: 5d68a037-fbb3-4b22-8c90-6db026bede6e
+
+	/// Average revenue per internet sales order (IS Revenue ÷ IS Orders).
+	measure 'IS Avg Order Value' = DIVIDE([Fact Revenue], [Fact Orders])
+		formatString: $#,##0.00
+		displayFolder: Fact Sales Performance
+		lineageTag: fb2699c2-c589-4515-94f5-dd3190678ee2
+
+	/// Total discount dollars applied across all internet sales order lines.
+	measure 'IS Discount Amount' = SUM(FactInternetSales[DiscountAmount])
+		formatString: $#,##0.00
+		displayFolder: Promotion Analysis
+		lineageTag: 07c88844-3a68-4066-9103-b1362933f32a
+
+	/// Average unit price discount % across all sales order lines.
+	measure 'IS Avg Discount %' = AVERAGE(FactInternetSales[UnitPriceDiscountPct])
+		formatString: 0.00%
+		displayFolder: Promotion Analysis
+		lineageTag: ef50bb47-9a58-4f80-a730-6866d24a3048
+
+	/// Revenue from orders that had an active promotion applied (excluding No Discount rows).
+	measure 'IS Promo Revenue' = CALCULATE([Fact Revenue], DimPromotion[EnglishPromotionName] <> "No Discount")
+		formatString: $#,##0.00
+		displayFolder: Promotion Analysis
+		lineageTag: d029d5bb-d50d-4974-b315-f085552b5d3e
+
+	/// Revenue from orders with no promotion applied (baseline / organic revenue).
+	measure 'IS No Promo Revenue' = CALCULATE([Fact Revenue], DimPromotion[EnglishPromotionName] = "No Discount")
+		formatString: $#,##0.00
+		displayFolder: Promotion Analysis
+		lineageTag: 48f31828-9066-4cc6-ac27-cb1246ec99e8
+
+	/// Discount dollars as a % of gross revenue. Shows how much revenue was given away as discounts.
+	measure 'IS Discount % of Revenue' = DIVIDE([IS Discount Amount], [Fact Revenue])
+		formatString: 0.00%
+		displayFolder: Promotion Analysis
+		lineageTag: f5a9544b-3356-400d-9878-934a537f57a4
+
+	/// Average days since last order across customers in the current filter context. Lower = more recent.
+	measure 'RFM Avg Recency' = AVERAGE(FactCustomerRFM[Recency])
+		formatString: #,0
+		displayFolder: RFM\Grow and Risk
+		lineageTag: 47a60c5c-4bc1-407e-bff7-317596f2a835
+
+	/// Average number of orders per customer in the current filter context. Higher = more loyal.
+	measure 'RFM Avg Frequency' = AVERAGE(FactCustomerRFM[Frequency])
+		formatString: 0.0
+		displayFolder: RFM\Grow and Risk
+		lineageTag: dba2a318-58f0-4561-b5ab-5fa9a58bc36f
+
+	/// Segment share of total revenue. Sums to 100% across all segments.
+	measure 'RFM Revenue Share %' = DIVIDE([Total Revenue], CALCULATE([Total Revenue], ALL(FactCustomerRFM[Segment])))
+		formatString: 0.0%
+		displayFolder: RFM\Grow and Risk
+		lineageTag: 080193b1-a092-48f7-8cf0-9fb22aa83c72
+
+	/// Territory's share of total internet sales revenue across all territories.
+	measure 'IS Revenue Territory %' =
+			
+			DIVIDE([Fact Revenue], CALCULATE([Fact Revenue], ALL(DimSalesTerritory[SalesTerritoryGroup], DimSalesTerritory[SalesTerritoryCountry], DimSalesTerritory[SalesTerritoryRegion])))
+		formatString: 0.0%
+		displayFolder: Fact Sales Performance
+		lineageTag: 297d96c0-b139-49d8-a39a-da9e862604b1
+
+	measure 'Selected Metric (Orders, Rev, Profit)' =
+			
+			VAR _selected = SELECTEDVALUE('RFM Metric Selector'[Metric])
+			RETURN
+			    SWITCH(
+			        _selected,
+			        "Orders",  CALCULATE([Total Orders]),
+			        "Revenue", CALCULATE([Total Revenue]),
+			        "Profit",  CALCULATE([Total Profit]),
+			        CALCULATE([Total Revenue])
+			    )
+		displayFolder: RFM\Sales Health
+		lineageTag: b150a570-d5b3-4014-9fb1-7724a4250826
+
+		formatStringDefinition = ```
+				VAR __selectedMetric = SELECTEDVALUE('RFM Metric Selector'[Metric])
+				VAR __val = [Selected Metric (Orders, Rev, Profit)]
+				RETURN
+				SWITCH(
+				    TRUE(),
+				    __val <= 1E3, "#,0",
+				    __selectedMetric = "Orders" && __val <= 1E3, "#,0",
+				    __selectedMetric in {"Revenue", "Profit"} && __val <= 1E6, "#,0,.00 K",
+				    __selectedMetric in {"Revenue", "Profit"} && __val <= 1E9, "#,0,,.00 M",
+				    __selectedMetric in {"Revenue", "Profit"} && __val <= 1E12, "#,0,,,.00 B"
+				)
+				
+				```
+
+	measure 'Top N Filter' = ```
+			
+			VAR _SelectedMetric = [Fact Selected Metric] 
+			VAR _TopN = [Top N Value]
+			VAR _Direction = SELECTEDVALUE('TopBottomSelector'[Direction], "DESC")
+			
+			-- Use ALLSELECTED to break the row context of the visual
+			VAR _Rank = 
+			    IF(
+			        NOT ISBLANK(_SelectedMetric),
+			        IF(
+			            _Direction = "ASC",
+			            RANKX(
+			                ALLSELECTED(DimProduct[EnglishProductName]),
+			                CALCULATE([Fact Selected Metric], ALLSELECTED(DimProduct[EnglishProductName])),
+			                ,
+			                ASC,
+			                Dense
+			            ),
+			            RANKX(
+			                ALLSELECTED(DimProduct[EnglishProductName]),
+			                CALCULATE([Fact Selected Metric], ALLSELECTED(DimProduct[EnglishProductName])),
+			                ,
+			                DESC,
+			                Dense
+			            )
+			        )
+			    )
+			
+			RETURN
+			   IF(NOT ISBLANK(_Rank) && _Rank <= _TopN, 1, 0)
+			
+			```
+		displayFolder: Fact Sales Performance
+		lineageTag: dba1a177-1c07-48fa-8b36-97ca602abd96
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Color Selected Segment' = ```
+			
+			VAR __SelectedSegment = SELECTEDVALUE(FactCustomerRFM[Segment])
+			RETURN
+			SWITCH(
+			    __SelectedSegment,
+			    "Champions", "#e6f4ea",
+			    "VIPs", "#fff4e5",
+			    "Loyalists", "#ebf2ff",
+			    "At RisK", "#f5d4df"
+			)
+			
+			```
+		displayFolder: RFM\Sales Health
+		lineageTag: fddadac2-ce3e-4447-92d6-63dfa9d1250c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 11d94115-b4d5-4fdf-b86f-d9373e72e24b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Metrics = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = bc3ecbd07a0d4b5790369ca5b384f23e
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":"{}"}
+
+	annotation 277cc1b9-af89-4597-8e15-cacc25c0886b = ```
+			An Evaluate statement cannot return a table without columns.
+			{"RootActivityId":"01547BB5-7A0F-46BE-952D-00236E13D0A5"}
+			
+			```
+

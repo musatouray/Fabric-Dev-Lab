@@ -1,0 +1,321 @@
+/// Product catalog with names, list price, standard cost, color, product line and active status. Links up to subcategory and category.
+table DimProduct
+	lineageTag: 8c21bb3c-ba65-4a7d-a14a-d215834e918d
+	sourceLineageTag: [dbo].[DimProduct]
+
+	/// Unique product identifier. Primary key.
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 18158843-d53e-4175-a753-f31520eef40c
+		sourceLineageTag: ProductKey
+		isDefaultLabel
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Business/SKU code for the product (alternate to ProductKey).
+	column ProductAlternateKey
+		dataType: string
+		lineageTag: a9137ce4-aeae-4def-b4bc-d13d914ee16a
+		sourceLineageTag: ProductAlternateKey
+		summarizeBy: none
+		sourceColumn: ProductAlternateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key to DimProductSubcategory.
+	column ProductSubcategoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a4e97d81-6c6b-4bf9-81b1-584a636bbb51
+		sourceLineageTag: ProductSubcategoryKey
+		summarizeBy: none
+		sourceColumn: ProductSubcategoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Unit of measure for weight (e.g. LB, G).
+	column WeightUnitMeasureCode
+		dataType: string
+		lineageTag: a5217f86-52a0-4cda-91f9-c50dd016ccca
+		sourceLineageTag: WeightUnitMeasureCode
+		summarizeBy: none
+		sourceColumn: WeightUnitMeasureCode
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Unit of measure for size (e.g. CM, IN).
+	column SizeUnitMeasureCode
+		dataType: string
+		lineageTag: 111b2e95-eb7a-4226-ae1c-63b6964791b2
+		sourceLineageTag: SizeUnitMeasureCode
+		summarizeBy: none
+		sourceColumn: SizeUnitMeasureCode
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Product name in English.
+	column EnglishProductName
+		dataType: string
+		lineageTag: e3555eaa-e5b1-48bd-8773-c96dfa761935
+		sourceLineageTag: EnglishProductName
+		summarizeBy: none
+		sourceColumn: EnglishProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Product name translated to Spanish.
+	column SpanishProductName
+		dataType: string
+		lineageTag: 4b443d41-21c1-4106-856f-2b682543c80a
+		sourceLineageTag: SpanishProductName
+		summarizeBy: none
+		sourceColumn: SpanishProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Product name translated to French.
+	column FrenchProductName
+		dataType: string
+		lineageTag: 336c20e0-b929-42b9-9823-3df1341fea4d
+		sourceLineageTag: FrenchProductName
+		summarizeBy: none
+		sourceColumn: FrenchProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Manufacturing cost of the product.
+	column StandardCost
+		dataType: double
+		lineageTag: fbf82cd9-68c2-4f83-a9d5-232b3ef39f40
+		sourceLineageTag: StandardCost
+		summarizeBy: none
+		sourceColumn: StandardCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// 1 = sellable finished product; 0 = component or raw material.
+	column FinishedGoodsFlag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6bfc6d9b-16b2-4f2c-93f7-9f3bf53a9ed5
+		sourceLineageTag: FinishedGoodsFlag
+		summarizeBy: none
+		sourceColumn: FinishedGoodsFlag
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Product color.
+	column Color
+		dataType: string
+		lineageTag: 3793c9e4-3aa2-4a23-8d7c-ba8b23ea10c5
+		sourceLineageTag: Color
+		summarizeBy: none
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Minimum stock level before reorder is triggered.
+	column SafetyStockLevel
+		dataType: int64
+		formatString: 0
+		lineageTag: f3d3e532-8dd0-4458-8bfa-09df0a891c5e
+		sourceLineageTag: SafetyStockLevel
+		summarizeBy: none
+		sourceColumn: SafetyStockLevel
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Stock level that triggers a replenishment order.
+	column ReorderPoint
+		dataType: int64
+		formatString: 0
+		lineageTag: c0bc94a8-e814-4b99-aa59-7cdbf6a32f70
+		sourceLineageTag: ReorderPoint
+		summarizeBy: none
+		sourceColumn: ReorderPoint
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Retail list price of the product.
+	column ListPrice
+		dataType: double
+		lineageTag: 3759ef7e-ec68-49e7-8806-da2aa1077b85
+		sourceLineageTag: ListPrice
+		summarizeBy: none
+		sourceColumn: ListPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Product size (e.g. S, M, L, or numeric for bikes).
+	column Size
+		dataType: string
+		lineageTag: fd07413d-a592-4529-a32e-807a9ab1a951
+		sourceLineageTag: Size
+		summarizeBy: none
+		sourceColumn: Size
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Descriptive size range band (e.g. Small, Large).
+	column SizeRange
+		dataType: string
+		lineageTag: aa3c7f36-fa3d-4f72-a8a9-84e3c60712f7
+		sourceLineageTag: SizeRange
+		summarizeBy: none
+		sourceColumn: SizeRange
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Product weight in the unit specified by WeightUnitMeasureCode.
+	column Weight
+		dataType: double
+		lineageTag: af4596db-60c7-48f3-837c-ca6168aa4838
+		sourceLineageTag: Weight
+		summarizeBy: none
+		sourceColumn: Weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Number of days required to manufacture this product.
+	column DaysToManufacture
+		dataType: int64
+		formatString: 0
+		lineageTag: 33171a19-8d3d-4da9-bc1e-f154626f7398
+		sourceLineageTag: DaysToManufacture
+		summarizeBy: none
+		sourceColumn: DaysToManufacture
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Product line code: R = Road, M = Mountain, T = Touring, S = Standard.
+	column ProductLine
+		dataType: string
+		lineageTag: 883e7cf6-39ec-470c-913e-1c14a43d0212
+		sourceLineageTag: ProductLine
+		summarizeBy: none
+		sourceColumn: ProductLine
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Wholesale price for dealers/resellers.
+	column DealerPrice
+		dataType: double
+		lineageTag: 32a2aad3-cbc1-4fb3-b620-d6f2b7566e24
+		sourceLineageTag: DealerPrice
+		summarizeBy: none
+		sourceColumn: DealerPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Quality class: H = High, M = Medium, L = Low.
+	column Class
+		dataType: string
+		lineageTag: b3bd21bc-3b57-48bb-be80-4e2528fcd85d
+		sourceLineageTag: Class
+		summarizeBy: none
+		sourceColumn: Class
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Style code: U = Universal, W = Womens, M = Mens.
+	column Style
+		dataType: string
+		lineageTag: 1f80a909-ceed-4cc8-8e46-b958e31cab1d
+		sourceLineageTag: Style
+		summarizeBy: none
+		sourceColumn: Style
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Product model name (shared across color/size variants).
+	column ModelName
+		dataType: string
+		lineageTag: 28e10875-75c6-4fe5-adac-791e7c93eabc
+		sourceLineageTag: ModelName
+		summarizeBy: none
+		sourceColumn: ModelName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Short product description in English.
+	column EnglishDescription
+		dataType: string
+		lineageTag: 68dc43c4-44ed-46db-a86d-26204a536a62
+		sourceLineageTag: EnglishDescription
+		summarizeBy: none
+		sourceColumn: EnglishDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date the product became available.
+	column StartDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: f9e58e4a-6493-40bd-9c42-0f7a774b2f4b
+		sourceLineageTag: StartDate
+		summarizeBy: none
+		sourceColumn: StartDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Date the product was discontinued. Blank if still active.
+	column EndDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: fc5c82b0-81f6-4a5f-8a54-dad706beeee9
+		sourceLineageTag: EndDate
+		summarizeBy: none
+		sourceColumn: EndDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Product status: Active or Obsolete.
+	column Status
+		dataType: string
+		lineageTag: d4c70c76-0444-42c2-8e5a-f6591ea609b0
+		sourceLineageTag: Status
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimProduct = entity
+		mode: directLake
+		source
+			entityName: DimProduct
+			schemaName: dbo
+			expressionSource: 'DirectLake - sales_warehouse'
+

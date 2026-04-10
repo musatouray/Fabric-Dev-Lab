@@ -1,0 +1,71 @@
+/// Sales territory hierarchy: Region → Country → Group. Use for regional breakdowns.
+table DimSalesTerritory
+	lineageTag: 2918c47b-e928-49d2-8939-1ecd8f11ef84
+	sourceLineageTag: [dbo].[DimSalesTerritory]
+
+	/// Unique territory identifier. Primary key.
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4bda2f0c-9b50-4331-9714-31661aae1cfd
+		sourceLineageTag: SalesTerritoryKey
+		isDefaultLabel
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Alternate integer key for the territory.
+	column SalesTerritoryAlternateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1697dcf9-402b-4f41-8475-0fb1c42d6bf3
+		sourceLineageTag: SalesTerritoryAlternateKey
+		summarizeBy: count
+		sourceColumn: SalesTerritoryAlternateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sales region name (e.g. Northwest, France, Pacific).
+	column SalesTerritoryRegion
+		dataType: string
+		lineageTag: 78b854d2-f855-413c-93a0-1db29fc2fb31
+		sourceLineageTag: SalesTerritoryRegion
+		summarizeBy: none
+		sourceColumn: SalesTerritoryRegion
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Country the territory belongs to.
+	column SalesTerritoryCountry
+		dataType: string
+		lineageTag: afe91362-c258-4a53-ae2d-fbf958c1ffb2
+		sourceLineageTag: SalesTerritoryCountry
+		summarizeBy: none
+		sourceColumn: SalesTerritoryCountry
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Top-level territory group: North America, Europe, or Pacific.
+	column SalesTerritoryGroup
+		dataType: string
+		lineageTag: b1c2fe6a-7bca-40a9-8650-4ff6231dd25d
+		sourceLineageTag: SalesTerritoryGroup
+		summarizeBy: none
+		sourceColumn: SalesTerritoryGroup
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimSalesTerritory = entity
+		mode: directLake
+		source
+			entityName: DimSalesTerritory
+			schemaName: dbo
+			expressionSource: 'DirectLake - sales_warehouse'
+

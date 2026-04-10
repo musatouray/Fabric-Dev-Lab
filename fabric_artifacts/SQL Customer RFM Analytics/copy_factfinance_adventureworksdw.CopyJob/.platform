@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "CopyJob",
+    "displayName": "copy_factfinance_adventureworksdw"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "05e3b816-22ba-ab74-4037-275d255d0d73"
+  }
+}

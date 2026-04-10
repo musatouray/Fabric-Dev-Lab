@@ -1,0 +1,67 @@
+table TopBottomSelector
+	lineageTag: aaaa4aa5-f3b9-4004-9e6d-21d1ced959ec
+
+	column ID
+		formatString: 0
+		lineageTag: d90dd8c8-bce9-4710-b405-d9c7a5207a27
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: [ID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Direction
+		lineageTag: a63731b6-3e2b-4c20-83af-bb905cf19e66
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Direction]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Label
+		lineageTag: dcafa311-f303-407d-a393-b5e9e77995d8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Label]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dynamic Label' = ```
+			
+			VAR _Metric = SELECTEDVALUE('Fact Metric Selector'[Metric])
+			VAR _N = [Top N Value] 
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    'TopBottomSelector'[ID] = 1 && _Metric = "Orders", "Top (" & _N & ") ordered products",
+			    'TopBottomSelector'[ID] = 2 && _Metric = "Orders", "Bottom (" & _N & ") ordered products",
+			    'TopBottomSelector'[ID] = 1 && _Metric = "Revenue", "Best-selling products (" & _N & ")",
+			    'TopBottomSelector'[ID] = 2 && _Metric = "Revenue", "Worst-selling products (" & _N & ")",
+			    'TopBottomSelector'[ID] = 1 && _Metric = "Profit", "Most profitable products (" & _N & ")",
+			    'TopBottomSelector'[ID] = 2 && _Metric = "Profit", "Least profitable products (" & _N & ")"
+			)
+			
+			```
+		lineageTag: fb75d2f7-2c11-4eac-911c-8ea1c572e393
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TopBottomSelector = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE (
+				    "ID", INTEGER,
+				    "Direction", STRING,
+				    "Label", STRING,
+				    {
+				        {1, "DESC", "Top (N) items"},
+				        {2, "ASC", "Bottom (N) items"}
+				    }
+				)
+				
+				```
+
+	annotation PBI_Id = f3357c87380543ee842f00ca89b9be3f
+

@@ -1,0 +1,85 @@
+/// Mid-level product grouping (e.g. Mountain Bikes). Connects DimProduct to DimProductCategory.
+table DimProductSubcategory
+	lineageTag: 2d71a628-1ccd-41aa-9034-015f118119a3
+	sourceLineageTag: [dbo].[DimProductSubcategory]
+
+	/// Unique subcategory identifier. Primary key.
+	column ProductSubcategoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 734e1cbb-f741-4029-920d-c2afe9001a4d
+		sourceLineageTag: ProductSubcategoryKey
+		isDefaultLabel
+		summarizeBy: none
+		sourceColumn: ProductSubcategoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Alternate integer key for the subcategory.
+	column ProductSubcategoryAlternateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: aa9ecce7-ddc8-4c18-b382-8ee0f8bcc7a1
+		sourceLineageTag: ProductSubcategoryAlternateKey
+		summarizeBy: count
+		sourceColumn: ProductSubcategoryAlternateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Product subcategory name (e.g. Mountain Bikes, Helmets, Tires).
+	column EnglishProductSubcategoryName
+		dataType: string
+		lineageTag: 0438fc46-0aff-43c8-8124-7291b084e078
+		sourceLineageTag: EnglishProductSubcategoryName
+		summarizeBy: none
+		sourceColumn: EnglishProductSubcategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Subcategory name translated to Spanish.
+	column SpanishProductSubcategoryName
+		dataType: string
+		lineageTag: 8656c3de-f315-4631-8b50-c94d5fc2c7c1
+		sourceLineageTag: SpanishProductSubcategoryName
+		summarizeBy: none
+		sourceColumn: SpanishProductSubcategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Subcategory name translated to French.
+	column FrenchProductSubcategoryName
+		dataType: string
+		lineageTag: 19b770d7-5a91-45d9-84f6-9004f683bd62
+		sourceLineageTag: FrenchProductSubcategoryName
+		summarizeBy: none
+		sourceColumn: FrenchProductSubcategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key to DimProductCategory.
+	column ProductCategoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 043dd654-2f27-40a1-8737-37ac6170d5fb
+		sourceLineageTag: ProductCategoryKey
+		summarizeBy: none
+		sourceColumn: ProductCategoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimProductSubcategory = entity
+		mode: directLake
+		source
+			entityName: DimProductSubcategory
+			schemaName: dbo
+			expressionSource: 'DirectLake - sales_warehouse'
+
