@@ -504,7 +504,6 @@
       "*": {
         "columnHeaders": [
           {
-            "columnAdjustment": "fitToContent",
             "fontFamily": "'Segoe UI', wf_segoe-ui_normal, helvetica, arial, sans-serif"
           }
         ],
@@ -551,8 +550,6 @@
       "None": {
         "columnHeaders": [
           {
-            "columnAdjustment": "fitToContent",
-            "fontFamily": "'Segoe UI', wf_segoe-ui_normal, helvetica, arial, sans-serif",
             "fontColor": {
               "solid": {
                 "color": "foreground"
@@ -567,41 +564,10 @@
                 "color": "background"
               }
             }
-          }
-        ],
-        "grid": [
-          {
-            "rowPadding": 4,
-            "gridHorizontal": false
-          }
-        ],
-        "total": [
-          {
-            "fontColor": {
-              "solid": {
-                "color": "foreground"
-              }
-            }
-          }
-        ],
-        "title": [
-          {
-            "show": true
-          }
-        ],
-        "subTitle": [
-          {
-            "show": true
           }
         ]
       },
       "Minimal": {
-        "columnHeaders": [
-          {
-            "columnAdjustment": "fitToContent",
-            "fontFamily": "'Segoe UI', wf_segoe-ui_normal, helvetica, arial, sans-serif"
-          }
-        ],
         "values": [
           {
             "backColorSecondary": {
@@ -613,7 +579,6 @@
         ],
         "grid": [
           {
-            "rowPadding": 4,
             "gridHorizontal": true,
             "gridHorizontalColor": {
               "solid": {
@@ -621,25 +586,6 @@
               }
             },
             "gridHorizontalWeight": 1
-          }
-        ],
-        "total": [
-          {
-            "fontColor": {
-              "solid": {
-                "color": "foreground"
-              }
-            }
-          }
-        ],
-        "title": [
-          {
-            "show": true
-          }
-        ],
-        "subTitle": [
-          {
-            "show": true
           }
         ]
       }
@@ -648,7 +594,6 @@
       "*": {
         "columnHeaders": [
           {
-            "columnAdjustment": "fitToContent",
             "fontFamily": "'Segoe UI', wf_segoe-ui_normal, helvetica, arial, sans-serif"
           }
         ],
@@ -723,13 +668,17 @@
           {
             "show": true
           }
+        ],
+        "rowHeaders": [
+          {
+            "showExpandCollapseButtons": true,
+            "legacyStyleDisabled": true
+          }
         ]
       },
       "None": {
         "columnHeaders": [
           {
-            "columnAdjustment": "fitToContent",
-            "fontFamily": "'Segoe UI', wf_segoe-ui_normal, helvetica, arial, sans-serif",
             "fontColor": {
               "solid": {
                 "color": "foreground"
@@ -743,88 +692,22 @@
               "solid": {
                 "color": "background"
               }
-            },
-            "outlineStyle": 0
-          }
-        ],
-        "grid": [
-          {
-            "rowPadding": 4,
-            "gridHorizontal": false,
-            "gridHorizontalColor": {
-              "solid": {
-                "color": "#F0F0F0"
-              }
             }
-          }
-        ],
-        "columnTotal": [
-          {
-            "fontColor": {
-              "solid": {
-                "color": "foreground"
-              }
-            }
-          }
-        ],
-        "rowTotal": [
-          {
-            "fontColor": {
-              "solid": {
-                "color": "foreground"
-              }
-            }
-          }
-        ],
-        "total": [
-          {
-            "fontColor": {
-              "solid": {
-                "color": "foreground"
-              }
-            }
-          }
-        ],
-        "subTotals": [
-          {
-            "fontColor": {
-              "solid": {
-                "color": "foreground"
-              }
-            }
-          }
-        ],
-        "title": [
-          {
-            "show": true
-          }
-        ],
-        "subTitle": [
-          {
-            "show": true
           }
         ]
       },
       "Minimal": {
-        "columnHeaders": [
-          {
-            "columnAdjustment": "fitToContent",
-            "fontFamily": "'Segoe UI', wf_segoe-ui_normal, helvetica, arial, sans-serif"
-          }
-        ],
         "values": [
           {
             "backColorSecondary": {
               "solid": {
                 "color": "background"
               }
-            },
-            "outlineStyle": 0
+            }
           }
         ],
         "grid": [
           {
-            "rowPadding": 4,
             "gridHorizontal": true,
             "gridHorizontalColor": {
               "solid": {
@@ -832,52 +715,6 @@
               }
             },
             "gridHorizontalWeight": 1
-          }
-        ],
-        "columnTotal": [
-          {
-            "fontColor": {
-              "solid": {
-                "color": "foreground"
-              }
-            }
-          }
-        ],
-        "rowTotal": [
-          {
-            "fontColor": {
-              "solid": {
-                "color": "foreground"
-              }
-            }
-          }
-        ],
-        "total": [
-          {
-            "fontColor": {
-              "solid": {
-                "color": "foreground"
-              }
-            }
-          }
-        ],
-        "subTotals": [
-          {
-            "fontColor": {
-              "solid": {
-                "color": "foreground"
-              }
-            }
-          }
-        ],
-        "title": [
-          {
-            "show": true
-          }
-        ],
-        "subTitle": [
-          {
-            "show": true
           }
         ]
       }
