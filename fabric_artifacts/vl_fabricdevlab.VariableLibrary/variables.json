@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/variables/1.0.0/schema.json",
+  "variables": [
+    {
+      "name": "VL_KV_URL",
+      "note": "",
+      "type": "String",
+      "value": "https://kv-fabric-dev-lab.vault.azure.net/"
+    },
+    {
+      "name": "VL_KV_WORKSPACE_ID",
+      "note": "",
+      "type": "String",
+      "value": "ws-fabricdevlab-id"
+    },
+    {
+      "name": "VL_KV_TENANT_ID",
+      "note": "",
+      "type": "String",
+      "value": "amigomusa-tenant-id"
+    },
+    {
+      "name": "VL_KV_CLIENT_ID",
+      "note": "",
+      "type": "String",
+      "value": "spn-fabricdevlab-client-id"
+    },
+    {
+      "name": "VL_KV_CLIENT_SECRET",
+      "note": "",
+      "type": "String",
+      "value": "spn-fabricdevlab-secret-value"
+    },
+    {
+      "name": "VL_KV_KAGGLE_API_KEY",
+      "note": "",
+      "type": "String",
+      "value": "Kaggle-API-Key"
+    },
+    {
+      "name": "VL_KV_KAGGLE_USERNAME",
+      "note": "",
+      "type": "String",
+      "value": "Kaggle-Username"
+    }
+  ]
+}

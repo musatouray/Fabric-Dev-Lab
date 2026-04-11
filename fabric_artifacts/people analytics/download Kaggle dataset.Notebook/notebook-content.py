@@ -34,13 +34,23 @@
 
 # CELL ********************
 
-# Kaggle API Credentials
+# Using Variable Library to define Kaggle keys
 import os
-os.environ['KAGGLE_USERNAME'] = 'amigomusa'
-os.environ['KAGGLE_KEY'] = 'KGAT_a82661150f9614976194e255b027e20d'
-#KAGGLE_API_TOKEN = 'KGAT_a82661150f9614976194e255b027e20d'
+from notebookutils import credentials, variableLibrary
 
-# 2. Define the dataset and target path
+# 1. Load the Variable Library
+vl = variableLibrary.getLibrary("vl_fabricdevlab")
+
+# 2. Access the Variable Library properties
+vault_uri = vl.VL_KV_URL
+kaggle_username = vl.VL_KV_KAGGLE_USERNAME
+kaggle_key = vl.VL_KV_KAGGLE_API_KEY
+
+# 3. Retrieve actual secrets from Key Vault
+os.environ['KAGGLE_USERNAME'] = credentials.getSecret(vault_uri, kaggle_username)
+os.environ['KAGGLE_KEY'] = credentials.getSecret(vault_uri, kaggle_key)
+
+# 4. Define the dataset and target path
 dataset_path = "pavansubhasht/ibm-hr-analytics-attrition-dataset"
 file_name = "WA_Fn-UseC_-HR-Employee-Attrition.csv"
 target_path = "/lakehouse/default/Files/raw_uploads"
