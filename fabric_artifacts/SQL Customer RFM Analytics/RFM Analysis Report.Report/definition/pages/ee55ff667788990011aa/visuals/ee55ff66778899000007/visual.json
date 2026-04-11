@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "ee55ff66778899000007",
+  "position": {
+    "x": 774,
+    "y": 240,
+    "z": 2000,
+    "height": 795,
+    "width": 370,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimSalesTerritory"
+                    }
+                  },
+                  "Property": "SalesTerritoryCountry"
+                }
+              },
+              "queryRef": "DimSalesTerritory.SalesTerritoryCountry",
+              "nativeQueryRef": "SalesTerritoryCountry"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Revenue Territory %"
+                }
+              },
+              "queryRef": "Metrics.IS Revenue Territory %",
+              "nativeQueryRef": "IS Revenue Territory %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Change PY %"
+                }
+              },
+              "queryRef": "Metrics.IS Change PY %",
+              "nativeQueryRef": "IS Change PY %"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

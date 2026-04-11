@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "ff667788990011220006",
+  "position": {
+    "x": 52,
+    "y": 435,
+    "z": 2000,
+    "height": 610,
+    "width": 700,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Details": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimPromotion"
+                    }
+                  },
+                  "Property": "EnglishPromotionName"
+                }
+              },
+              "queryRef": "DimPromotion.EnglishPromotionName",
+              "nativeQueryRef": "EnglishPromotionName"
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Discount Amount"
+                }
+              },
+              "queryRef": "Metrics.IS Discount Amount",
+              "nativeQueryRef": "IS Discount Amount"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Avg Discount %"
+                }
+              },
+              "queryRef": "Metrics.IS Avg Discount %",
+              "nativeQueryRef": "IS Avg Discount %",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Revenue"
+                }
+              },
+              "queryRef": "Metrics.IS Revenue",
+              "nativeQueryRef": "IS Revenue"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

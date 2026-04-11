@@ -1,0 +1,121 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "bb22cc33dd44ee550005",
+  "position": {
+    "x": 52,
+    "y": 240,
+    "z": 2000,
+    "height": 500,
+    "width": 700,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Total Revenue"
+                }
+              },
+              "queryRef": "Metrics.Total Revenue",
+              "nativeQueryRef": "Total Revenue"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "RFM Avg Recency"
+                }
+              },
+              "queryRef": "Metrics.RFM Avg Recency",
+              "nativeQueryRef": "RFM Avg Recency",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "RFM Avg Frequency"
+                }
+              },
+              "queryRef": "Metrics.RFM Avg Frequency",
+              "nativeQueryRef": "RFM Avg Frequency"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "a4c04c565e807070622e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "RFM Avg Recency"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "00c7853c1a043788973a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "RFM Avg Frequency"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0de878506c206bcb8eda",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Total Revenue"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "bb22cc33dd44ee550008",
+  "position": {
+    "x": 1162.4395718521248,
+    "y": 167.8822090822292,
+    "z": 0,
+    "height": 892.67022898206,
+    "width": 725.945828238329,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactCustomerRFM"
+                    }
+                  },
+                  "Property": "Segment"
+                }
+              },
+              "queryRef": "FactCustomerRFM.Segment",
+              "nativeQueryRef": "Segment"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IBCS Bar AbsoluteValues"
+                }
+              },
+              "queryRef": "Metrics.IBCS Bar AbsoluteValues",
+              "nativeQueryRef": "IBCS Bar AbsoluteValues"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "grid": [
+        {
+          "properties": {
+            "imageHeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "300D"
+                }
+              }
+            },
+            "imageWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "56D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

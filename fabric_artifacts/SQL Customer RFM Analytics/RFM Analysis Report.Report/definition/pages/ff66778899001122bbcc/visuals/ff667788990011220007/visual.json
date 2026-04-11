@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "ff667788990011220007",
+  "position": {
+    "x": 774,
+    "y": 435,
+    "z": 3000,
+    "height": 300,
+    "width": 480,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimPromotion"
+                    }
+                  },
+                  "Property": "EnglishPromotionType"
+                }
+              },
+              "queryRef": "DimPromotion.EnglishPromotionType",
+              "nativeQueryRef": "EnglishPromotionType",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Revenue"
+                }
+              },
+              "queryRef": "Metrics.IS Revenue",
+              "nativeQueryRef": "IS Revenue"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

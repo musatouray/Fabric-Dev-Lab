@@ -1,0 +1,133 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.2.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "Fluent2-CY26SU03",
+      "reportVersionAtImport": {
+        "visual": "2.7.0",
+        "report": "3.2.0",
+        "page": "2.3.1"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "rfm_theme.json",
+      "reportVersionAtImport": {
+        "visual": "2.7.0",
+        "report": "3.2.0",
+        "page": "2.3.1"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "Fluent2-CY26SU03",
+          "path": "BaseThemes/Fluent2-CY26SU03.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "customers_dark32899996305795265.svg",
+          "path": "customers_dark32899996305795265.svg",
+          "type": "Image"
+        },
+        {
+          "name": "dolar_bills_light03417188652392855.svg",
+          "path": "dolar_bills_light03417188652392855.svg",
+          "type": "Image"
+        },
+        {
+          "name": "dolar_coins_light5315297096875927.svg",
+          "path": "dolar_coins_light5315297096875927.svg",
+          "type": "Image"
+        },
+        {
+          "name": "dollar_bills_dark1289867915004953.svg",
+          "path": "dollar_bills_dark1289867915004953.svg",
+          "type": "Image"
+        },
+        {
+          "name": "dollar_coins_dark06350388889043013.svg",
+          "path": "dollar_coins_dark06350388889043013.svg",
+          "type": "Image"
+        },
+        {
+          "name": "executive_summary12198256932876017.svg",
+          "path": "executive_summary12198256932876017.svg",
+          "type": "Image"
+        },
+        {
+          "name": "logo_2693848972949952.png",
+          "path": "logo_2693848972949952.png",
+          "type": "Image"
+        },
+        {
+          "name": "shopping_cart_light3312939664036727.svg",
+          "path": "shopping_cart_light3312939664036727.svg",
+          "type": "Image"
+        },
+        {
+          "name": "shopping_coins_dark8459916827494449.svg",
+          "path": "shopping_coins_dark8459916827494449.svg",
+          "type": "Image"
+        },
+        {
+          "name": "warning_skeleton_light9478209283900223.svg",
+          "path": "warning_skeleton_light9478209283900223.svg",
+          "type": "Image"
+        },
+        {
+          "name": "rfm_theme.json",
+          "path": "rfm_theme.json",
+          "type": "CustomTheme"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "cc33dd44ee55ff660006",
+  "position": {
+    "x": 295.24112631702371,
+    "y": 382.65565587363284,
+    "z": 1000,
+    "height": 325.34414311797519,
+    "width": 539.53868574012961,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimDate"
+                    }
+                  },
+                  "Property": "CalendarYear"
+                }
+              },
+              "queryRef": "DimDate.CalendarYear",
+              "nativeQueryRef": "CalendarYear",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Revenue"
+                }
+              },
+              "queryRef": "Metrics.IS Revenue",
+              "nativeQueryRef": "IS Revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Profit"
+                }
+              },
+              "queryRef": "Metrics.IS Profit",
+              "nativeQueryRef": "IS Profit"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "lineStyles": [
+        {
+          "properties": {
+            "lineChartType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'linear'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,147 @@
+-- ════════════════════════════════════════════════════════════════════════════
+-- Template: SVG KPI Card with Monthly Sparkline
+-- Purpose : Reusable DAX pattern for generating SVG card visuals
+--
+-- HOW TO USE:
+--   1. Copy this entire template
+--   2. Replace the 3 parameters at the top:
+--      • _title   → Display name shown on card (e.g., "Total Revenue")
+--      • _measure → Your base measure (e.g., [Total Revenue])
+--      • _format  → DAX format string (e.g., "$#,##0", "#,##0.0", "0.0%")
+--   3. For NEGATIVE KPIs (like Churn), swap the colors in _chgColor:
+--      • Use: IF(_chgPct >= 0, "%23dc2626", "%2316a34a")  -- red for up, green for down
+--   4. Add measure to Power BI, set Data Category = "Image URL"
+--   5. Display in Table visual with image size 360×260
+--
+-- DEPENDENCIES:
+--   • DimDate[FullDateAlternateKey] - Date column for DATEADD time intelligence
+--   • DimDate[MonthNumberOfYear] - Month number (1-12) for sparkline
+-- ════════════════════════════════════════════════════════════════════════════
+
+SVG Card [YOUR_MEASURE_NAME] =
+
+-- ══════════════════════════════════════════════════════════════════════════
+-- PARAMETERS - MODIFY THESE 3 LINES ONLY
+-- ══════════════════════════════════════════════════════════════════════════
+VAR _title   = "Your Title Here"        -- Card title
+VAR _measure = [Your Measure Here]      -- Base measure to visualize
+VAR _format  = "#,##0"                  -- Number format: "$#,##0", "#,##0.0", "0.0%"
+
+-- ══════════════════════════════════════════════════════════════════════════
+-- CORE CALCULATIONS (DO NOT MODIFY BELOW THIS LINE)
+-- ══════════════════════════════════════════════════════════════════════════
+VAR _current     = _measure
+VAR _currentFmt  = FORMAT(_current, _format)
+
+-- Prior Year Comparison using DATEADD for proper time intelligence
+VAR _py = CALCULATE(_measure, DATEADD(DimDate[FullDateAlternateKey], -1, YEAR))
+VAR _hasPY   = NOT ISBLANK(_py)
+VAR _chgPct  = DIVIDE(_current - _py, _py, 0)
+-- For NEGATIVE KPIs (Churn, Complaints), swap colors: IF(_chgPct >= 0, "%23dc2626", "%2316a34a")
+VAR _chgColor = IF(_hasPY, IF(_chgPct >= 0, "%2316a34a", "%23dc2626"), "%23999999")
+VAR _chgLine  = IF(
+    _hasPY,
+    UNICHAR(916) & "PY " & IF(_chgPct >= 0, "+", "") & FORMAT(ABS(_chgPct) * 100, "0.0") & "%",
+    UNICHAR(916) & "PY N/A"
+)
+
+-- Monthly Values for Sparkline
+VAR _m1  = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 1)
+VAR _m2  = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 2)
+VAR _m3  = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 3)
+VAR _m4  = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 4)
+VAR _m5  = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 5)
+VAR _m6  = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 6)
+VAR _m7  = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 7)
+VAR _m8  = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 8)
+VAR _m9  = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 9)
+VAR _m10 = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 10)
+VAR _m11 = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 11)
+VAR _m12 = CALCULATE(_measure, REMOVEFILTERS(DimDate[MonthNumberOfYear]), DimDate[MonthNumberOfYear] = 12)
+
+-- Bar Heights (max 85px)
+VAR _maxVal = MAXX({_m1,_m2,_m3,_m4,_m5,_m6,_m7,_m8,_m9,_m10,_m11,_m12}, [Value])
+VAR _latestM = CALCULATE(MAX(DimDate[MonthNumberOfYear]))
+
+VAR _h1  = IF(ISBLANK(_m1),  0, ROUND(85 * DIVIDE(_m1,  _maxVal, 0), 0))
+VAR _h2  = IF(ISBLANK(_m2),  0, ROUND(85 * DIVIDE(_m2,  _maxVal, 0), 0))
+VAR _h3  = IF(ISBLANK(_m3),  0, ROUND(85 * DIVIDE(_m3,  _maxVal, 0), 0))
+VAR _h4  = IF(ISBLANK(_m4),  0, ROUND(85 * DIVIDE(_m4,  _maxVal, 0), 0))
+VAR _h5  = IF(ISBLANK(_m5),  0, ROUND(85 * DIVIDE(_m5,  _maxVal, 0), 0))
+VAR _h6  = IF(ISBLANK(_m6),  0, ROUND(85 * DIVIDE(_m6,  _maxVal, 0), 0))
+VAR _h7  = IF(ISBLANK(_m7),  0, ROUND(85 * DIVIDE(_m7,  _maxVal, 0), 0))
+VAR _h8  = IF(ISBLANK(_m8),  0, ROUND(85 * DIVIDE(_m8,  _maxVal, 0), 0))
+VAR _h9  = IF(ISBLANK(_m9),  0, ROUND(85 * DIVIDE(_m9,  _maxVal, 0), 0))
+VAR _h10 = IF(ISBLANK(_m10), 0, ROUND(85 * DIVIDE(_m10, _maxVal, 0), 0))
+VAR _h11 = IF(ISBLANK(_m11), 0, ROUND(85 * DIVIDE(_m11, _maxVal, 0), 0))
+VAR _h12 = IF(ISBLANK(_m12), 0, ROUND(85 * DIVIDE(_m12, _maxVal, 0), 0))
+
+-- Bar Colors (highlight current month)
+VAR _cN = "%2393c5fd"  -- Light blue (normal)
+VAR _cH = "%231e3a8a"  -- Dark navy (highlighted)
+VAR _c1  = IF(_latestM = 1,  _cH, _cN)
+VAR _c2  = IF(_latestM = 2,  _cH, _cN)
+VAR _c3  = IF(_latestM = 3,  _cH, _cN)
+VAR _c4  = IF(_latestM = 4,  _cH, _cN)
+VAR _c5  = IF(_latestM = 5,  _cH, _cN)
+VAR _c6  = IF(_latestM = 6,  _cH, _cN)
+VAR _c7  = IF(_latestM = 7,  _cH, _cN)
+VAR _c8  = IF(_latestM = 8,  _cH, _cN)
+VAR _c9  = IF(_latestM = 9,  _cH, _cN)
+VAR _c10 = IF(_latestM = 10, _cH, _cN)
+VAR _c11 = IF(_latestM = 11, _cH, _cN)
+VAR _c12 = IF(_latestM = 12, _cH, _cN)
+
+-- SVG Bar Elements
+VAR _bar1  = "<rect x='23' y='"  & (218 - _h1)  & "' width='18' height='" & _h1  & "' rx='3' fill='" & _c1  & "'/>"
+VAR _bar2  = "<rect x='50' y='"  & (218 - _h2)  & "' width='18' height='" & _h2  & "' rx='3' fill='" & _c2  & "'/>"
+VAR _bar3  = "<rect x='77' y='"  & (218 - _h3)  & "' width='18' height='" & _h3  & "' rx='3' fill='" & _c3  & "'/>"
+VAR _bar4  = "<rect x='104' y='" & (218 - _h4)  & "' width='18' height='" & _h4  & "' rx='3' fill='" & _c4  & "'/>"
+VAR _bar5  = "<rect x='131' y='" & (218 - _h5)  & "' width='18' height='" & _h5  & "' rx='3' fill='" & _c5  & "'/>"
+VAR _bar6  = "<rect x='158' y='" & (218 - _h6)  & "' width='18' height='" & _h6  & "' rx='3' fill='" & _c6  & "'/>"
+VAR _bar7  = "<rect x='185' y='" & (218 - _h7)  & "' width='18' height='" & _h7  & "' rx='3' fill='" & _c7  & "'/>"
+VAR _bar8  = "<rect x='212' y='" & (218 - _h8)  & "' width='18' height='" & _h8  & "' rx='3' fill='" & _c8  & "'/>"
+VAR _bar9  = "<rect x='239' y='" & (218 - _h9)  & "' width='18' height='" & _h9  & "' rx='3' fill='" & _c9  & "'/>"
+VAR _bar10 = "<rect x='266' y='" & (218 - _h10) & "' width='18' height='" & _h10 & "' rx='3' fill='" & _c10 & "'/>"
+VAR _bar11 = "<rect x='293' y='" & (218 - _h11) & "' width='18' height='" & _h11 & "' rx='3' fill='" & _c11 & "'/>"
+VAR _bar12 = "<rect x='320' y='" & (218 - _h12) & "' width='18' height='" & _h12 & "' rx='3' fill='" & _c12 & "'/>"
+
+-- Month Labels
+VAR _FF  = "font-family='Segoe UI,sans-serif'"
+VAR _ls  = " y='238' " & _FF & " font-size='9' fill='%2364748b' text-anchor='middle'"
+VAR _lbl1  = "<text x='31'"  & _ls & ">J</text>"
+VAR _lbl2  = "<text x='58'"  & _ls & ">F</text>"
+VAR _lbl3  = "<text x='85'"  & _ls & ">M</text>"
+VAR _lbl4  = "<text x='112'" & _ls & ">A</text>"
+VAR _lbl5  = "<text x='139'" & _ls & ">M</text>"
+VAR _lbl6  = "<text x='166'" & _ls & ">J</text>"
+VAR _lbl7  = "<text x='193'" & _ls & ">J</text>"
+VAR _lbl8  = "<text x='220'" & _ls & ">A</text>"
+VAR _lbl9  = "<text x='247'" & _ls & ">S</text>"
+VAR _lbl10 = "<text x='274'" & _ls & ">O</text>"
+VAR _lbl11 = "<text x='301'" & _ls & ">N</text>"
+VAR _lbl12 = "<text x='328'" & _ls & ">D</text>"
+
+-- SVG Assembly (360×260 card)
+VAR _svg =
+    "data:image/svg+xml;utf8,"
+    & "<svg xmlns='http://www.w3.org/2000/svg' width='360' height='260'>"
+    -- Card border
+    & "<rect x='1' y='1' width='358' height='258' rx='12' fill='white' stroke='%233b82f6' stroke-width='2'/>"
+    -- Title
+    & "<text x='16' y='26' " & _FF & " font-size='13' font-weight='bold' fill='%231e293b'>" & _title & "</text>"
+    -- KPI Value
+    & "<text x='16' y='70' " & _FF & " font-size='32' font-weight='700' fill='%230f172a'>" & _currentFmt & "</text>"
+    -- Delta Line
+    & "<text x='16' y='94' " & _FF & " font-size='12' fill='" & _chgColor & "'>" & _chgLine & "</text>"
+    -- Separator
+    & "<line x1='16' y1='107' x2='344' y2='107' stroke='%23e2e8f0' stroke-width='1' stroke-dasharray='4,3'/>"
+    -- Bars
+    & _bar1 & _bar2 & _bar3 & _bar4 & _bar5 & _bar6
+    & _bar7 & _bar8 & _bar9 & _bar10 & _bar11 & _bar12
+    -- Labels
+    & _lbl1 & _lbl2 & _lbl3 & _lbl4 & _lbl5 & _lbl6
+    & _lbl7 & _lbl8 & _lbl9 & _lbl10 & _lbl11 & _lbl12
+    & "</svg>"
+
+RETURN IF(ISBLANK(_current), BLANK(), _svg)

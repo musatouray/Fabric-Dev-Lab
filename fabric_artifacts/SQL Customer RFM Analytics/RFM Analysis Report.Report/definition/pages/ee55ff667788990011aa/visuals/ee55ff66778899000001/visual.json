@@ -1,0 +1,26 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "ee55ff66778899000001",
+  "position": {
+    "x": 52.1,
+    "y": 31.11,
+    "z": 4000,
+    "height": 47.5,
+    "width": 47.5,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "image",
+    "objects": {
+      "image": [
+        {
+          "properties": {
+            "sourceFile": {
+              "image": {}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "cc33dd44ee55ff660005",
+  "position": {
+    "x": 295.24112631702371,
+    "y": 107.67617548032631,
+    "z": 0,
+    "height": 250.08660111559658,
+    "width": 1583.8818070654449,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Revenue"
+                }
+              },
+              "queryRef": "Metrics.IS Revenue",
+              "nativeQueryRef": "IS Revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Orders"
+                }
+              },
+              "queryRef": "Metrics.IS Orders",
+              "nativeQueryRef": "IS Orders"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Profit"
+                }
+              },
+              "queryRef": "Metrics.IS Profit",
+              "nativeQueryRef": "IS Profit"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Gross Margin %"
+                }
+              },
+              "queryRef": "Metrics.IS Gross Margin %",
+              "nativeQueryRef": "IS Gross Margin %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Avg Order Value"
+                }
+              },
+              "queryRef": "Metrics.IS Avg Order Value",
+              "nativeQueryRef": "IS Avg Order Value"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "layout": [
+        {
+          "properties": {
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1D'"
+                }
+              }
+            },
+            "rowCount": {
+              "expr": {
+                "Literal": {
+                  "Value": "5L"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

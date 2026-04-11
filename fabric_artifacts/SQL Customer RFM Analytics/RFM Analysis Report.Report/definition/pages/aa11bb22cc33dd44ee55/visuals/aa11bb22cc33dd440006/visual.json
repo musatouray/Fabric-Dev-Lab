@@ -1,0 +1,135 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "aa11bb22cc33dd440006",
+  "position": {
+    "x": 52.101375232415954,
+    "y": 611.32280272701382,
+    "z": 2000,
+    "height": 299.87235967101628,
+    "width": 539.53868574012961,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimDate"
+                    }
+                  },
+                  "Property": "CalendarYear"
+                }
+              },
+              "queryRef": "DimDate.CalendarYear",
+              "nativeQueryRef": "CalendarYear",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Fact Revenue"
+                }
+              },
+              "queryRef": "Metrics.Fact Revenue",
+              "nativeQueryRef": "Fact Revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Fact Profit"
+                }
+              },
+              "queryRef": "Metrics.Fact Profit",
+              "nativeQueryRef": "Fact Profit"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Metrics"
+                  }
+                },
+                "Property": "Fact Revenue"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "7a8b0c5d252aaa6ae6a3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "CalendarYear"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a2311030f918cf02ace1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Fact Revenue"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c9193e0051df62c62a5b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Fact Profit"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

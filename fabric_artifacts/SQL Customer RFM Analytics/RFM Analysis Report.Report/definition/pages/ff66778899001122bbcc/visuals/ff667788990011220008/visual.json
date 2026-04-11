@@ -1,0 +1,94 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "ff667788990011220008",
+  "position": {
+    "x": 774,
+    "y": 755,
+    "z": 4000,
+    "height": 290,
+    "width": 480,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimPromotion"
+                    }
+                  },
+                  "Property": "EnglishPromotionName"
+                }
+              },
+              "queryRef": "DimPromotion.EnglishPromotionName",
+              "nativeQueryRef": "EnglishPromotionName"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Revenue"
+                }
+              },
+              "queryRef": "Metrics.IS Revenue",
+              "nativeQueryRef": "IS Revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Discount Amount"
+                }
+              },
+              "queryRef": "Metrics.IS Discount Amount",
+              "nativeQueryRef": "IS Discount Amount"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Discount % of Revenue"
+                }
+              },
+              "queryRef": "Metrics.IS Discount % of Revenue",
+              "nativeQueryRef": "IS Discount % of Revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Gross Margin %"
+                }
+              },
+              "queryRef": "Metrics.IS Gross Margin %",
+              "nativeQueryRef": "IS Gross Margin %"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

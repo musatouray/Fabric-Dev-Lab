@@ -1,0 +1,180 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "bb22cc33dd44ee550007",
+  "position": {
+    "x": 31.260825139449572,
+    "y": 786.15186184023185,
+    "z": 1000,
+    "height": 253.56002613109098,
+    "width": 1076.7617548032631,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "RFM Avg Recency"
+                }
+              },
+              "queryRef": "Metrics.RFM Avg Recency",
+              "nativeQueryRef": "RFM Avg Recency"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "RFM Avg Frequency"
+                }
+              },
+              "queryRef": "Metrics.RFM Avg Frequency",
+              "nativeQueryRef": "RFM Avg Frequency"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "IS Avg Order Value"
+                }
+              },
+              "queryRef": "Metrics.IS Avg Order Value",
+              "nativeQueryRef": "IS Avg Order Value"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Churn Rate %"
+                }
+              },
+              "queryRef": "Metrics.Churn Rate %",
+              "nativeQueryRef": "Churn Rate %"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Metrics"
+                  }
+                },
+                "Property": "RFM Avg Recency"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "layout": [
+        {
+          "properties": {
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1D'"
+                }
+              }
+            },
+            "rowCount": {
+              "expr": {
+                "Literal": {
+                  "Value": "5L"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2c7cff13e4fa78b6951c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "RFM Avg Recency"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "3bfe5d5f1d4cd4878d6a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "RFM Avg Frequency"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8a59eddc1fdde14520a5",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "IS Avg Order Value"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "855363126d0540dda568",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Churn Rate %"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

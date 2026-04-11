@@ -1,0 +1,123 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "b06792ed0a6d1c4939ca",
+  "position": {
+    "x": 455.01867702976597,
+    "y": 32.4186334779477,
+    "z": 3000,
+    "height": 119.25425886530762,
+    "width": 819.72830365667767,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "RFM is a Customer segmentation pattern that allows to rank and group customers based on their purchasing behaviors.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "12pt",
+                      "color": "#999999"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Recency (R):",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "12pt",
+                      "color": "#999999"
+                    }
+                  },
+                  {
+                    "value": " How long since the customer's last order. The lesser the better. Identifies less likely churners",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "12pt",
+                      "color": "#999999"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Frequency (F):",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "12pt",
+                      "color": "#999999"
+                    }
+                  },
+                  {
+                    "value": " How often the customer orders. The higher the better. Identifies the loyal ones.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "12pt",
+                      "color": "#999999"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Monetary (M):",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "12pt",
+                      "color": "#999999"
+                    }
+                  },
+                  {
+                    "value": " Total customer order value. The higher the better. Identifies the big spenders.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "12pt",
+                      "color": "#999999"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

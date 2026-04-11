@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "ee55ff66778899000009",
+  "position": {
+    "x": 1162,
+    "y": 640,
+    "z": 5000,
+    "height": 400,
+    "width": 722,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "donutChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimSalesTerritory"
+                    }
+                  },
+                  "Property": "SalesTerritoryGroup"
+                }
+              },
+              "queryRef": "DimSalesTerritory.SalesTerritoryGroup",
+              "nativeQueryRef": "SalesTerritoryGroup",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Fact Revenue"
+                }
+              },
+              "queryRef": "Metrics.Fact Revenue",
+              "nativeQueryRef": "Fact Revenue"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Metrics"
+                  }
+                },
+                "Property": "Fact Revenue"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

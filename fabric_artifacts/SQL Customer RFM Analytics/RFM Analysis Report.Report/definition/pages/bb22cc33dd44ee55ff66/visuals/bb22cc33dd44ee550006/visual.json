@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "bb22cc33dd44ee550006",
+  "position": {
+    "x": 774,
+    "y": 240,
+    "z": 3000,
+    "height": 500,
+    "width": 370,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "donutChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactCustomerRFM"
+                    }
+                  },
+                  "Property": "Segment"
+                }
+              },
+              "queryRef": "FactCustomerRFM.Segment",
+              "nativeQueryRef": "Segment",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "RFM Revenue Share %"
+                }
+              },
+              "queryRef": "Metrics.RFM Revenue Share %",
+              "nativeQueryRef": "RFM Revenue Share %"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
