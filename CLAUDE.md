@@ -17,7 +17,7 @@ fabric_artifacts/
 │   ├── *.SemanticModel/           # TMDL semantic model definitions
 │   ├── *.Warehouse/               # SQL warehouse schemas
 │   ├── *.CopyJob/                 # Fabric data copy jobs
-│   └── functions.tmdl             # Reusable DAX SVG library
+│   └── *.SemanticModel/definition/functions.tmdl  # Reusable DAX/HTML function libraries
 ├── people analytics/              # HR attrition analysis pipeline
 │   ├── *.Notebook/                # PySpark data ingestion notebooks
 │   ├── *.Lakehouse/               # OneLake storage definitions

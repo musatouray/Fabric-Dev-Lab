@@ -20,7 +20,8 @@ Customer RFM Analysis.Report/       # Report artifact
 │   └── pages/                      # Report pages (GUID-named folders)
 └── StaticResources/                # SVG/PNG icons
 
-functions.tmdl                      # Reusable DAX functions (SVG library)
+RFM Analysis Model.SemanticModel/
+└── definition/functions.tmdl       # Reusable DAX functions (SVG/HTML library)
 SVG_RFM_Monthly_Card.dax            # Standalone DAX measure example
 SVG_Card_Template.dax               # Template for creating new SVG cards
 images/                             # Dashboard graphics
@@ -40,7 +41,7 @@ Star schema with semantic model "RFM Analysis Model" hosted in Fabric workspace 
 
 This project uses DAX to generate SVG data-URI images for KPI cards (360×260px) with sparklines. Two approaches exist:
 
-1. **`functions.tmdl`** - Reusable TMDL function library following DaxLib.SVG patterns:
+1. **`RFM Analysis Model.SemanticModel\definition\functions.tmdl`** - Reusable TMDL function library following DaxLib.SVG patterns:
    - `SVG.KpiCard()` - High-level function that generates complete cards
    - `SVG.Element.*` - Low-level SVG element builders (Rect, Txt, Line)
    - `SVG.Attr.*` - Attribute generators (Shapes, Txt, Stroke)
@@ -50,7 +51,7 @@ This project uses DAX to generate SVG data-URI images for KPI cards (360×260px)
 
 ### Adding New SVG Card Measures
 
-Using the function library (preferred):
+Using the semantic-model function library (preferred):
 ```dax
 SVG Card MyMetric =
 SVG.KpiCard([My Measure], "Title", "$#,##0", FALSE, DimDate[FullDateAlternateKey], DimDate[MonthNumberOfYear])
