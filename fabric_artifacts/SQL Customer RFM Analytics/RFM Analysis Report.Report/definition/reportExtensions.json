@@ -58,8 +58,7 @@
           "dataCategory": "ImageUrl",
           "expression": "SVG.KpiCard([Churn Customers], \"Churn Customers\", \"#,##0\", TRUE, DimDate[FullDateAlternateKey], DimDate[MonthNumberOfYear])",
           "displayFolder": "SVG Cards"
-        },
-        
+        }
       ]
     },
     {
