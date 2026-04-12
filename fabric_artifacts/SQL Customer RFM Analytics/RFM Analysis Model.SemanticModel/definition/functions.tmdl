@@ -1608,75 +1608,78 @@ function 'HTML.KpiCard' =
     // ── Card Dimensions ──────────────────────────────────────────────────────
     VAR _cardWidth = "380px"
     VAR _cardHeight = "280px"
+    VAR _nl = UNICHAR(10)
+    VAR _html =
+        "<!DOCTYPE html>" & _nl &
+        "<html lang='en'>" & _nl &
+        "<head>" & _nl &
+        "    <meta charset='UTF-8'>" & _nl &
+        "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>" & _nl &
+        "    <style>" & _nl &
+        "        * { box-sizing: border-box; margin: 0; padding: 0; }" & _nl &
+        "        html, body { margin: 0; padding: 0; overflow: hidden; font-family: 'Segoe UI', sans-serif; background: transparent; }" & _nl &
+        "        .card-container { width: " & _cardWidth & "; height: " & _cardHeight & "; margin: 0 auto; display: flex; align-items: center; justify-content: center; padding: 10px; }" & _nl &
+        "        .kpi-card { background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); border-radius: 12px; border: 1px solid " & _borderColor & "; overflow: hidden; position: relative; width: 100%; height: 100%; transition: all 0.3s ease; }" & _nl &
+        "        .kpi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.12); border-color: " & _accentColor & "; }" & _nl &
+        "        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, " & _accentColor & ", " & _accentLight & "); }" & _nl &
+        "        .card-content { padding: 24px; height: 100%; display: flex; flex-direction: column; }" & _nl &
+        "        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }" & _nl &
+        "        .title-section { flex: 1; }" & _nl &
+        "        .card-subtitle { font-size: 14px; font-weight: 600; color: " & _accentColor & "; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }" & _nl &
+        "        .card-title { font-size: 16px; font-weight: 700; color: " & _primaryColor & "; }" & _nl &
+        "        .icon-wrapper { width: 48px; height: 48px; border-radius: 10px; background: linear-gradient(135deg, " & _accentColor & " 0%, " & _accentLight & " 100%); display: flex; align-items: center; justify-content: center; }" & _nl &
+        "        .card-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }" & _nl &
+        "        .card-value { font-size: 2.8rem; font-weight: 800; color: " & _primaryColor & "; line-height: 1; margin-bottom: 12px; position: relative; }" & _nl &
+        "        .value-decoration { position: absolute; bottom: -4px; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, " & _accentColor & " 0%, transparent 100%); border-radius: 2px; }" & _nl &
+        "        .card-footer { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; border-top: 1px dashed #e2e8f0; }" & _nl &
+        "        .performance-metrics { display: flex; justify-content: space-between; align-items: center; }" & _nl &
+        "        .metric-item { display: flex; flex-direction: column; align-items: center; font-size: 14px; }" & _nl &
+        "        .metric-value { font-weight: 700; color: " & _accentColor & "; margin-bottom: 2px; }" & _nl &
+        "        .metric-label { color: " & _secondaryColor & "; font-weight: 500; font-size: 12px; }" & _nl &
+        "        .status-indicator { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: " & _statusColor & "; }" & _nl &
+        "        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: " & _statusColor & "; animation: pulse 2s infinite; }" & _nl &
+        "        @keyframes pulse { 0% { box-shadow: 0 0 0 0 " & _pulseColor & "; } 70% { box-shadow: 0 0 0 6px " & _pulseTransparent & "; } 100% { box-shadow: 0 0 0 0 " & _pulseTransparent & "; } }" & _nl &
+        "    </style>" & _nl &
+        "</head>" & _nl &
+        "<body>" & _nl &
+        "    <div class='card-container'>" & _nl &
+        "        <div class='kpi-card'>" & _nl &
+        "            <div class='card-content'>" & _nl &
+        "                <div class='card-top'>" & _nl &
+        "                    <div class='title-section'>" & _nl &
+        "                        <div class='card-subtitle'>" & subtitle & "</div>" & _nl &
+        "                        <div class='card-title'>" & title & "</div>" & _nl &
+        "                    </div>" & _nl &
+        "                    <div class='icon-wrapper'>" & _nl &
+        "                        <svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'>" & _iconSvg & "</svg>" & _nl &
+        "                    </div>" & _nl &
+        "                </div>" & _nl &
+        "                <div class='card-main'>" & _nl &
+        "                    <div class='card-value'>" & _nl &
+        "                        " & currentValueFmt & _nl &
+        "                        <div class='value-decoration'></div>" & _nl &
+        "                    </div>" & _nl &
+        "                </div>" & _nl &
+        "                <div class='card-footer'>" & _nl &
+        "                    <div class='performance-metrics'>" & _nl &
+        "                        <div class='metric-item'>" & _nl &
+        "                            <div class='metric-value'>" & priorYearFmt & "</div>" & _nl &
+        "                            <div class='metric-label'>Prior Year</div>" & _nl &
+        "                        </div>" & _nl &
+        "                        <div class='metric-item'>" & _nl &
+        "                            <div class='metric-value'>" & yoyPercentFmt & "</div>" & _nl &
+        "                            <div class='metric-label'>YoY Change</div>" & _nl &
+        "                        </div>" & _nl &
+        "                        <div class='status-indicator'>" & _nl &
+        "                            <div class='status-dot'></div>" & _nl &
+        "                            <span>" & _statusIndicator & "</span>" & _nl &
+        "                        </div>" & _nl &
+        "                    </div>" & _nl &
+        "                </div>" & _nl &
+        "            </div>" & _nl &
+        "        </div>" & _nl &
+        "    </div>" & _nl &
+        "</body>" & _nl &
+        "</html>"
     RETURN
-    "<!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { margin: 0; padding: 0; overflow: hidden; font-family: 'Segoe UI', sans-serif; background: transparent; }
-        .card-container { width: " & _cardWidth & "; height: " & _cardHeight & "; margin: 0 auto; display: flex; align-items: center; justify-content: center; padding: 10px; }
-        .kpi-card { background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); border-radius: 12px; border: 1px solid " & _borderColor & "; overflow: hidden; position: relative; width: 100%; height: 100%; transition: all 0.3s ease; }
-        .kpi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.12); border-color: " & _accentColor & "; }
-        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, " & _accentColor & ", " & _accentLight & "); }
-        .card-content { padding: 24px; height: 100%; display: flex; flex-direction: column; }
-        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
-        .title-section { flex: 1; }
-        .card-subtitle { font-size: 14px; font-weight: 600; color: " & _accentColor & "; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-        .card-title { font-size: 16px; font-weight: 700; color: " & _primaryColor & "; }
-        .icon-wrapper { width: 48px; height: 48px; border-radius: 10px; background: linear-gradient(135deg, " & _accentColor & " 0%, " & _accentLight & " 100%); display: flex; align-items: center; justify-content: center; }
-        .card-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-        .card-value { font-size: 2.8rem; font-weight: 800; color: " & _primaryColor & "; line-height: 1; margin-bottom: 12px; position: relative; }
-        .value-decoration { position: absolute; bottom: -4px; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, " & _accentColor & " 0%, transparent 100%); border-radius: 2px; }
-        .card-footer { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; border-top: 1px dashed #e2e8f0; }
-        .performance-metrics { display: flex; justify-content: space-between; align-items: center; }
-        .metric-item { display: flex; flex-direction: column; align-items: center; font-size: 14px; }
-        .metric-value { font-weight: 700; color: " & _accentColor & "; margin-bottom: 2px; }
-        .metric-label { color: " & _secondaryColor & "; font-weight: 500; font-size: 12px; }
-        .status-indicator { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: " & _statusColor & "; }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: " & _statusColor & "; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 " & _pulseColor & "; } 70% { box-shadow: 0 0 0 6px " & _pulseTransparent & "; } 100% { box-shadow: 0 0 0 0 " & _pulseTransparent & "; } }
-    </style>
-</head>
-<body>
-    <div class='card-container'>
-        <div class='kpi-card'>
-            <div class='card-content'>
-                <div class='card-top'>
-                    <div class='title-section'>
-                        <div class='card-subtitle'>" & subtitle & "</div>
-                        <div class='card-title'>" & title & "</div>
-                    </div>
-                    <div class='icon-wrapper'>
-                        <svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'>" & _iconSvg & "</svg>
-                    </div>
-                </div>
-                <div class='card-main'>
-                    <div class='card-value'>
-                        " & currentValueFmt & "
-                        <div class='value-decoration'></div>
-                    </div>
-                </div>
-                <div class='card-footer'>
-                    <div class='performance-metrics'>
-                        <div class='metric-item'>
-                            <div class='metric-value'>" & priorYearFmt & "</div>
-                            <div class='metric-label'>Prior Year</div>
-                        </div>
-                        <div class='metric-item'>
-                            <div class='metric-value'>" & yoyPercentFmt & "</div>
-                            <div class='metric-label'>YoY Change</div>
-                        </div>
-                        <div class='status-indicator'>
-                            <div class='status-dot'></div>
-                            <span>" & _statusIndicator & "</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>"
+        _html
