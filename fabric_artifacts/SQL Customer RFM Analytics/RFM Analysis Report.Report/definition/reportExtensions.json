@@ -63,21 +63,21 @@
           "name": "HTML Card Total Orders",
           "dataType": "Text",
           "dataCategory": "WebUrl",
-          "expression": "\nVAR _current = [Fact Orders]\nVAR _py = [Total Orders PY]\nVAR _yoyChange = _current - _py\nVAR _yoyPct = [Total Orders YOY Δ]\nRETURN\n'HTML.KpiCard'(\n    FORMAT(_current, \"#,##0\"),\n    FORMAT(_py, \"#,##0\"),\n    FORMAT(_yoyPct, \"+#,##0;-#,##0;0\"),\n    _yoyChange,\n    \"Total Orders\",\n    \"Year to Date\",\n    \"orders\"\n)\n",
+          "expression": "\nVAR _current = [Total Orders]\nVAR _py = [Total Orders PY]\nVAR _yoyChange = _current - _py\nVAR _yoyPct = [Total Orders YOY %]\nRETURN\n'HTML.KpiCard'(\n    FORMAT(_current, \"#,##0\"),\n    FORMAT(_py, \"#,##0\"),\n    FORMAT(_yoyPct, \"+0.0%;-0.0%;0.0%\"),\n    _yoyChange,\n    \"Total Orders\",\n    \"Year to Date\",\n    \"orders\"\n)\n",
           "displayFolder": "HTML Cards"
         },
         {
           "name": "HTML Card Total Revenue",
           "dataType": "Text",
           "dataCategory": "WebUrl",
-          "expression": "\nVAR _current = [Fact Revenue]\nVAR _py = [Total Revenue PY]\nVAR _yoyChange = _current - _py\nVAR _yoyPct = [Total Revenue YOY %]\nRETURN\n'HTML.KpiCard'(\n    \"$\" & FORMAT(_current, \"#,##0\"),\n    \"$\" & FORMAT(_py, \"#,##0\"),\n    FORMAT(_yoyPct, \"+0.0%;-0.0%;0.0%\"),\n    _yoyChange,\n    \"Total Revenue\",\n    \"Year to Date\",\n    \"revenue\"\n)\n",
+          "expression": "\nVAR _current = [Total Revenue]\nVAR _py = [Total Revenue PY]\nVAR _yoyChange = _current - _py\nVAR _yoyPct = [Total Revenue YOY %]\nRETURN\n'HTML.KpiCard'(\n    \"$\" & FORMAT(_current, \"#,##0\"),\n    \"$\" & FORMAT(_py, \"#,##0\"),\n    FORMAT(_yoyPct, \"+0.0%;-0.0%;0.0%\"),\n    _yoyChange,\n    \"Total Revenue\",\n    \"Year to Date\",\n    \"revenue\"\n)\n",
           "displayFolder": "HTML Cards"
         },
         {
           "name": "HTML Card Total Profit",
           "dataType": "Text",
           "dataCategory": "WebUrl",
-          "expression": "\nVAR _current = [Fact Profit]\nVAR _py = [Total Profit PY]\nVAR _yoyChange = _current - _py\nVAR _yoyPct = [Total Profit YOY %]\nRETURN\n'HTML.KpiCard'(\n    \"$\" & FORMAT(_current, \"#,##0\"),\n    \"$\" & FORMAT(_py, \"#,##0\"),\n    FORMAT(_yoyPct, \"+0.0%;-0.0%;0.0%\"),\n    _yoyChange,\n    \"Total Profit\",\n    \"Year to Date\",\n    \"profit\"\n)\n",
+          "expression": "\nVAR _current = [Total Profit]\nVAR _py = [Total Profit PY]\nVAR _yoyChange = _current - _py\nVAR _yoyPct = [Total Profit YOY %]\nRETURN\n'HTML.KpiCard'(\n    \"$\" & FORMAT(_current, \"#,##0\"),\n    \"$\" & FORMAT(_py, \"#,##0\"),\n    FORMAT(_yoyPct, \"+0.0%;-0.0%;0.0%\"),\n    _yoyChange,\n    \"Total Profit\",\n    \"Year to Date\",\n    \"profit\"\n)\n",
           "displayFolder": "HTML Cards"
         }
       ]
