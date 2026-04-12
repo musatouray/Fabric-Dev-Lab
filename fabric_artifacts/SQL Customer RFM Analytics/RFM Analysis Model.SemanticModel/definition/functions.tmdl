@@ -1603,13 +1603,13 @@ function 'SVG.KpiCard' =
 /// ════════════════════════════════════════════════════════════════════════════
 function 'HTML.KpiCard' =
 		(
-		    currentValueFmt: SCALAR STRING VAL,
-		    priorYearFmt: SCALAR STRING VAL,
-		    yoyPercentFmt: SCALAR STRING VAL,
-		    yoyChange: SCALAR DOUBLE VAL,
-		    subtitle: SCALAR STRING VAL,
-		    title: SCALAR STRING VAL,
-		    iconType: SCALAR STRING VAL
+		    currentValueFmt: STRING,
+		    priorYearFmt: STRING,
+		    yoyPercentFmt: STRING,
+		    yoyChange: DOUBLE,
+		    subtitle: STRING,
+		    title: STRING,
+		    iconType: STRING
 		) =>
 		VAR _primaryColor = "#1d1f21"
 		VAR _accentColor = "#FF6600"
