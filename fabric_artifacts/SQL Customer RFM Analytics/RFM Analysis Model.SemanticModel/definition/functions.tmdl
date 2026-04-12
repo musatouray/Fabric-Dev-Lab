@@ -1410,7 +1410,10 @@ function 'SVG.Wrap' =
 /// URL-encodes a hex color for SVG data-URI (replaces # with %23)
 /// @param {string} hex – Hex color with # (e.g., "#16a34a")
 /// @returns {string} URL-encoded hex (e.g., "%2316a34a")
-function 'SVG.Color.Encode' = (hex: STRING) =>
+function 'SVG.Color.Encode' =
+    (
+        hex: STRING
+    ) =>
     SUBSTITUTE(hex, "#", "%23")
 /// Returns delta color based on change direction
 /// @param {numeric} change – The change percentage
