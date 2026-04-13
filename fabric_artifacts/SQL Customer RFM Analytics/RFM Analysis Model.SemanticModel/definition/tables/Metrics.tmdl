@@ -129,174 +129,6 @@ table Metrics
 		displayFolder: Time Intelligence\Grow and Risk\Previous Period
 		lineageTag: 580c55cf-c2f6-493f-a823-a3372ca7d64f
 
-	/// Total Revenue in the previous quarter.
-	measure 'Total Revenue PQ' = CALCULATE([Total Revenue], DATEADD('DimDate'[FullDateAlternateKey], -1, QUARTER))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e601
-
-	/// Total Revenue for the prior full year (parallel period).
-	measure 'Total Revenue PYC' = CALCULATE([Total Revenue], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, YEAR))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e602
-
-	/// Total Revenue for the prior full quarter (parallel period).
-	measure 'Total Revenue PQC' = CALCULATE([Total Revenue], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, QUARTER))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e603
-
-	/// Total Revenue for the prior full month (parallel period).
-	measure 'Total Revenue PMC' = CALCULATE([Total Revenue], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, MONTH))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e604
-
-	/// Total Orders in the previous quarter.
-	measure 'Total Orders PQ' = CALCULATE([Total Orders], DATEADD('DimDate'[FullDateAlternateKey], -1, QUARTER))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e605
-
-	/// Total Orders for the prior full year (parallel period).
-	measure 'Total Orders PYC' = CALCULATE([Total Orders], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, YEAR))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e606
-
-	/// Total Orders for the prior full quarter (parallel period).
-	measure 'Total Orders PQC' = CALCULATE([Total Orders], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, QUARTER))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e607
-
-	/// Total Orders for the prior full month (parallel period).
-	measure 'Total Orders PMC' = CALCULATE([Total Orders], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, MONTH))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e608
-
-	/// Total Profit in the previous quarter.
-	measure 'Total Profit PQ' = CALCULATE([Total Profit], DATEADD('DimDate'[FullDateAlternateKey], -1, QUARTER))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e609
-
-	/// Total Profit for the prior full year (parallel period).
-	measure 'Total Profit PYC' = CALCULATE([Total Profit], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, YEAR))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e610
-
-	/// Total Profit for the prior full quarter (parallel period).
-	measure 'Total Profit PQC' = CALCULATE([Total Profit], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, QUARTER))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e611
-
-	/// Total Profit for the prior full month (parallel period).
-	measure 'Total Profit PMC' = CALCULATE([Total Profit], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, MONTH))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e612
-
-	/// Total Customers in the previous quarter.
-	measure 'Total Customers PQ' = CALCULATE([Total Customers], DATEADD('DimDate'[FullDateAlternateKey], -1, QUARTER))
-		formatString: #,0
-		displayFolder: Time Intelligence\Grow and Risk\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e613
-
-	/// Total Customers for the prior full year (parallel period).
-	measure 'Total Customers PYC' = CALCULATE([Total Customers], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, YEAR))
-		formatString: #,0
-		displayFolder: Time Intelligence\Grow and Risk\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e614
-
-	/// Total Customers for the prior full quarter (parallel period).
-	measure 'Total Customers PQC' = CALCULATE([Total Customers], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, QUARTER))
-		formatString: #,0
-		displayFolder: Time Intelligence\Grow and Risk\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e615
-
-	/// Total Customers for the prior full month (parallel period).
-	measure 'Total Customers PMC' = CALCULATE([Total Customers], PARALLELPERIOD('DimDate'[FullDateAlternateKey], -1, MONTH))
-		formatString: #,0
-		displayFolder: Time Intelligence\Grow and Risk\Previous Period
-		lineageTag: e1f2a3b4-c5d6-4e7f-8091-a2b3c4d5e616
-
-	/// Total Revenue year-to-date.
-	measure 'Total Revenue YTD' = CALCULATE([Total Revenue], DATESYTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f701
-
-	/// Total Revenue quarter-to-date.
-	measure 'Total Revenue QTD' = CALCULATE([Total Revenue], DATESQTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f702
-
-	/// Total Revenue month-to-date.
-	measure 'Total Revenue MTD' = CALCULATE([Total Revenue], DATESMTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f703
-
-	/// Total Orders year-to-date.
-	measure 'Total Orders YTD' = CALCULATE([Total Orders], DATESYTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f704
-
-	/// Total Orders quarter-to-date.
-	measure 'Total Orders QTD' = CALCULATE([Total Orders], DATESQTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f705
-
-	/// Total Orders month-to-date.
-	measure 'Total Orders MTD' = CALCULATE([Total Orders], DATESMTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f706
-
-	/// Total Profit year-to-date.
-	measure 'Total Profit YTD' = CALCULATE([Total Profit], DATESYTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f707
-
-	/// Total Profit quarter-to-date.
-	measure 'Total Profit QTD' = CALCULATE([Total Profit], DATESQTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f708
-
-	/// Total Profit month-to-date.
-	measure 'Total Profit MTD' = CALCULATE([Total Profit], DATESMTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f709
-
-	/// Total Customers year-to-date.
-	measure 'Total Customers YTD' = CALCULATE([Total Customers], DATESYTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Grow and Risk\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f710
-
-	/// Total Customers quarter-to-date.
-	measure 'Total Customers QTD' = CALCULATE([Total Customers], DATESQTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Grow and Risk\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f711
-
-	/// Total Customers month-to-date.
-	measure 'Total Customers MTD' = CALCULATE([Total Customers], DATESMTD('DimDate'[FullDateAlternateKey]))
-		formatString: #,0
-		displayFolder: Time Intelligence\Grow and Risk\Period to Date
-		lineageTag: f2a3b4c5-d6e7-4f80-9112-b3c4d5e6f712
-
 	/// Churned Customers in the previous month.
 	measure 'Churned Customers PM' = CALCULATE([Churned Customers], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
 		formatString: #,0
@@ -321,12 +153,6 @@ table Metrics
 		displayFolder: Time Intelligence\Sales Health\Period Change
 		lineageTag: fd027ea0-cf5f-48a5-b102-1556aaf3d8b0
 
-	/// Revenue change vs same period last quarter (absolute Δ).
-	measure 'Total Revenue QOQ Δ' = [Total Revenue] - [Total Revenue PQ]
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period Change
-		lineageTag: a3b4c5d6-e7f8-4091-a2b3-c4d5e6f7a801
-
 	/// Order count change vs previous month (absolute Δ).
 	measure 'Total Orders MOM Δ' = [Total Orders] - [Total Orders PM]
 		formatString: #,0
@@ -338,12 +164,6 @@ table Metrics
 		formatString: #,0
 		displayFolder: Time Intelligence\Sales Health\Period Change
 		lineageTag: 1b3a637d-b0b9-428a-b637-e47d0fb4188e
-
-	/// Order count change vs same period last quarter (absolute Δ).
-	measure 'Total Orders QOQ Δ' = [Total Orders] - [Total Orders PQ]
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period Change
-		lineageTag: a3b4c5d6-e7f8-4091-a2b3-c4d5e6f7a802
 
 	/// Profit change vs previous month (absolute Δ).
 	measure 'Total Profit MOM Δ' = [Total Profit] - [Total Profit PM]
@@ -357,12 +177,6 @@ table Metrics
 		displayFolder: Time Intelligence\Sales Health\Period Change
 		lineageTag: 6f494cf2-4a10-4fd5-a11f-39264443f22e
 
-	/// Profit change vs same period last quarter (absolute Δ).
-	measure 'Total Profit QOQ Δ' = [Total Profit] - [Total Profit PQ]
-		formatString: #,0
-		displayFolder: Time Intelligence\Sales Health\Period Change
-		lineageTag: a3b4c5d6-e7f8-4091-a2b3-c4d5e6f7a803
-
 	/// Customer count change vs previous month (absolute Δ).
 	measure 'Total Customers MOM Δ' = [Total Customers] - [Total Customers PM]
 		formatString: #,0
@@ -374,12 +188,6 @@ table Metrics
 		formatString: #,0
 		displayFolder: Time Intelligence\Grow and Risk\Period Change
 		lineageTag: 9e61c8ce-9457-433a-b1f1-a7f8fb5b7698
-
-	/// Customer count change vs same period last quarter (absolute Δ).
-	measure 'Total Customers QOQ Δ' = [Total Customers] - [Total Customers PQ]
-		formatString: #,0
-		displayFolder: Time Intelligence\Grow and Risk\Period Change
-		lineageTag: a3b4c5d6-e7f8-4091-a2b3-c4d5e6f7a804
 
 	/// Churned customer count change vs previous month (absolute Δ).
 	measure 'Churned Customers MOM Δ' = [Churned Customers] - [Churned Customers PM]
@@ -405,12 +213,6 @@ table Metrics
 		displayFolder: Time Intelligence\Sales Health\Period Change %
 		lineageTag: 956663ab-f828-496d-85ec-26f753d3b0ab
 
-	/// Revenue % change vs same period last quarter.
-	measure 'Total Revenue QOQ %' = DIVIDE([Total Revenue QOQ Δ], [Total Revenue PQ])
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Time Intelligence\Sales Health\Period Change %
-		lineageTag: b4c5d6e7-f8a9-4012-b3c4-d5e6f7a8b901
-
 	/// Order count % change vs previous month.
 	measure 'Total Orders MOM %' = DIVIDE([Total Orders MOM Δ], [Total Orders PM])
 		formatString: #,0.00%;-#,0.00%;#,0.00%
@@ -422,12 +224,6 @@ table Metrics
 		formatString: #,0.00%;-#,0.00%;#,0.00%
 		displayFolder: Time Intelligence\Sales Health\Period Change %
 		lineageTag: 6c7d7b3b-6837-4a8f-9426-f310b3d24812
-
-	/// Order count % change vs same period last quarter.
-	measure 'Total Orders QOQ %' = DIVIDE([Total Orders QOQ Δ], [Total Orders PQ])
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Time Intelligence\Sales Health\Period Change %
-		lineageTag: b4c5d6e7-f8a9-4012-b3c4-d5e6f7a8b902
 
 	/// Profit % change vs previous month.
 	measure 'Total Profit MOM %' = DIVIDE([Total Profit MOM Δ], [Total Profit PM])
@@ -441,12 +237,6 @@ table Metrics
 		displayFolder: Time Intelligence\Sales Health\Period Change %
 		lineageTag: 1de20e9b-d516-4d35-9b2e-9fea2863ac49
 
-	/// Profit % change vs same period last quarter.
-	measure 'Total Profit QOQ %' = DIVIDE([Total Profit QOQ Δ], [Total Profit PQ])
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Time Intelligence\Sales Health\Period Change %
-		lineageTag: b4c5d6e7-f8a9-4012-b3c4-d5e6f7a8b903
-
 	/// Customer count % change vs previous month.
 	measure 'Total Customers MOM %' = DIVIDE([Total Customers MOM Δ], [Total Customers PM])
 		formatString: #,0.00%;-#,0.00%;#,0.00%
@@ -458,12 +248,6 @@ table Metrics
 		formatString: #,0.00%;-#,0.00%;#,0.00%
 		displayFolder: Time Intelligence\Grow and Risk\Period Change %
 		lineageTag: 1eb41063-9fad-4ee2-89ba-154118eca843
-
-	/// Customer count % change vs same period last quarter.
-	measure 'Total Customers QOQ %' = DIVIDE([Total Customers QOQ Δ], [Total Customers PQ])
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Time Intelligence\Grow and Risk\Period Change %
-		lineageTag: b4c5d6e7-f8a9-4012-b3c4-d5e6f7a8b904
 
 	/// Churned customers % change vs previous month.
 	measure 'Churned Customers MOM %' = DIVIDE([Churned Customers MOM Δ], [Churned Customers PM])
@@ -517,6 +301,114 @@ table Metrics
 		formatString: $#,##0.00
 		displayFolder: Fact Sales Performance
 		lineageTag: 992a10e7-5858-461a-9c45-48154a79e2b4
+
+	/// Fact Revenue in the previous month.
+	measure 'Fact Revenue PM' = CALCULATE([Fact Revenue], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334401
+
+	/// Fact Revenue in the same period last year.
+	measure 'Fact Revenue PY' = CALCULATE([Fact Revenue], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334402
+
+	/// Fact Revenue month-over-month change (absolute Δ).
+	measure 'Fact Revenue MOM Δ' = [Fact Revenue] - [Fact Revenue PM]
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334403
+
+	/// Fact Revenue year-over-year change (absolute Δ).
+	measure 'Fact Revenue YOY Δ' = [Fact Revenue] - [Fact Revenue PY]
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334404
+
+	/// Fact Revenue month-over-month % change.
+	measure 'Fact Revenue MOM %' = DIVIDE([Fact Revenue MOM Δ], [Fact Revenue PM])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334405
+
+	/// Fact Revenue year-over-year % change.
+	measure 'Fact Revenue YOY %' = DIVIDE([Fact Revenue YOY Δ], [Fact Revenue PY])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334406
+
+	/// Fact Orders in the previous month.
+	measure 'Fact Orders PM' = CALCULATE([Fact Orders], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
+		formatString: #,0
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334407
+
+	/// Fact Orders in the same period last year.
+	measure 'Fact Orders PY' = CALCULATE([Fact Orders], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
+		formatString: #,0
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334408
+
+	/// Fact Orders month-over-month change (absolute Δ).
+	measure 'Fact Orders MOM Δ' = [Fact Orders] - [Fact Orders PM]
+		formatString: #,0
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334409
+
+	/// Fact Orders year-over-year change (absolute Δ).
+	measure 'Fact Orders YOY Δ' = [Fact Orders] - [Fact Orders PY]
+		formatString: #,0
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334410
+
+	/// Fact Orders month-over-month % change.
+	measure 'Fact Orders MOM %' = DIVIDE([Fact Orders MOM Δ], [Fact Orders PM])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334411
+
+	/// Fact Orders year-over-year % change.
+	measure 'Fact Orders YOY %' = DIVIDE([Fact Orders YOY Δ], [Fact Orders PY])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334412
+
+	/// Fact Profit in the previous month.
+	measure 'Fact Profit PM' = CALCULATE([Fact Profit], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334413
+
+	/// Fact Profit in the same period last year.
+	measure 'Fact Profit PY' = CALCULATE([Fact Profit], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334414
+
+	/// Fact Profit month-over-month change (absolute Δ).
+	measure 'Fact Profit MOM Δ' = [Fact Profit] - [Fact Profit PM]
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334415
+
+	/// Fact Profit year-over-year change (absolute Δ).
+	measure 'Fact Profit YOY Δ' = [Fact Profit] - [Fact Profit PY]
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334416
+
+	/// Fact Profit month-over-month % change.
+	measure 'Fact Profit MOM %' = DIVIDE([Fact Profit MOM Δ], [Fact Profit PM])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334417
+
+	/// Fact Profit year-over-year % change.
+	measure 'Fact Profit YOY %' = DIVIDE([Fact Profit YOY Δ], [Fact Profit PY])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334418
 
 	/// Reads the Metric Selector slicer and returns IS Orders, IS Revenue or IS Profit accordingly. Use this measure in all visuals.
 	measure 'Fact Selected Metric' = ```
