@@ -495,14 +495,12 @@ table Metrics
 	measure 'HTML Card Total Orders' = ```
 			VAR _current = [Total Orders]
 			VAR _py = [Total Orders PY]
-			VAR _yoyChange = _current - _py
 			VAR _yoyPct = [Total Orders YOY %]
 			RETURN
 			    HTML.KpiCard(
 			        FORMAT(_current, "#,##0"),
 			        FORMAT(_py, "#,##0"),
 			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
-			        _yoyChange,
 			        "Total Orders",
 			        "Year to Date",
 			        "orders"
@@ -517,14 +515,12 @@ table Metrics
 	measure 'HTML Card Total Revenue' = ```
 			VAR _current = [Total Revenue]
 			VAR _py = [Total Revenue PY]
-			VAR _yoyChange = _current - _py
 			VAR _yoyPct = [Total Revenue YOY %]
 			RETURN
 			    HTML.KpiCard(
 			        "$" & FORMAT(_current, "#,##0"),
 			        "$" & FORMAT(_py, "#,##0"),
 			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
-			        _yoyChange,
 			        "Total Revenue",
 			        "Year to Date",
 			        "revenue"
@@ -539,14 +535,12 @@ table Metrics
 	measure 'HTML Card Total Profit' = ```
 			VAR _current = [Total Profit]
 			VAR _py = [Total Profit PY]
-			VAR _yoyChange = _current - _py
 			VAR _yoyPct = [Total Profit YOY %]
 			RETURN
 			    HTML.KpiCard(
 			        "$" & FORMAT(_current, "#,##0"),
 			        "$" & FORMAT(_py, "#,##0"),
 			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
-			        _yoyChange,
 			        "Total Profit",
 			        "Year to Date",
 			        "profit"

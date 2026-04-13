@@ -1603,13 +1603,12 @@ function 'SVG.KpiCard' =
 /// ════════════════════════════════════════════════════════════════════════════
 function 'HTML.KpiCard' =
 		(
-		    currentValueFmt: STRING,
-		    priorYearFmt: STRING,
-		    yoyPercentFmt: STRING,
-		    yoyChange: DOUBLE,
-		    subtitle: STRING,
-		    title: STRING,
-		    iconType: STRING
+		    currentValueFmt: STRING VAL,
+		    priorYearFmt: STRING VAL,
+		    yoyPercentFmt: STRING VAL,
+		    subtitle: STRING VAL,
+		    title: STRING VAL,
+		    iconType: STRING VAL
 		) =>
 		// ── Configuration ───────────────────────────────────────────────────────
 		VAR _w = "380"
@@ -1619,8 +1618,8 @@ function 'HTML.KpiCard' =
 		VAR _dark = "#1d1f21"
 		VAR _mid = "#444648"
 		VAR _border = "#cccccc"
-		// ── Status logic ────────────────────────────────────────────────────────
-		VAR _isPositive = yoyChange >= 0
+		// ── Status logic (derived from formatted percent string: "-" prefix = negative) ──
+		VAR _isPositive = LEFT(yoyPercentFmt, 1) <> "-"
 		VAR _statusColor = IF(_isPositive, "#4CAF50", "#E53935")
 		VAR _statusLabel = IF(_isPositive, "On Track", "Off Track")
 		// ── Icon SVG paths (Feather icons, stroke-based) ─────────────────────
