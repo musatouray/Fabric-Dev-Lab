@@ -1622,11 +1622,16 @@ function 'SVG.HtmlCard' =
 		VAR _isPositive = LEFT(yoyPercentFmt, 1) <> "-"
 		VAR _statusColor = IF(_isPositive, "#4CAF50", "#E53935")
 		VAR _statusLabel = IF(_isPositive, "On Track", "Off Track")
+		// ── Progress bar vars (conditional on YoY direction) ──────────────────
+		VAR _progColor = IF(_isPositive, "#26a69a", "#ef5350")
+		VAR _progLight = IF(_isPositive, "#b2dfdb", "#ffcdd2")
+		VAR _progWidth = IF(_isPositive, "65", "35")
 		// ── Icon SVG paths (Feather icons, stroke-based) ─────────────────────
 		VAR _iconOrders = "<path d='M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z'/><line x1='3' y1='6' x2='21' y2='6'/><path d='M16 10a4 4 0 0 1-8 0'/>"
 		VAR _iconRevenue = "<line x1='12' y1='1' x2='12' y2='23'/><path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'/>"
 		VAR _iconProfit = "<line x1='18' y1='20' x2='18' y2='10'/><line x1='12' y1='20' x2='12' y2='4'/><line x1='6' y1='20' x2='6' y2='14'/>"
-		VAR _iconPaths = SWITCH(iconType, "orders", _iconOrders, "revenue", _iconRevenue, "profit", _iconProfit, _iconOrders)
+		VAR _iconCustomers = "<path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx='9' cy='7' r='4'/><path d='M23 21v-2a4 4 0 0 0-3-3.87'/><path d='M16 3.13a4 4 0 0 1 0 7.75'/>"
+		VAR _iconPaths = SWITCH(iconType, "orders", _iconOrders, "revenue", _iconRevenue, "profit", _iconProfit, "customers", _iconCustomers, _iconOrders)
 		VAR _iconSvg =
 		    "<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'" &
 		    " fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>" &
@@ -1647,7 +1652,11 @@ function 'SVG.HtmlCard' =
 		        "background:linear-gradient(135deg," & _accent & " 0%," & _accentLight & " 100%);" &
 		        "display:flex;align-items:center;justify-content:center;flex-shrink:0} " &
 		    ".val {font-size:2.6rem;font-weight:800;color:" & _dark & ";line-height:1;flex:1;display:flex;align-items:center} " &
-		    ".ul {height:3px;width:55px;background:linear-gradient(90deg," & _accent & " 0%,transparent 100%);border-radius:2px;margin-bottom:12px} " &
+		    ".pg {margin-bottom:12px} " &
+		    ".pg-t {position:relative;height:8px;border-radius:4px;background:" & _progLight & "} " &
+		    ".pg-f {position:absolute;top:0;left:0;height:100%;border-radius:4px;background:" & _progColor & "} " &
+		    ".pg-th {position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;" &
+		        "border-radius:50%;background:" & _progColor & ";border:3px solid white;box-shadow:0 1px 4px rgba(0,0,0,.25)} " &
 		    ".ftr {border-top:1px dashed #e2e8f0;padding-top:12px;display:flex;justify-content:space-between;align-items:center} " &
 		    ".m {text-align:center} " &
 		    ".mv {font-size:13px;font-weight:700;color:" & _accent & "} " &
@@ -1664,7 +1673,10 @@ function 'SVG.HtmlCard' =
 		            "<div class='ico'>" & _iconSvg & "</div>" &
 		        "</div>" &
 		        "<div class='val'>" & currentValueFmt & "</div>" &
-		        "<div class='ul'></div>" &
+		        "<div class='pg'><div class='pg-t'>" &
+		            "<div class='pg-f' style='width:" & _progWidth & "%'></div>" &
+		            "<div class='pg-th' style='left:" & _progWidth & "%'></div>" &
+		        "</div></div>" &
 		        "<div class='ftr'>" &
 		            "<div class='m'><div class='mv'>" & priorYearFmt & "</div><div class='ml'>Prior Year</div></div>" &
 		            "<div class='m'><div class='mv'>" & yoyPercentFmt & "</div><div class='ml'>YoY Change</div></div>" &

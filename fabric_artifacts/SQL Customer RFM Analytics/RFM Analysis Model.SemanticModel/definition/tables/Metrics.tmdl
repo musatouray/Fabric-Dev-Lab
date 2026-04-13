@@ -549,6 +549,25 @@ table Metrics
 		lineageTag: 2f0203ee-98d1-40bc-bc47-af97efa6c2c7
 		dataCategory: ImageUrl
 
+	/// SVG KPI card for total customers — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Total Customers' =
+			VAR _current = [Total Customers]
+			VAR _py = [Total Customers PY]
+			VAR _yoyPct = [Total Customers YOY %]
+			RETURN
+			    SVG.HtmlCard(
+			        FORMAT(_current, "#,##0"),
+			        FORMAT(_py, "#,##0"),
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        "Total Customers",
+			        "Year to Date",
+			        "customers"
+			    )
+		formatString: @
+		displayFolder: HTML Cards
+		lineageTag: a7f3c9e2-14b8-4d65-91fa-3b72d0e85c41
+		dataCategory: ImageUrl
+
 	/// Gross profit as a % of internet sales revenue. Higher is better.
 	measure 'IS Gross Margin %' = DIVIDE([Fact Profit], [Fact Revenue])
 		formatString: +0.0%;-0.0%;0.0%

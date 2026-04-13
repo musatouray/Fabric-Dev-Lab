@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
-  "name": "f3609f3aad0eb17a42f9",
-  "displayName": "Customer Intelligence",
+  "name": "c762ea9e61555c041e09",
+  "displayName": "Executive Summary",
   "displayOption": "FitToPage",
   "height": 1080,
   "width": 1920,
@@ -74,5 +74,12 @@
         }
       }
     ]
-  }
+  },
+  "visualInteractions": [
+    {
+      "source": "5f99693b7eb1a3cdbed9",
+      "target": "241ddea308bc84ee8c1e",
+      "type": "NoFilter"
+    }
+  ]
 }

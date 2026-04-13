@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
-  "name": "feccb849070cdac23b3d",
+  "name": "039cd68b4eca8a6062a4",
   "position": {
-    "x": 999.18859612388815,
-    "y": 26.629591785457041,
-    "z": 11500,
-    "height": 61.363841940401009,
-    "width": 348.50030988793782,
-    "tabOrder": 5000
+    "x": 1271.2735556709492,
+    "y": 9,
+    "z": 1000,
+    "height": 60,
+    "width": 493.22635220020436,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "advancedSlicerVisual",
@@ -20,17 +20,34 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "RFM Metric Selector"
+                      "Entity": "DimDate"
                     }
                   },
-                  "Property": "Metric"
+                  "Property": "CalendarYear"
                 }
               },
-              "queryRef": "RFM Metric Selector.Metric",
-              "nativeQueryRef": "Metric"
+              "queryRef": "DimDate.CalendarYear",
+              "nativeQueryRef": "CalendarYear"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DimDate"
+                  }
+                },
+                "Property": "CalendarYear"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
       }
     },
     "objects": {
@@ -47,8 +64,8 @@
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "r",
-                    "Entity": "RFM Metric Selector",
+                    "Name": "d",
+                    "Entity": "DimDate",
                     "Type": 0
                   }
                 ],
@@ -61,10 +78,10 @@
                             "Column": {
                               "Expression": {
                                 "SourceRef": {
-                                  "Source": "r"
+                                  "Source": "d"
                                 }
                               },
-                              "Property": "Metric"
+                              "Property": "CalendarYear"
                             }
                           }
                         ],
@@ -72,7 +89,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'Profit'"
+                                "Value": "2013L"
                               }
                             }
                           ]
@@ -99,7 +116,7 @@
             "maxTiles": {
               "expr": {
                 "Literal": {
-                  "Value": "4L"
+                  "Value": "5L"
                 }
               }
             }
@@ -128,6 +145,13 @@
                   "Value": "'center'"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10.5D"
+                }
+              }
             }
           },
           "selector": {
@@ -142,7 +166,7 @@
                   "expr": {
                     "ThemeDataColor": {
                       "ColorId": 0,
-                      "Percent": -0.5
+                      "Percent": -0.6
                     }
                   }
                 }
@@ -160,7 +184,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 0,
+                      "ColorId": 2,
                       "Percent": 0
                     }
                   }
@@ -186,7 +210,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 0,
+                      "ColorId": 5,
                       "Percent": 0
                     }
                   }
@@ -196,7 +220,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "33D"
+                  "Value": "0D"
                 }
               }
             },
@@ -281,7 +305,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 0,
+                      "ColorId": 2,
                       "Percent": 0
                     }
                   }
@@ -328,8 +352,8 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": 0
+                      "ColorId": 5,
+                      "Percent": 0.2
                     }
                   }
                 }
@@ -338,13 +362,27 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "33D"
+                  "Value": "0D"
                 }
               }
             }
           },
           "selector": {
             "id": "interaction:hover"
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
           }
         }
       ],
@@ -357,18 +395,11 @@
                   "Value": "false"
                 }
               }
-            },
-            "strictSingleSelect": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
             }
           }
         }
       ],
-      "selectionIcon": [
+      "background": [
         {
           "properties": {
             "show": {
@@ -378,6 +409,80 @@
                 }
               }
             }
+          },
+          "selector": {
+            "id": "selection:selected"
+          }
+        },
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "id": "selection:selected",
+            "hierarchyMatching": 1
+          }
+        }
+      ],
+      "shapeCustomRectangle": [
+        {
+          "properties": {
+            "rectangleRoundedCurve": {
+              "expr": {
+                "Literal": {
+                  "Value": "10L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        },
+        {
+          "properties": {
+            "rectangleRoundedCurve": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "selection:selected"
+          }
+        },
+        {
+          "properties": {
+            "rectangleRoundedCurve": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "interaction:hover"
           }
         }
       ]
@@ -446,18 +551,58 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "4a6b81ad69bd437cb0d7",
+        "name": "3d7c52db968575f51164",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "RFM Metric Selector"
+                "Entity": "DimDate"
               }
             },
-            "Property": "Metric"
+            "Property": "CalendarYear"
           }
         },
-        "type": "Categorical"
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "DimDate",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "Comparison": {
+                      "ComparisonKind": 0,
+                      "Left": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "CalendarYear"
+                        }
+                      },
+                      "Right": {
+                        "Literal": {
+                          "Value": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "isHiddenInViewMode": true,
+        "isLockedInViewMode": true
       }
     ]
   }
