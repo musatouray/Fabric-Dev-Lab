@@ -42,11 +42,11 @@
                       "Entity": "Metrics"
                     }
                   },
-                  "Property": "Selected Metric (Orders, Rev, Profit)"
+                  "Property": "Fact Selected Metric"
                 }
               },
-              "queryRef": "Metrics.Selected Metric (Orders, Rev, Profit)",
-              "nativeQueryRef": "Selected Metric (Orders, Rev, Profit)"
+              "queryRef": "Metrics.Fact Selected Metric",
+              "nativeQueryRef": "Fact Selected Metric"
             }
           ]
         }
@@ -122,7 +122,7 @@
         "type": "Categorical"
       },
       {
-        "name": "80bb3eb6a7192a1440b4",
+        "name": "83be1ae7a7048167dc80",
         "field": {
           "Measure": {
             "Expression": {
@@ -130,7 +130,7 @@
                 "Entity": "Metrics"
               }
             },
-            "Property": "Selected Metric (Orders, Rev, Profit)"
+            "Property": "Fact Selected Metric"
           }
         },
         "type": "Advanced"

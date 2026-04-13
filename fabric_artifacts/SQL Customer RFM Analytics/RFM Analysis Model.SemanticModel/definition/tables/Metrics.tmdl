@@ -410,6 +410,108 @@ table Metrics
 		displayFolder: Fact Time Intelligence
 		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334418
 
+	/// Fact Selected Metric in the previous month — follows the active Fact Metric Selector choice.
+	measure 'Fact Selected Metric PM' =
+			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
+			RETURN
+			    SWITCH(
+			        _selected,
+			        "Orders",  [Fact Orders PM],
+			        "Revenue", [Fact Revenue PM],
+			        "Profit",  [Fact Profit PM],
+			        [Fact Revenue PM]
+			    )
+		displayFolder: Fact Time Intelligence
+		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445501
+
+		formatStringDefinition =
+				VAR _s = SELECTEDVALUE('Fact Metric Selector'[Metric])
+				RETURN SWITCH(_s, "Orders", "#,0", "Revenue", "$#,##0.00", "Profit", "$#,##0.00", "$#,##0.00")
+
+	/// Fact Selected Metric in the same period last year — follows the active Fact Metric Selector choice. Use as the PY series on the column chart.
+	measure 'Fact Selected Metric PY' =
+			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
+			RETURN
+			    SWITCH(
+			        _selected,
+			        "Orders",  [Fact Orders PY],
+			        "Revenue", [Fact Revenue PY],
+			        "Profit",  [Fact Profit PY],
+			        [Fact Revenue PY]
+			    )
+		displayFolder: Fact Time Intelligence
+		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445502
+
+		formatStringDefinition =
+				VAR _s = SELECTEDVALUE('Fact Metric Selector'[Metric])
+				RETURN SWITCH(_s, "Orders", "#,0", "Revenue", "$#,##0.00", "Profit", "$#,##0.00", "$#,##0.00")
+
+	/// Month-over-month absolute change for the selected Fact metric.
+	measure 'Fact Selected Metric MOM Δ' =
+			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
+			RETURN
+			    SWITCH(
+			        _selected,
+			        "Orders",  [Fact Orders MOM Δ],
+			        "Revenue", [Fact Revenue MOM Δ],
+			        "Profit",  [Fact Profit MOM Δ],
+			        [Fact Revenue MOM Δ]
+			    )
+		displayFolder: Fact Time Intelligence
+		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445503
+
+		formatStringDefinition =
+				VAR _s = SELECTEDVALUE('Fact Metric Selector'[Metric])
+				RETURN SWITCH(_s, "Orders", "+#,0;-#,0;0", "Revenue", "+$#,##0.00;-$#,##0.00;0", "Profit", "+$#,##0.00;-$#,##0.00;0", "+$#,##0.00;-$#,##0.00;0")
+
+	/// Year-over-year absolute change for the selected Fact metric.
+	measure 'Fact Selected Metric YOY Δ' =
+			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
+			RETURN
+			    SWITCH(
+			        _selected,
+			        "Orders",  [Fact Orders YOY Δ],
+			        "Revenue", [Fact Revenue YOY Δ],
+			        "Profit",  [Fact Profit YOY Δ],
+			        [Fact Revenue YOY Δ]
+			    )
+		displayFolder: Fact Time Intelligence
+		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445504
+
+		formatStringDefinition =
+				VAR _s = SELECTEDVALUE('Fact Metric Selector'[Metric])
+				RETURN SWITCH(_s, "Orders", "+#,0;-#,0;0", "Revenue", "+$#,##0.00;-$#,##0.00;0", "Profit", "+$#,##0.00;-$#,##0.00;0", "+$#,##0.00;-$#,##0.00;0")
+
+	/// Month-over-month % change for the selected Fact metric.
+	measure 'Fact Selected Metric MOM %' =
+			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
+			RETURN
+			    SWITCH(
+			        _selected,
+			        "Orders",  [Fact Orders MOM %],
+			        "Revenue", [Fact Revenue MOM %],
+			        "Profit",  [Fact Profit MOM %],
+			        [Fact Revenue MOM %]
+			    )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445505
+
+	/// Year-over-year % change for the selected Fact metric.
+	measure 'Fact Selected Metric YOY %' =
+			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
+			RETURN
+			    SWITCH(
+			        _selected,
+			        "Orders",  [Fact Orders YOY %],
+			        "Revenue", [Fact Revenue YOY %],
+			        "Profit",  [Fact Profit YOY %],
+			        [Fact Revenue YOY %]
+			    )
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445506
+
 	/// Reads the Metric Selector slicer and returns IS Orders, IS Revenue or IS Profit accordingly. Use this measure in all visuals.
 	measure 'Fact Selected Metric' = ```
 			
@@ -674,6 +776,87 @@ table Metrics
 		formatString: @
 		displayFolder: HTML Cards
 		lineageTag: a7f3c9e2-14b8-4d65-91fa-3b72d0e85c41
+		dataCategory: ImageUrl
+
+	/// SVG KPI card for Fact Revenue — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Fact Revenue' =
+			VAR _current = [Fact Revenue]
+			VAR _py = [Fact Revenue PY]
+			VAR _yoyPct = [Fact Revenue YOY %]
+			RETURN
+			    SVG.HtmlCard(
+			        "$" & FORMAT(_current, "#,##0"),
+			        "$" & FORMAT(_py, "#,##0"),
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        "Fact Revenue",
+			        "Year to Date",
+			        "revenue"
+			    )
+		formatString: @
+		displayFolder: Fact HTML Cards
+		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e701
+		dataCategory: ImageUrl
+
+	/// SVG KPI card for Fact Orders — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Fact Orders' =
+			VAR _current = [Fact Orders]
+			VAR _py = [Fact Orders PY]
+			VAR _yoyPct = [Fact Orders YOY %]
+			RETURN
+			    SVG.HtmlCard(
+			        FORMAT(_current, "#,##0"),
+			        FORMAT(_py, "#,##0"),
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        "Fact Orders",
+			        "Year to Date",
+			        "orders"
+			    )
+		formatString: @
+		displayFolder: Fact HTML Cards
+		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e702
+		dataCategory: ImageUrl
+
+	/// SVG KPI card for Fact Profit — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Fact Profit' =
+			VAR _current = [Fact Profit]
+			VAR _py = [Fact Profit PY]
+			VAR _yoyPct = [Fact Profit YOY %]
+			RETURN
+			    SVG.HtmlCard(
+			        "$" & FORMAT(_current, "#,##0"),
+			        "$" & FORMAT(_py, "#,##0"),
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        "Fact Profit",
+			        "Year to Date",
+			        "profit"
+			    )
+		formatString: @
+		displayFolder: Fact HTML Cards
+		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e703
+		dataCategory: ImageUrl
+
+	/// SVG KPI card for the dynamically selected Fact metric (Orders / Revenue / Profit) — changes with the Fact Metric Selector slicer.
+	measure 'HTML Card Fact Selected' =
+			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
+			VAR _current = [Fact Selected Metric]
+			VAR _py = [Fact Selected Metric PY]
+			VAR _yoyPct = [Fact Selected Metric YOY %]
+			VAR _title = SWITCH(_selected, "Orders", "Fact Orders", "Revenue", "Fact Revenue", "Profit", "Fact Profit", "Fact Revenue")
+			VAR _icon = SWITCH(_selected, "Orders", "orders", "Revenue", "revenue", "Profit", "profit", "revenue")
+			VAR _currentFmt = SWITCH(_selected, "Orders", FORMAT(_current, "#,##0"), "$" & FORMAT(_current, "#,##0"))
+			VAR _pyFmt = SWITCH(_selected, "Orders", FORMAT(_py, "#,##0"), "$" & FORMAT(_py, "#,##0"))
+			RETURN
+			    SVG.HtmlCard(
+			        _currentFmt,
+			        _pyFmt,
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        _title,
+			        "Year to Date",
+			        _icon
+			    )
+		formatString: @
+		displayFolder: Fact HTML Cards
+		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e704
 		dataCategory: ImageUrl
 
 	/// Gross profit as a % of internet sales revenue. Higher is better.

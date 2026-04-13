@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "241ddea308bc84ee8c1e",
   "position": {
-    "x": 745.62856999279722,
+    "x": 339.23784317995279,
     "y": 61.363841940401009,
     "z": 6002,
     "height": 347.3425015494397,
-    "width": 1117.2850466506977,
+    "width": 1530.6226234945309,
     "tabOrder": 6002
   },
   "visual": {
@@ -15,6 +15,21 @@
       "queryState": {
         "Values": {
           "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "HTML Card Total Customers"
+                }
+              },
+              "queryRef": "Metrics.HTML Card Total Customers",
+              "nativeQueryRef": " 3",
+              "displayName": " "
+            },
             {
               "field": {
                 "Measure": {
@@ -73,7 +88,7 @@
                     "Entity": "Metrics"
                   }
                 },
-                "Property": "HTML Card Total Orders"
+                "Property": "HTML Card Total Revenue"
               }
             },
             "direction": "Descending"
@@ -266,6 +281,20 @@
               }
             },
             "Property": "HTML Card Total Profit"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c58070a1410e07eb0794",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "HTML Card Total Customers"
           }
         },
         "type": "Advanced"
