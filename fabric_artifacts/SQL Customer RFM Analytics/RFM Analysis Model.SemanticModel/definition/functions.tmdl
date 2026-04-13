@@ -1619,8 +1619,6 @@ function 'HTML.KpiCard' =
 		VAR _isPositive = yoyChange >= 0
 		VAR _statusColor = IF(_isPositive, "#4CAF50", "#E53935")
 		VAR _statusIndicator = IF(_isPositive, "On Track", "Off Track")
-		VAR _pulseColor = IF(_isPositive, "rgba(76, 175, 80, 0.7)", "rgba(229, 57, 53, 0.7)")
-		VAR _pulseTransparent = IF(_isPositive, "rgba(76, 175, 80, 0)", "rgba(229, 57, 53, 0)")
 		VAR _iconOrders = "<path d='M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z'></path><line x1='3' y1='6' x2='21' y2='6'></line><path d='M16 10a4 4 0 0 1-8 0'></path>"
 		VAR _iconRevenue = "<line x1='12' y1='1' x2='12' y2='23'></line><path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'></path>"
 		VAR _iconProfit = "<line x1='18' y1='20' x2='18' y2='10'></line><line x1='12' y1='20' x2='12' y2='4'></line><line x1='6' y1='20' x2='6' y2='14'></line>"
@@ -1656,8 +1654,7 @@ function 'HTML.KpiCard' =
 		    "        .metric-value { font-weight: 700; color: " & _accentColor & "; margin-bottom: 2px; }" & _nl &
 		    "        .metric-label { color: " & _secondaryColor & "; font-weight: 500; font-size: 12px; }" & _nl &
 		    "        .status-indicator { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: " & _statusColor & "; }" & _nl &
-		    "        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: " & _statusColor & "; animation: pulse 2s infinite; }" & _nl &
-		    "        @keyframes pulse { 0% { box-shadow: 0 0 0 0 " & _pulseColor & "; } 70% { box-shadow: 0 0 0 6px " & _pulseTransparent & "; } 100% { box-shadow: 0 0 0 0 " & _pulseTransparent & "; } }" & _nl &
+		    "        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: " & _statusColor & "; }" & _nl &
 		    "    </style>" & _nl &
 		    "</head>" & _nl &
 		    "<body>" & _nl &
