@@ -1623,8 +1623,8 @@ function 'SVG.HtmlCard' =
 		VAR _statusColor = IF(_isPositive, "#4CAF50", "#E53935")
 		VAR _statusLabel = IF(_isPositive, "On Track", "Off Track")
 		// ── Progress bar vars (conditional on YoY direction) ──────────────────
-		VAR _progColor = IF(_isPositive, "#26a69a", "#ef5350")
-		VAR _progLight = IF(_isPositive, "#b2dfdb", "#ffcdd2")
+		VAR _progColor = _statusColor
+		VAR _progLight = IF(_isPositive, "#c8e6c9", "#ffcdd2")
 		VAR _progWidth = IF(_isPositive, "65", "35")
 		// ── Icon SVG paths (Feather icons, stroke-based) ─────────────────────
 		VAR _iconOrders = "<path d='M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z'/><line x1='3' y1='6' x2='21' y2='6'/><path d='M16 10a4 4 0 0 1-8 0'/>"
