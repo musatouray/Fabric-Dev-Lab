@@ -32,4 +32,5 @@ ref table 'Metrics Stats'
 ref table TopBottomSelector
 ref table 'Top N'
 ref table Pages
+ref table 'Param: Fact Metrics'
 

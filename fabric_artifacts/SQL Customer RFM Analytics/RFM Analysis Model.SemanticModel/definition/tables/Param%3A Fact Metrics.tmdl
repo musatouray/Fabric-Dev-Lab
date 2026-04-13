@@ -1,0 +1,49 @@
+table 'Param: Fact Metrics'
+	lineageTag: e6dc35fc-c860-4474-8c00-b38e32352cc8
+
+	column 'Param: Fact Metrics'
+		lineageTag: a9bdbc7d-a46a-4930-89c5-2d880998046f
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Param: Fact Metrics Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Param: Fact Metrics Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Param: Fact Metrics Fields'
+		isHidden
+		lineageTag: 25a6d897-b7c9-40a5-827b-7cc209f95785
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Param: Fact Metrics Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Param: Fact Metrics Order'
+		isHidden
+		formatString: 0
+		lineageTag: c79aa602-df5a-437a-b9c5-74ce72227e04
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Param: Fact Metrics' = calculated
+		mode: import
+		source =
+				{
+				    ("Orders", NAMEOF('Metrics'[Fact Orders]), 0),
+				    ("Revenue", NAMEOF('Metrics'[Fact Revenue]), 1),
+				    ("Profit", NAMEOF('Metrics'[Fact Profit]), 2)
+				}
+
+	annotation PBI_Id = ca4038a2c86f4896bf28a1c4c5636b59
+

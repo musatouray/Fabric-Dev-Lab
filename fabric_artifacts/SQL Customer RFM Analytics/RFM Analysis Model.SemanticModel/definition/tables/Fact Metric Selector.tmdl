@@ -1,39 +1,32 @@
 table 'Fact Metric Selector'
 	lineageTag: 9db16ba9-37ff-4a5c-844d-0d004152a942
 
+	/// Switch between Fact Orders, Fact Revenue and Fact Profit in visuals
 	calculationGroup
 		precedence: 11
 
-		calculationItem Orders = ```
-				[Fact Orders]
-				    
-				```
+		multipleOrEmptySelectionExpression = SELECTEDMEASURE()
 
-		calculationItem Revenue = ```
-				[Fact Revenue]
-				    
-				```
+		noSelectionExpression = SELECTEDMEASURE()
 
-		calculationItem Profit = ```
-				[Fact Profit]
-				   
-				```
+		/// Fact number of orders
+		calculationItem Orders = [Fact Orders]
+
+			formatStringDefinition = "#,0"
+
+		/// Fact Revenue
+		calculationItem Revenue = [Fact Revenue]
+
+			formatStringDefinition = "$#,##0.00"
+
+		/// Fact Profit
+		calculationItem Profit = [Fact Profit]
+
+			formatStringDefinition = "$#,##0.00"
 
 	column Metric
 		dataType: string
 		lineageTag: c64cd8c0-3dfb-4dc2-9eb8-61396f0bf4b0
-		summarizeBy: none
-		sourceColumn: Name
-		sortByColumn: Ordinal
 
-		annotation SummarizationSetBy = Automatic
-
-	column Ordinal
-		dataType: int64
-		formatString: 0
-		lineageTag: be18b542-1850-4ed2-acfa-2a1f1e66629d
-		summarizeBy: sum
-		sourceColumn: Ordinal
-
-		annotation SummarizationSetBy = Automatic
+	partition 'Partition_Metric Selector' = calculationGroup
 

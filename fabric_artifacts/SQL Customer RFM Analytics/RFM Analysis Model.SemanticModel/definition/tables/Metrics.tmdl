@@ -302,264 +302,63 @@ table Metrics
 		displayFolder: Fact Sales Performance
 		lineageTag: 992a10e7-5858-461a-9c45-48154a79e2b4
 
-	/// Fact Revenue in the previous month.
-	measure 'Fact Revenue PM' = CALCULATE([Fact Revenue], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
-		formatString: $#,##0.00
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334401
-
-	/// Fact Revenue in the same period last year.
-	measure 'Fact Revenue PY' = CALCULATE([Fact Revenue], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
-		formatString: $#,##0.00
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334402
-
-	/// Fact Revenue month-over-month change (absolute Δ).
-	measure 'Fact Revenue MOM Δ' = [Fact Revenue] - [Fact Revenue PM]
-		formatString: $#,##0.00
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334403
-
-	/// Fact Revenue year-over-year change (absolute Δ).
-	measure 'Fact Revenue YOY Δ' = [Fact Revenue] - [Fact Revenue PY]
-		formatString: $#,##0.00
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334404
-
-	/// Fact Revenue month-over-month % change.
-	measure 'Fact Revenue MOM %' = DIVIDE([Fact Revenue MOM Δ], [Fact Revenue PM])
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334405
-
-	/// Fact Revenue year-over-year % change.
-	measure 'Fact Revenue YOY %' = DIVIDE([Fact Revenue YOY Δ], [Fact Revenue PY])
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334406
-
-	/// Fact Orders in the previous month.
-	measure 'Fact Orders PM' = CALCULATE([Fact Orders], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
-		formatString: #,0
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334407
-
-	/// Fact Orders in the same period last year.
-	measure 'Fact Orders PY' = CALCULATE([Fact Orders], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
-		formatString: #,0
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334408
-
-	/// Fact Orders month-over-month change (absolute Δ).
-	measure 'Fact Orders MOM Δ' = [Fact Orders] - [Fact Orders PM]
-		formatString: #,0
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334409
-
-	/// Fact Orders year-over-year change (absolute Δ).
-	measure 'Fact Orders YOY Δ' = [Fact Orders] - [Fact Orders PY]
-		formatString: #,0
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334410
-
-	/// Fact Orders month-over-month % change.
-	measure 'Fact Orders MOM %' = DIVIDE([Fact Orders MOM Δ], [Fact Orders PM])
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334411
-
-	/// Fact Orders year-over-year % change.
-	measure 'Fact Orders YOY %' = DIVIDE([Fact Orders YOY Δ], [Fact Orders PY])
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334412
-
-	/// Fact Profit in the previous month.
-	measure 'Fact Profit PM' = CALCULATE([Fact Profit], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
-		formatString: $#,##0.00
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334413
-
-	/// Fact Profit in the same period last year.
-	measure 'Fact Profit PY' = CALCULATE([Fact Profit], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
-		formatString: $#,##0.00
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334414
-
-	/// Fact Profit month-over-month change (absolute Δ).
-	measure 'Fact Profit MOM Δ' = [Fact Profit] - [Fact Profit PM]
-		formatString: $#,##0.00
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334415
-
-	/// Fact Profit year-over-year change (absolute Δ).
-	measure 'Fact Profit YOY Δ' = [Fact Profit] - [Fact Profit PY]
-		formatString: $#,##0.00
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334416
-
-	/// Fact Profit month-over-month % change.
-	measure 'Fact Profit MOM %' = DIVIDE([Fact Profit MOM Δ], [Fact Profit PM])
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334417
-
-	/// Fact Profit year-over-year % change.
-	measure 'Fact Profit YOY %' = DIVIDE([Fact Profit YOY Δ], [Fact Profit PY])
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Fact Time Intelligence
-		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334418
-
-	/// Fact Selected Metric in the previous month — follows the active Fact Metric Selector choice.
-	/// Uses CALCULATE with ALL('Fact Metric Selector') to escape the calculation group override.
-	measure 'Fact Selected Metric PM' =
-			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
-			RETURN
-			    CALCULATE(
-			        SWITCH(
-			            _selected,
-			            "Orders",  [Fact Orders PM],
-			            "Revenue", [Fact Revenue PM],
-			            "Profit",  [Fact Profit PM],
-			            [Fact Revenue PM]
-			        ),
-			        ALL('Fact Metric Selector')
-			    )
-		displayFolder: Fact Time Intelligence
-		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445501
-
-		formatStringDefinition =
-				VAR _s = SELECTEDVALUE('Fact Metric Selector'[Metric])
-				RETURN SWITCH(_s, "Orders", "#,0", "Revenue", "$#,##0.00", "Profit", "$#,##0.00", "$#,##0.00")
-
-	/// Fact Selected Metric in the same period last year — follows the active Fact Metric Selector choice.
-	/// Uses CALCULATE with ALL('Fact Metric Selector') to escape the calculation group override.
-	/// Use this as the PY series on the column chart — NOT [Fact Revenue PY] directly.
-	measure 'Fact Selected Metric PY' =
-			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
-			RETURN
-			    CALCULATE(
-			        SWITCH(
-			            _selected,
-			            "Orders",  [Fact Orders PY],
-			            "Revenue", [Fact Revenue PY],
-			            "Profit",  [Fact Profit PY],
-			            [Fact Revenue PY]
-			        ),
-			        ALL('Fact Metric Selector')
-			    )
-		displayFolder: Fact Time Intelligence
-		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445502
-
-		formatStringDefinition =
-				VAR _s = SELECTEDVALUE('Fact Metric Selector'[Metric])
-				RETURN SWITCH(_s, "Orders", "#,0", "Revenue", "$#,##0.00", "Profit", "$#,##0.00", "$#,##0.00")
-
-	/// Month-over-month absolute change for the selected Fact metric.
-	measure 'Fact Selected Metric MOM Δ' =
-			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
-			RETURN
-			    CALCULATE(
-			        SWITCH(
-			            _selected,
-			            "Orders",  [Fact Orders MOM Δ],
-			            "Revenue", [Fact Revenue MOM Δ],
-			            "Profit",  [Fact Profit MOM Δ],
-			            [Fact Revenue MOM Δ]
-			        ),
-			        ALL('Fact Metric Selector')
-			    )
-		displayFolder: Fact Time Intelligence
-		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445503
-
-		formatStringDefinition =
-				VAR _s = SELECTEDVALUE('Fact Metric Selector'[Metric])
-				RETURN SWITCH(_s, "Orders", "+#,0;-#,0;0", "Revenue", "+$#,##0.00;-$#,##0.00;0", "Profit", "+$#,##0.00;-$#,##0.00;0", "+$#,##0.00;-$#,##0.00;0")
-
-	/// Year-over-year absolute change for the selected Fact metric.
-	measure 'Fact Selected Metric YOY Δ' =
-			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
-			RETURN
-			    CALCULATE(
-			        SWITCH(
-			            _selected,
-			            "Orders",  [Fact Orders YOY Δ],
-			            "Revenue", [Fact Revenue YOY Δ],
-			            "Profit",  [Fact Profit YOY Δ],
-			            [Fact Revenue YOY Δ]
-			        ),
-			        ALL('Fact Metric Selector')
-			    )
-		displayFolder: Fact Time Intelligence
-		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445504
-
-		formatStringDefinition =
-				VAR _s = SELECTEDVALUE('Fact Metric Selector'[Metric])
-				RETURN SWITCH(_s, "Orders", "+#,0;-#,0;0", "Revenue", "+$#,##0.00;-$#,##0.00;0", "Profit", "+$#,##0.00;-$#,##0.00;0", "+$#,##0.00;-$#,##0.00;0")
-
-	/// Month-over-month % change for the selected Fact metric.
-	measure 'Fact Selected Metric MOM %' =
-			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
-			RETURN
-			    CALCULATE(
-			        SWITCH(
-			            _selected,
-			            "Orders",  [Fact Orders MOM %],
-			            "Revenue", [Fact Revenue MOM %],
-			            "Profit",  [Fact Profit MOM %],
-			            [Fact Revenue MOM %]
-			        ),
-			        ALL('Fact Metric Selector')
-			    )
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Fact Time Intelligence
-		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445505
-
-	/// Year-over-year % change for the selected Fact metric.
-	measure 'Fact Selected Metric YOY %' =
-			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
-			RETURN
-			    CALCULATE(
-			        SWITCH(
-			            _selected,
-			            "Orders",  [Fact Orders YOY %],
-			            "Revenue", [Fact Revenue YOY %],
-			            "Profit",  [Fact Profit YOY %],
-			            [Fact Revenue YOY %]
-			        ),
-			        ALL('Fact Metric Selector')
-			    )
-		formatString: #,0.00%;-#,0.00%;#,0.00%
-		displayFolder: Fact Time Intelligence
-		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445506
-
 	/// Reads the Metric Selector slicer and returns IS Orders, IS Revenue or IS Profit accordingly. Use this measure in all visuals.
 	measure 'Fact Selected Metric' = ```
 			
-			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
-			RETURN
-			    SWITCH(
-			        _selected,
-			        "Orders",  CALCULATE([Fact Orders]),
-			        "Revenue", CALCULATE([Fact Revenue]),
-			        "Profit",  CALCULATE([Fact Profit]),
-			        CALCULATE([Fact Revenue])
+			
+			VAR _selectedValue = 
+			    SELECTCOLUMNS(
+			        SUMMARIZE(
+			            'Param: Fact Metrics', 
+			            'Param: Fact Metrics'[Param: Fact Metrics], 
+			            'Param: Fact Metrics'[Param: Fact Metrics Fields], 
+			            'Param: Fact Metrics'[Param: Fact Metrics Order]
+			        ),
+			        'Param: Fact Metrics'[Param: Fact Metrics]
 			    )
-			    
+			
+			RETURN
+			    IF (
+			        COUNTROWS(_selectedValue) = 1,
+			        SWITCH(
+			            _selectedValue,
+			            "Orders", [Fact Orders],
+			            "Revenue", [Fact Revenue],
+			            "Profit", [Fact Profit],
+			            [Fact Revenue]
+			        )
+			    )
+			
 			```
 		displayFolder: Fact Sales Performance
 		lineageTag: ce4f5dbb-a79e-4ba3-aa00-7d228e65dbb0
 
-		formatStringDefinition =
-				VAR _selected = SELECTEDVALUE('RFM Metric Selector'[Metric])
-				RETURN
-				    SWITCH(
-				        _selected,
-				        "Orders",  "#,0",
-				        "Revenue", "$#,##0.00",
-				        "Profit",  "$#,##0.00",
-				        "$#,##0.00"
+		formatStringDefinition = ```
+				VAR _selectedValue = 
+				    SELECTCOLUMNS(
+				        SUMMARIZE(
+				            'Param: Fact Metrics', 
+				            'Param: Fact Metrics'[Param: Fact Metrics], 
+				            'Param: Fact Metrics'[Param: Fact Metrics Fields], 
+				            'Param: Fact Metrics'[Param: Fact Metrics Order]
+				        ),
+				        'Param: Fact Metrics'[Param: Fact Metrics]
 				    )
+				
+				RETURN
+				    IF (
+				        COUNTROWS(_selectedValue) = 1,
+				        SWITCH(
+				            _selectedValue,
+				            "Orders",  "#,0",
+				            "Revenue", "$#,##0.00",
+				            "Profit",  "$#,##0.00",
+				            "$#,##0.00"
+				        )
+				    )
+				
+				    
+				```
 
 	/// Dynamic title that updates to show which metric is currently selected (Orders / Revenue / Profit).
 	measure 'Title Selected Metric' = ```
@@ -626,22 +425,6 @@ table Metrics
 		formatString: +0.0%;-0.0%;0%
 		displayFolder: Fact Sales Performance
 		lineageTag: 331fad7d-7e8a-403f-968f-6fe3abf6cd90
-
-	/// IBCS stacked column chart showing Champions/VIPs/Loyalists/At Risk segment contributions per period. Place DimDate[FullDateAlternateKey] in matrix columns. Set visual image size in Format pane. Use Segment Slicer to highlight a segment.
-	measure 'IBCS Segment Stacked' =
-			
-			PowerofBI.IBCS.ColumnChart.Stacked(
-			    [IS Metric by Segment],
-			    FactCustomerRFM[Segment],
-			    'Segment Slicer'[Segment],
-			    DimDate[FullDateAlternateKey],
-			    0,
-			    0
-			)
-		formatString: @
-		displayFolder: SVG Visuals
-		lineageTag: 0f95390c-267b-4800-851a-5e5a27088069
-		dataCategory: ImageUrl
 
 	/// IBCS vertical column chart showing [Selected Metric] AC (black) vs PY (grey) with red/green variance bar per period. Place DimDate[FullDateAlternateKey] in matrix columns. businessImpact=1 means higher is better.
 	measure 'IBCS Variance Column' =
@@ -722,174 +505,8 @@ table Metrics
 		lineageTag: 96c4cb32-d250-4524-8574-846103ed7295
 		dataCategory: ImageUrl
 
-	/// KPI card for total orders — inline SVG foreignObject, no UDF call.
-	/// SVG KPI card for total orders — rendered via SVG.HtmlCard UDF.
-	measure 'HTML Card Total Orders' =
-			VAR _current = [Total Orders]
-			VAR _py = [Total Orders PY]
-			VAR _yoyPct = [Total Orders YOY %]
-			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
-			RETURN
-			    SVG.HtmlCard(
-			        FORMAT(_current, "#,##0"),
-			        FORMAT(_py, "#,##0"),
-			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
-			        "Total Orders",
-			        _subtitle,
-			        "orders"
-			    )
-		formatString: @
-		displayFolder: HTML Cards
-		lineageTag: 29a9770f-a174-4d5b-9b98-bb2d2f3f78a0
-		dataCategory: ImageUrl
-
-	/// SVG KPI card for total revenue — rendered via SVG.HtmlCard UDF.
-	measure 'HTML Card Total Revenue' =
-			VAR _current = [Total Revenue]
-			VAR _py = [Total Revenue PY]
-			VAR _yoyPct = [Total Revenue YOY %]
-			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
-			RETURN
-			    SVG.HtmlCard(
-			        "$" & FORMAT(_current, "#,##0"),
-			        "$" & FORMAT(_py, "#,##0"),
-			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
-			        "Total Revenue",
-			        _subtitle,
-			        "revenue"
-			    )
-		formatString: @
-		displayFolder: HTML Cards
-		lineageTag: 0ee92b22-7e05-45c0-8fc4-3f4c45c77fd0
-		dataCategory: ImageUrl
-
-	/// SVG KPI card for total profit — rendered via SVG.HtmlCard UDF.
-	measure 'HTML Card Total Profit' =
-			VAR _current = [Total Profit]
-			VAR _py = [Total Profit PY]
-			VAR _yoyPct = [Total Profit YOY %]
-			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
-			RETURN
-			    SVG.HtmlCard(
-			        "$" & FORMAT(_current, "#,##0"),
-			        "$" & FORMAT(_py, "#,##0"),
-			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
-			        "Total Profit",
-			        _subtitle,
-			        "profit"
-			    )
-		formatString: @
-		displayFolder: HTML Cards
-		lineageTag: 2f0203ee-98d1-40bc-bc47-af97efa6c2c7
-		dataCategory: ImageUrl
-
-	/// SVG KPI card for total customers — rendered via SVG.HtmlCard UDF.
-	measure 'HTML Card Total Customers' =
-			VAR _current = [Total Customers]
-			VAR _py = [Total Customers PY]
-			VAR _yoyPct = [Total Customers YOY %]
-			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
-			RETURN
-			    SVG.HtmlCard(
-			        FORMAT(_current, "#,##0"),
-			        FORMAT(_py, "#,##0"),
-			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
-			        "Unique Customers",
-			        _subtitle,
-			        "customers"
-			    )
-		formatString: @
-		displayFolder: HTML Cards
-		lineageTag: a7f3c9e2-14b8-4d65-91fa-3b72d0e85c41
-		dataCategory: ImageUrl
-
-	/// SVG KPI card for Fact Revenue — rendered via SVG.HtmlCard UDF.
-	measure 'HTML Card Fact Revenue' =
-			VAR _current = [Fact Revenue]
-			VAR _py = [Fact Revenue PY]
-			VAR _yoyPct = [Fact Revenue YOY %]
-			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
-			RETURN
-			    SVG.HtmlCard(
-			        "$" & FORMAT(_current, "#,##0"),
-			        "$" & FORMAT(_py, "#,##0"),
-			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
-			        "Total Revenue",
-			        _subtitle,
-			        "revenue"
-			    )
-		formatString: @
-		displayFolder: Fact HTML Cards
-		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e701
-		dataCategory: ImageUrl
-
-	/// SVG KPI card for Fact Orders — rendered via SVG.HtmlCard UDF.
-	measure 'HTML Card Fact Orders' =
-			VAR _current = [Fact Orders]
-			VAR _py = [Fact Orders PY]
-			VAR _yoyPct = [Fact Orders YOY %]
-			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
-			RETURN
-			    SVG.HtmlCard(
-			        FORMAT(_current, "#,##0"),
-			        FORMAT(_py, "#,##0"),
-			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
-			        "Total Orders",
-			        _subtitle,
-			        "orders"
-			    )
-		formatString: @
-		displayFolder: Fact HTML Cards
-		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e702
-		dataCategory: ImageUrl
-
-	/// SVG KPI card for Fact Profit — rendered via SVG.HtmlCard UDF.
-	measure 'HTML Card Fact Profit' =
-			VAR _current = [Fact Profit]
-			VAR _py = [Fact Profit PY]
-			VAR _yoyPct = [Fact Profit YOY %]
-			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
-			RETURN
-			    SVG.HtmlCard(
-			        "$" & FORMAT(_current, "#,##0"),
-			        "$" & FORMAT(_py, "#,##0"),
-			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
-			        "Total Profit",
-			        _subtitle,
-			        "profit"
-			    )
-		formatString: @
-		displayFolder: Fact HTML Cards
-		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e703
-		dataCategory: ImageUrl
-
-	/// SVG KPI card for the dynamically selected Fact metric (Orders / Revenue / Profit) — changes with the Fact Metric Selector slicer.
-	measure 'HTML Card Fact Selected' =
-			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
-			VAR _current = [Fact Selected Metric]
-			VAR _py = [Fact Selected Metric PY]
-			VAR _yoyPct = [Fact Selected Metric YOY %]
-			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
-			VAR _title = SWITCH(_selected, "Orders", "Total Orders", "Revenue", "Total Revenue", "Profit", "Total Profit", "Total Revenue")
-			VAR _icon = SWITCH(_selected, "Orders", "orders", "Revenue", "revenue", "Profit", "profit", "revenue")
-			VAR _currentFmt = SWITCH(_selected, "Orders", FORMAT(_current, "#,##0"), "$" & FORMAT(_current, "#,##0"))
-			VAR _pyFmt = SWITCH(_selected, "Orders", FORMAT(_py, "#,##0"), "$" & FORMAT(_py, "#,##0"))
-			RETURN
-			    SVG.HtmlCard(
-			        _currentFmt,
-			        _pyFmt,
-			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
-			        _title,
-			        _subtitle,
-			        _icon
-			    )
-		formatString: @
-		displayFolder: Fact HTML Cards
-		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e704
-		dataCategory: ImageUrl
-
 	/// Gross profit as a % of internet sales revenue. Higher is better.
-	measure 'IS Gross Margin %' = DIVIDE([Fact Profit], [Fact Revenue])
+	measure 'Fact Gross Margin %' = DIVIDE([Fact Profit], [Fact Revenue])
 		formatString: +0.0%;-0.0%;0.0%
 		displayFolder: Fact Sales Performance
 		lineageTag: 5d68a037-fbb3-4b22-8c90-6db026bede6e
@@ -1040,6 +657,354 @@ table Metrics
 		lineageTag: fddadac2-ce3e-4447-92d6-63dfa9d1250c
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// KPI card for total orders — inline SVG foreignObject, no UDF call.
+	/// SVG KPI card for total orders — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Total Orders' =
+			VAR _current = [Total Orders]
+			VAR _py = [Total Orders PY]
+			VAR _yoyPct = [Total Orders YOY %]
+			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			RETURN
+			    SVG.HtmlCard(
+			        FORMAT(_current, "#,##0"),
+			        FORMAT(_py, "#,##0"),
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        "Total Orders",
+			        _subtitle,
+			        "orders"
+			    )
+		formatString: @
+		displayFolder: HTML Cards
+		lineageTag: 29a9770f-a174-4d5b-9b98-bb2d2f3f78a0
+		dataCategory: ImageUrl
+
+	/// SVG KPI card for total revenue — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Total Revenue' =
+			VAR _current = [Total Revenue]
+			VAR _py = [Total Revenue PY]
+			VAR _yoyPct = [Total Revenue YOY %]
+			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			RETURN
+			    SVG.HtmlCard(
+			        "$" & FORMAT(_current, "#,##0"),
+			        "$" & FORMAT(_py, "#,##0"),
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        "Total Revenue",
+			        _subtitle,
+			        "revenue"
+			    )
+		formatString: @
+		displayFolder: HTML Cards
+		lineageTag: 0ee92b22-7e05-45c0-8fc4-3f4c45c77fd0
+		dataCategory: ImageUrl
+
+	/// SVG KPI card for total profit — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Total Profit' =
+			VAR _current = [Total Profit]
+			VAR _py = [Total Profit PY]
+			VAR _yoyPct = [Total Profit YOY %]
+			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			RETURN
+			    SVG.HtmlCard(
+			        "$" & FORMAT(_current, "#,##0"),
+			        "$" & FORMAT(_py, "#,##0"),
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        "Total Profit",
+			        _subtitle,
+			        "profit"
+			    )
+		formatString: @
+		displayFolder: HTML Cards
+		lineageTag: 2f0203ee-98d1-40bc-bc47-af97efa6c2c7
+		dataCategory: ImageUrl
+
+	/// IBCS stacked column chart showing Champions/VIPs/Loyalists/At Risk segment contributions per period. Place DimDate[FullDateAlternateKey] in matrix columns. Set visual image size in Format pane. Use Segment Slicer to highlight a segment.
+	measure 'IBCS Segment Stacked' =
+			
+			PowerofBI.IBCS.ColumnChart.Stacked(
+			    [IS Metric by Segment],
+			    FactCustomerRFM[Segment],
+			    'Segment Slicer'[Segment],
+			    DimDate[FullDateAlternateKey],
+			    0,
+			    0
+			)
+		formatString: @
+		displayFolder: SVG Visuals
+		lineageTag: 0f95390c-267b-4800-851a-5e5a27088069
+		dataCategory: ImageUrl
+
+	/// SVG KPI card for total customers — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Total Customers' =
+			VAR _current = [Total Customers]
+			VAR _py = [Total Customers PY]
+			VAR _yoyPct = [Total Customers YOY %]
+			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			RETURN
+			    SVG.HtmlCard(
+			        FORMAT(_current, "#,##0"),
+			        FORMAT(_py, "#,##0"),
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        "Unique Customers",
+			        _subtitle,
+			        "customers"
+			    )
+		formatString: @
+		displayFolder: HTML Cards
+		lineageTag: a7f3c9e2-14b8-4d65-91fa-3b72d0e85c41
+		dataCategory: ImageUrl
+
+	/// Fact Revenue in the previous month.
+	measure 'Fact Revenue PM' = CALCULATE([Fact Revenue], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334401
+
+	/// Fact Revenue in the same period last year.
+	measure 'Fact Revenue PY' = CALCULATE([Fact Revenue], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334402
+
+	/// Fact Revenue month-over-month change (absolute Δ).
+	measure 'Fact Revenue MOM Δ' = [Fact Revenue] - [Fact Revenue PM]
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334403
+
+	/// Fact Revenue year-over-year change (absolute Δ).
+	measure 'Fact Revenue YOY Δ' = [Fact Revenue] - [Fact Revenue PY]
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334404
+
+	/// Fact Revenue month-over-month % change.
+	measure 'Fact Revenue MOM %' = DIVIDE([Fact Revenue MOM Δ], [Fact Revenue PM])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334405
+
+	/// Fact Revenue year-over-year % change.
+	measure 'Fact Revenue YOY %' = DIVIDE([Fact Revenue YOY Δ], [Fact Revenue PY])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334406
+
+	/// Fact Orders in the previous month.
+	measure 'Fact Orders PM' = CALCULATE([Fact Orders], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
+		formatString: #,0
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334407
+
+	/// Fact Orders in the same period last year.
+	measure 'Fact Orders PY' = CALCULATE([Fact Orders], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
+		formatString: #,0
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334408
+
+	/// Fact Orders month-over-month change (absolute Δ).
+	measure 'Fact Orders MOM Δ' = [Fact Orders] - [Fact Orders PM]
+		formatString: #,0
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334409
+
+	/// Fact Orders year-over-year change (absolute Δ).
+	measure 'Fact Orders YOY Δ' = [Fact Orders] - [Fact Orders PY]
+		formatString: #,0
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334410
+
+	/// Fact Orders month-over-month % change.
+	measure 'Fact Orders MOM %' = DIVIDE([Fact Orders MOM Δ], [Fact Orders PM])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334411
+
+	/// Fact Orders year-over-year % change.
+	measure 'Fact Orders YOY %' = DIVIDE([Fact Orders YOY Δ], [Fact Orders PY])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334412
+
+	/// Fact Profit in the previous month.
+	measure 'Fact Profit PM' = CALCULATE([Fact Profit], DATEADD('DimDate'[FullDateAlternateKey], -1, MONTH))
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334413
+
+	/// Fact Profit in the same period last year.
+	measure 'Fact Profit PY' = CALCULATE([Fact Profit], DATEADD('DimDate'[FullDateAlternateKey], -1, YEAR))
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334414
+
+	/// Fact Profit month-over-month change (absolute Δ).
+	measure 'Fact Profit MOM Δ' = [Fact Profit] - [Fact Profit PM]
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334415
+
+	/// Fact Profit year-over-year change (absolute Δ).
+	measure 'Fact Profit YOY Δ' = [Fact Profit] - [Fact Profit PY]
+		formatString: $#,##0.00
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334416
+
+	/// Fact Profit month-over-month % change.
+	measure 'Fact Profit MOM %' = DIVIDE([Fact Profit MOM Δ], [Fact Profit PM])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334417
+
+	/// Fact Profit year-over-year % change.
+	measure 'Fact Profit YOY %' = DIVIDE([Fact Profit YOY Δ], [Fact Profit PY])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Fact Time Intelligence
+		lineageTag: c1d2e3f4-a5b6-4c7d-8e9f-001122334418
+
+	/// Fact Selected Metric in the same period last year — follows the active Fact Metric Selector choice.
+	/// Uses CALCULATE with ALL('Fact Metric Selector') to escape the calculation group override.
+	/// Use this as the PY series on the column chart — NOT [Fact Revenue PY] directly.
+	measure 'Fact Selected Metric PY' = ```
+			
+			
+			VAR _selectedValue = 
+			    SELECTCOLUMNS(
+			        SUMMARIZE(
+			            'Param: Fact Metrics', 
+			            'Param: Fact Metrics'[Param: Fact Metrics], 
+			            'Param: Fact Metrics'[Param: Fact Metrics Fields], 
+			            'Param: Fact Metrics'[Param: Fact Metrics Order]
+			        ),
+			        'Param: Fact Metrics'[Param: Fact Metrics]
+			    )
+			
+			RETURN
+			    IF (
+			        COUNTROWS(_selectedValue) = 1,
+			        SWITCH(
+			            _selectedValue,
+			            "Orders", [Fact Orders PY],
+			            "Revenue", [Fact Revenue PY],
+			            "Profit", [Fact Profit PY],
+			            [Fact Revenue PY]
+			        )
+			    )
+			
+			```
+		displayFolder: Fact Time Intelligence
+		lineageTag: d2e3f4a5-b6c7-4d8e-9f01-112233445502
+
+		formatStringDefinition = ```
+				VAR _selectedValue = 
+				    SELECTCOLUMNS(
+				        SUMMARIZE(
+				            'Param: Fact Metrics', 
+				            'Param: Fact Metrics'[Param: Fact Metrics], 
+				            'Param: Fact Metrics'[Param: Fact Metrics Fields], 
+				            'Param: Fact Metrics'[Param: Fact Metrics Order]
+				        ),
+				        'Param: Fact Metrics'[Param: Fact Metrics]
+				    )
+				
+				RETURN
+				    IF (
+				        COUNTROWS(_selectedValue) = 1,
+				        SWITCH(
+				            _selectedValue,
+				            "Orders",  "#,0",
+				            "Revenue", "$#,##0.00",
+				            "Profit",  "$#,##0.00",
+				            "$#,##0.00"
+				        )
+				    )
+				```
+
+	/// SVG KPI card for Fact Revenue — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Fact Revenue' =
+			VAR _current = [Fact Revenue]
+			VAR _py = [Fact Revenue PY]
+			VAR _yoyPct = [Fact Revenue YOY %]
+			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			RETURN
+			    SVG.HtmlCard(
+			        "$" & FORMAT(_current, "#,##0"),
+			        "$" & FORMAT(_py, "#,##0"),
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        "Total Revenue",
+			        _subtitle,
+			        "revenue"
+			    )
+		formatString: @
+		displayFolder: Fact HTML Cards
+		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e701
+		dataCategory: ImageUrl
+
+	/// SVG KPI card for Fact Orders — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Fact Orders' =
+			VAR _current = [Fact Orders]
+			VAR _py = [Fact Orders PY]
+			VAR _yoyPct = [Fact Orders YOY %]
+			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			RETURN
+			    SVG.HtmlCard(
+			        FORMAT(_current, "#,##0"),
+			        FORMAT(_py, "#,##0"),
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        "Total Orders",
+			        _subtitle,
+			        "orders"
+			    )
+		formatString: @
+		displayFolder: Fact HTML Cards
+		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e702
+		dataCategory: ImageUrl
+
+	/// SVG KPI card for Fact Profit — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Fact Profit' =
+			VAR _current = [Fact Profit]
+			VAR _py = [Fact Profit PY]
+			VAR _yoyPct = [Fact Profit YOY %]
+			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			RETURN
+			    SVG.HtmlCard(
+			        "$" & FORMAT(_current, "#,##0"),
+			        "$" & FORMAT(_py, "#,##0"),
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        "Total Profit",
+			        _subtitle,
+			        "profit"
+			    )
+		formatString: @
+		displayFolder: Fact HTML Cards
+		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e703
+		dataCategory: ImageUrl
+
+	/// SVG KPI card for the dynamically selected Fact metric (Orders / Revenue / Profit) — changes with the Fact Metric Selector slicer.
+	measure 'HTML Card Fact Selected' =
+			VAR _selected = SELECTEDVALUE('Fact Metric Selector'[Metric])
+			VAR _current = [Fact Selected Metric]
+			VAR _py = [Fact Selected Metric PY]
+			VAR _yoyPct = [Fact Selected Metric YOY %]
+			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			VAR _title = SWITCH(_selected, "Orders", "Total Orders", "Revenue", "Total Revenue", "Profit", "Total Profit", "Total Revenue")
+			VAR _icon = SWITCH(_selected, "Orders", "orders", "Revenue", "revenue", "Profit", "profit", "revenue")
+			VAR _currentFmt = SWITCH(_selected, "Orders", FORMAT(_current, "#,##0"), "$" & FORMAT(_current, "#,##0"))
+			VAR _pyFmt = SWITCH(_selected, "Orders", FORMAT(_py, "#,##0"), "$" & FORMAT(_py, "#,##0"))
+			RETURN
+			    SVG.HtmlCard(
+			        _currentFmt,
+			        _pyFmt,
+			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
+			        _title,
+			        _subtitle,
+			        _icon
+			    )
+		formatString: @
+		displayFolder: Fact HTML Cards
+		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e704
+		dataCategory: ImageUrl
 
 	column Column
 		isHidden
