@@ -78,8 +78,8 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": 0
+                      "ColorId": 5,
+                      "Percent": 0.6
                     }
                   }
                 }
@@ -88,7 +88,7 @@
             "fillTransparency": {
               "expr": {
                 "Literal": {
-                  "Value": "45D"
+                  "Value": "0D"
                 }
               }
             }
@@ -176,6 +176,34 @@
         },
         "type": "Advanced",
         "howCreated": "User"
+      },
+      {
+        "name": "3469c3f5823aae67c616",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimProduct"
+              }
+            },
+            "Property": "EnglishProductName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1b693f6ae99c12ce198a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Fact Selected Metric"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

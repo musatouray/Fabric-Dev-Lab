@@ -451,5 +451,66 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "7fb358c4cbccd064aae9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics Stats"
+              }
+            },
+            "Property": "Aggregation"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f921a3502498e703dc4a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimProductCategory"
+              }
+            },
+            "Property": "EnglishProductCategoryName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "803c3af265a0a11a708c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimProductSubcategory"
+              }
+            },
+            "Property": "EnglishProductSubcategoryName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "95e1d20014901a704801",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Schema": "extension",
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "blank"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

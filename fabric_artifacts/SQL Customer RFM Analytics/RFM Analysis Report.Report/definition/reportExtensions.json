@@ -67,6 +67,20 @@
           "references": {
             "unrecognizedReferences": true
           }
+        },
+        {
+          "name": "Most profitable product",
+          "dataType": "Decimal",
+          "expression": "\nMAXX(\n    VALUES(DimProductCategory[EnglishProductCategoryName]),\n    [Fact Profit]\n)\n",
+          "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+          "references": {
+            "measures": [
+              {
+                "entity": "Metrics",
+                "name": "Fact Profit"
+              }
+            ]
+          }
         }
       ]
     },

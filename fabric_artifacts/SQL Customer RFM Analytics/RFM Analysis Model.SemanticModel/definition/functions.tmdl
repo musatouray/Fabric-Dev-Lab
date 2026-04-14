@@ -1,4 +1,4 @@
-/// Default number format string for all time intelligence measures
+﻿/// Default number format string for all time intelligence measures
 function 'XU.TMDL.TimeIntelligence.Config.NumberFormat' = () => "#,0"
 	lineageTag: 34bbbbdf-c2ea-4af1-9f5b-0b2f06a6d6f1
 
@@ -1608,11 +1608,12 @@ function 'SVG.HtmlCard' =
 		    yoyPercentFmt: STRING VAL,
 		    subtitle: STRING VAL,
 		    title: STRING VAL,
-		    iconType: STRING VAL
+		    iconType: STRING VAL,
+		    bulletHtml: STRING VAL
 		) =>
 		// ── Configuration ───────────────────────────────────────────────────────
 		VAR _w = "380"
-		VAR _h = "300"
+		VAR _h = "350"
 		VAR _accent = "#FF6600"
 		VAR _accentLight = "#ff983f"
 		VAR _dark = "#1d1f21"
@@ -1621,7 +1622,12 @@ function 'SVG.HtmlCard' =
 		// ── Status logic (derived from formatted percent string: "-" prefix = negative) ──
 		VAR _isPositive = LEFT(yoyPercentFmt, 1) <> "-"
 		VAR _statusColor = IF(_isPositive, "#4CAF50", "#E53935")
-		VAR _statusLabel = IF(_isPositive, "On Track", "Off Track")
+		VAR _direction = IF(_isPositive, "increased", "decreased")
+		VAR _pgLabel =
+		    title & " " & _direction & " by " &
+		    "<span style='color:" & _statusColor & ";font-weight:700'>" & yoyPercentFmt & "</span>" &
+		    " from prior year of " &
+		    "<span style='color:" & _statusColor & ";font-weight:700'>" & priorYearFmt & "</span>"
 		// ── Progress bar vars (conditional on YoY direction) ──────────────────
 		VAR _progColor = _statusColor
 		VAR _progLight = IF(_isPositive, "#c8e6c9", "#ffcdd2")
@@ -1631,7 +1637,8 @@ function 'SVG.HtmlCard' =
 		VAR _iconRevenue = "<line x1='12' y1='1' x2='12' y2='23'/><path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'/>"
 		VAR _iconProfit = "<line x1='18' y1='20' x2='18' y2='10'/><line x1='12' y1='20' x2='12' y2='4'/><line x1='6' y1='20' x2='6' y2='14'/>"
 		VAR _iconCustomers = "<path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx='9' cy='7' r='4'/><path d='M23 21v-2a4 4 0 0 0-3-3.87'/><path d='M16 3.13a4 4 0 0 1 0 7.75'/>"
-		VAR _iconPaths = SWITCH(iconType, "orders", _iconOrders, "revenue", _iconRevenue, "profit", _iconProfit, "customers", _iconCustomers, _iconOrders)
+		VAR _iconMargin = "<path d='M19 5L5 19'/><circle cx='6.5' cy='6.5' r='2.5'/><circle cx='17.5' cy='17.5' r='2.5'/>"
+		VAR _iconPaths = SWITCH(iconType, "orders", _iconOrders, "revenue", _iconRevenue, "profit", _iconProfit, "customers", _iconCustomers, "margin", _iconMargin, _iconOrders)
 		VAR _iconSvg =
 		    "<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'" &
 		    " fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>" &
@@ -1649,18 +1656,18 @@ function 'SVG.HtmlCard' =
 		    ".ico {width:44px;height:44px;border-radius:10px;" &
 		        "background:linear-gradient(135deg," & _accent & " 0%," & _accentLight & " 100%);" &
 		        "display:flex;align-items:center;justify-content:center;flex-shrink:0} " &
-		    ".val {font-size:2.6rem;font-weight:800;color:" & _dark & ";line-height:1;flex:1;display:flex;align-items:center} " &
-		    ".pg {margin-bottom:12px} " &
+		    ".val {font-size:2.6rem;font-weight:800;color:" & _dark & ";line-height:1;margin-bottom:10px;display:flex;align-items:center} " &
+		    ".pg {margin-bottom:6px} " &
 		    ".pg-t {position:relative;height:8px;border-radius:4px;background:" & _progLight & "} " &
 		    ".pg-f {position:absolute;top:0;left:0;height:100%;border-radius:4px;background:" & _progColor & "} " &
 		    ".pg-th {position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;" &
 		        "border-radius:50%;background:" & _progColor & ";border:3px solid white;box-shadow:0 1px 4px rgba(0,0,0,.25)} " &
-		    ".ftr {border-top:1px dashed #e2e8f0;padding-top:12px;display:flex;justify-content:space-between;align-items:center} " &
-		    ".m {text-align:center} " &
-		    ".mv {font-size:13px;font-weight:700;color:" & _accent & "} " &
-		    ".ml {font-size:11px;color:" & _mid & ";font-weight:500} " &
-		    ".st {font-size:12px;font-weight:700;color:" & _statusColor & ";display:flex;align-items:center;gap:5px} " &
-		    ".dt {width:8px;height:8px;border-radius:50%;background:" & _statusColor & ";display:inline-block;flex-shrink:0}"
+		    ".pg-lbl {font-size:10px;color:#444648;line-height:1.5;margin-top:5px;margin-bottom:8px} " &
+		    ".bul {border-top:1px dashed #e2e8f0;padding-top:8px;flex:1} " &
+		    ".bul ul {list-style:none;padding:0;margin:0} " &
+		    ".bul li {font-size:11px;padding:3px 0;display:flex;justify-content:space-between;align-items:center} " &
+		    ".bn {color:#444648;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} " &
+		    ".bp {font-weight:700;color:#FF6600;margin-left:8px;flex-shrink:0}"
 		// ── HTML body ────────────────────────────────────────────────────────
 		VAR _html =
 		    "<html xmlns='http://www.w3.org/1999/xhtml'><head><style>" & _css & "</style></head>" &
@@ -1674,11 +1681,8 @@ function 'SVG.HtmlCard' =
 		            "<div class='pg-f' style='width:" & _progWidth & "%'></div>" &
 		            "<div class='pg-th' style='left:" & _progWidth & "%'></div>" &
 		        "</div></div>" &
-		        "<div class='ftr'>" &
-		            "<div class='m'><div class='mv'>" & priorYearFmt & "</div><div class='ml'>Prior Year</div></div>" &
-		            "<div class='m'><div class='mv'>" & yoyPercentFmt & "</div><div class='ml'>YoY Change</div></div>" &
-		            "<div class='st'><span class='dt'></span>" & _statusLabel & "</div>" &
-		        "</div>" &
+		        "<div class='pg-lbl'>" & _pgLabel & "</div>" &
+		        "<div class='bul'><ul>" & bulletHtml & "</ul></div>" &
 		    "</div></body></html>"
 		// ── Wrap in SVG foreignObject data URI ───────────────────────────────
 		VAR _svg =

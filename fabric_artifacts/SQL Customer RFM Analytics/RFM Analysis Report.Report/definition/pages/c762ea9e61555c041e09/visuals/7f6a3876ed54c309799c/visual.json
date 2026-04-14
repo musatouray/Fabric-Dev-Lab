@@ -1,0 +1,59 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "7f6a3876ed54c309799c",
+  "position": {
+    "x": 20,
+    "y": 776,
+    "z": 6008,
+    "height": 234,
+    "width": 240,
+    "tabOrder": 6008
+  },
+  "visual": {
+    "visualType": "card",
+    "autoSelectVisualType": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Schema": "extension",
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Most profitable product"
+                }
+              },
+              "queryRef": "Metrics.Most profitable product",
+              "nativeQueryRef": "Most profitable product"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "825249d91dedad071672",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Schema": "extension",
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Most profitable product"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

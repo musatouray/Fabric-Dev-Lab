@@ -1,4 +1,4 @@
-/// Virtual table that holds all DAX measures. No data rows — only used to organise measures in the field list.
+﻿/// Virtual table that holds all DAX measures. No data rows — only used to organise measures in the field list.
 table Metrics
 	lineageTag: 1a487961-fb03-477f-afbc-73197a0e69dd
 
@@ -665,6 +665,7 @@ table Metrics
 			VAR _py = [Total Orders PY]
 			VAR _yoyPct = [Total Orders YOY %]
 			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			VAR _bulletHtml = CONCATENATEX(ADDCOLUMNS(TOPN(3, VALUES(DimProductSubcategory[EnglishProductSubcategoryName]), CALCULATE([Total Orders]), DESC), "@pct", DIVIDE(CALCULATE([Total Orders]), [Total Orders])), "<li><span class='bn'>" & DimProductSubcategory[EnglishProductSubcategoryName] & "</span><span class='bp'>" & FORMAT([@pct], "0.0%") & "</span></li>", "", [@pct], DESC)
 			RETURN
 			    SVG.HtmlCard(
 			        FORMAT(_current, "#,##0"),
@@ -672,7 +673,8 @@ table Metrics
 			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
 			        "Total Orders",
 			        _subtitle,
-			        "orders"
+			        "orders",
+			        _bulletHtml
 			    )
 		formatString: @
 		displayFolder: HTML Cards
@@ -685,6 +687,7 @@ table Metrics
 			VAR _py = [Total Revenue PY]
 			VAR _yoyPct = [Total Revenue YOY %]
 			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			VAR _bulletHtml = CONCATENATEX(ADDCOLUMNS(TOPN(3, VALUES(DimProductSubcategory[EnglishProductSubcategoryName]), CALCULATE([Total Revenue]), DESC), "@pct", DIVIDE(CALCULATE([Total Revenue]), [Total Revenue])), "<li><span class='bn'>" & DimProductSubcategory[EnglishProductSubcategoryName] & "</span><span class='bp'>" & FORMAT([@pct], "0.0%") & "</span></li>", "", [@pct], DESC)
 			RETURN
 			    SVG.HtmlCard(
 			        "$" & FORMAT(_current, "#,##0"),
@@ -692,7 +695,8 @@ table Metrics
 			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
 			        "Total Revenue",
 			        _subtitle,
-			        "revenue"
+			        "revenue",
+			        _bulletHtml
 			    )
 		formatString: @
 		displayFolder: HTML Cards
@@ -705,6 +709,7 @@ table Metrics
 			VAR _py = [Total Profit PY]
 			VAR _yoyPct = [Total Profit YOY %]
 			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			VAR _bulletHtml = CONCATENATEX(ADDCOLUMNS(TOPN(3, VALUES(DimProductSubcategory[EnglishProductSubcategoryName]), CALCULATE([Total Profit]), DESC), "@pct", DIVIDE(CALCULATE([Total Profit]), [Total Profit])), "<li><span class='bn'>" & DimProductSubcategory[EnglishProductSubcategoryName] & "</span><span class='bp'>" & FORMAT([@pct], "0.0%") & "</span></li>", "", [@pct], DESC)
 			RETURN
 			    SVG.HtmlCard(
 			        "$" & FORMAT(_current, "#,##0"),
@@ -712,7 +717,8 @@ table Metrics
 			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
 			        "Total Profit",
 			        _subtitle,
-			        "profit"
+			        "profit",
+			        _bulletHtml
 			    )
 		formatString: @
 		displayFolder: HTML Cards
@@ -741,6 +747,7 @@ table Metrics
 			VAR _py = [Total Customers PY]
 			VAR _yoyPct = [Total Customers YOY %]
 			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			VAR _bulletHtml = CONCATENATEX(ADDCOLUMNS(TOPN(3, VALUES(DimCustomer[CustomerKey]), CALCULATE([Fact Revenue]), DESC), "@nm", CALCULATE(MAX(DimCustomer[FirstName]) & " " & MAX(DimCustomer[LastName])), "@pct", DIVIDE(CALCULATE([Fact Revenue]), [Fact Revenue])), "<li><span class='bn'>" & [@nm] & "</span><span class='bp'>" & FORMAT([@pct], "0.0%") & "</span></li>", "", [@pct], DESC)
 			RETURN
 			    SVG.HtmlCard(
 			        FORMAT(_current, "#,##0"),
@@ -748,7 +755,8 @@ table Metrics
 			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
 			        "Unique Customers",
 			        _subtitle,
-			        "customers"
+			        "customers",
+			        _bulletHtml
 			    )
 		formatString: @
 		displayFolder: HTML Cards
@@ -927,6 +935,7 @@ table Metrics
 			VAR _py = [Fact Revenue PY]
 			VAR _yoyPct = [Fact Revenue YOY %]
 			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			VAR _bulletHtml = CONCATENATEX(ADDCOLUMNS(TOPN(3, VALUES(DimProductSubcategory[EnglishProductSubcategoryName]), CALCULATE([Fact Revenue]), DESC), "@pct", DIVIDE(CALCULATE([Fact Revenue]), [Fact Revenue])), "<li><span class='bn'>" & DimProductSubcategory[EnglishProductSubcategoryName] & "</span><span class='bp'>" & FORMAT([@pct], "0.0%") & "</span></li>", "", [@pct], DESC)
 			RETURN
 			    SVG.HtmlCard(
 			        "$" & FORMAT(_current, "#,##0"),
@@ -934,7 +943,8 @@ table Metrics
 			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
 			        "Total Revenue",
 			        _subtitle,
-			        "revenue"
+			        "revenue",
+			        _bulletHtml
 			    )
 		formatString: @
 		displayFolder: Fact HTML Cards
@@ -947,6 +957,7 @@ table Metrics
 			VAR _py = [Fact Orders PY]
 			VAR _yoyPct = [Fact Orders YOY %]
 			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			VAR _bulletHtml = CONCATENATEX(ADDCOLUMNS(TOPN(3, VALUES(DimProductSubcategory[EnglishProductSubcategoryName]), CALCULATE([Fact Orders]), DESC), "@pct", DIVIDE(CALCULATE([Fact Orders]), [Fact Orders])), "<li><span class='bn'>" & DimProductSubcategory[EnglishProductSubcategoryName] & "</span><span class='bp'>" & FORMAT([@pct], "0.0%") & "</span></li>", "", [@pct], DESC)
 			RETURN
 			    SVG.HtmlCard(
 			        FORMAT(_current, "#,##0"),
@@ -954,7 +965,8 @@ table Metrics
 			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
 			        "Total Orders",
 			        _subtitle,
-			        "orders"
+			        "orders",
+			        _bulletHtml
 			    )
 		formatString: @
 		displayFolder: Fact HTML Cards
@@ -967,6 +979,7 @@ table Metrics
 			VAR _py = [Fact Profit PY]
 			VAR _yoyPct = [Fact Profit YOY %]
 			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			VAR _bulletHtml = CONCATENATEX(ADDCOLUMNS(TOPN(3, VALUES(DimProductSubcategory[EnglishProductSubcategoryName]), CALCULATE([Fact Profit]), DESC), "@pct", DIVIDE(CALCULATE([Fact Profit]), [Fact Profit])), "<li><span class='bn'>" & DimProductSubcategory[EnglishProductSubcategoryName] & "</span><span class='bp'>" & FORMAT([@pct], "0.0%") & "</span></li>", "", [@pct], DESC)
 			RETURN
 			    SVG.HtmlCard(
 			        "$" & FORMAT(_current, "#,##0"),
@@ -974,7 +987,8 @@ table Metrics
 			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
 			        "Total Profit",
 			        _subtitle,
-			        "profit"
+			        "profit",
+			        _bulletHtml
 			    )
 		formatString: @
 		displayFolder: Fact HTML Cards
@@ -992,6 +1006,9 @@ table Metrics
 			VAR _icon = SWITCH(_selected, "Orders", "orders", "Revenue", "revenue", "Profit", "profit", "revenue")
 			VAR _currentFmt = SWITCH(_selected, "Orders", FORMAT(_current, "#,##0"), "$" & FORMAT(_current, "#,##0"))
 			VAR _pyFmt = SWITCH(_selected, "Orders", FORMAT(_py, "#,##0"), "$" & FORMAT(_py, "#,##0"))
+			VAR _sel = SELECTEDVALUE('Fact Metric Selector'[Metric], "Revenue")
+			VAR _totalSel = IF(_sel = "Orders", [Fact Orders], IF(_sel = "Profit", [Fact Profit], [Fact Revenue]))
+			VAR _bulletHtml = CONCATENATEX(ADDCOLUMNS(TOPN(3, VALUES(DimProductSubcategory[EnglishProductSubcategoryName]), IF(_sel = "Orders", CALCULATE([Fact Orders]), IF(_sel = "Profit", CALCULATE([Fact Profit]), CALCULATE([Fact Revenue]))), DESC), "@pct", DIVIDE(IF(_sel = "Orders", CALCULATE([Fact Orders]), IF(_sel = "Profit", CALCULATE([Fact Profit]), CALCULATE([Fact Revenue]))), _totalSel)), "<li><span class='bn'>" & DimProductSubcategory[EnglishProductSubcategoryName] & "</span><span class='bp'>" & FORMAT([@pct], "0.0%") & "</span></li>", "", [@pct], DESC)
 			RETURN
 			    SVG.HtmlCard(
 			        _currentFmt,
@@ -999,11 +1016,34 @@ table Metrics
 			        FORMAT(_yoyPct, "+0.0%;-0.0%;0.0%"),
 			        _title,
 			        _subtitle,
-			        _icon
+			        _icon,
+			        _bulletHtml
 			    )
 		formatString: @
 		displayFolder: Fact HTML Cards
 		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e704
+		dataCategory: ImageUrl
+
+	/// SVG KPI card for Fact Gross Margin % — rendered via SVG.HtmlCard UDF.
+	measure 'HTML Card Fact Gross Margin' =
+			VAR _current = [Fact Gross Margin %]
+			VAR _py = [Fact Gross Margin % PY]
+			VAR _yoyAbs = _current - _py
+			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
+			VAR _bulletHtml = CONCATENATEX(ADDCOLUMNS(TOPN(3, VALUES(DimProductSubcategory[EnglishProductSubcategoryName]), CALCULATE([Fact Profit]), DESC), "@pct", DIVIDE(CALCULATE([Fact Profit]), [Fact Profit])), "<li><span class='bn'>" & DimProductSubcategory[EnglishProductSubcategoryName] & "</span><span class='bp'>" & FORMAT([@pct], "0.0%") & "</span></li>", "", [@pct], DESC)
+			RETURN
+			    SVG.HtmlCard(
+			        FORMAT(_current, "+0.0%;-0.0%;0.0%"),
+			        FORMAT(_py, "+0.0%;-0.0%;0.0%"),
+			        FORMAT(_yoyAbs, "+0.0pp;-0.0pp;0.0pp"),
+			        "Profit Margin",
+			        _subtitle,
+			        "margin",
+			        _bulletHtml
+			    )
+		formatString: @
+		displayFolder: Fact HTML Cards
+		lineageTag: f1a2b3c4-d5e6-4f70-8192-a3b4c5d6e705
 		dataCategory: ImageUrl
 
 	column Column

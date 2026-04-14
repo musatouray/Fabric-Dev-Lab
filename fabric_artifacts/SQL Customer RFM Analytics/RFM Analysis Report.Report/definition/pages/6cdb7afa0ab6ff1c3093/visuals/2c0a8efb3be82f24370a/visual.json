@@ -199,7 +199,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'backgroundDark'"
+                      "Value": "'#e6e6e6'"
                     }
                   }
                 }
@@ -371,5 +371,24 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "411d7ce5a11a0b8e0360",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Schema": "extension",
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "blank"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }
