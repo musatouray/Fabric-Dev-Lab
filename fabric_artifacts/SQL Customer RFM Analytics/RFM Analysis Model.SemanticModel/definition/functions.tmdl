@@ -1613,7 +1613,7 @@ function 'SVG.HtmlCard' =
 		) =>
 		// ── Configuration ───────────────────────────────────────────────────────
 		VAR _w = "380"
-		VAR _h = "350"
+		VAR _h = "300"
 		VAR _accent = "#FF6600"
 		VAR _accentLight = "#ff983f"
 		VAR _dark = "#1d1f21"
@@ -1656,8 +1656,8 @@ function 'SVG.HtmlCard' =
 		    ".ico {width:44px;height:44px;border-radius:10px;" &
 		        "background:linear-gradient(135deg," & _accent & " 0%," & _accentLight & " 100%);" &
 		        "display:flex;align-items:center;justify-content:center;flex-shrink:0} " &
-		    ".val {font-size:2.6rem;font-weight:800;color:" & _dark & ";line-height:1;margin-bottom:10px;display:flex;align-items:center} " &
-		    ".pg {margin-bottom:6px} " &
+		    ".val {font-size:2.6rem;font-weight:800;color:" & _dark & ";line-height:1;margin:8px 0 10px;display:flex;align-items:center} " &
+		    ".pg {margin-bottom:12px} " &
 		    ".pg-t {position:relative;height:8px;border-radius:4px;background:" & _progLight & "} " &
 		    ".pg-f {position:absolute;top:0;left:0;height:100%;border-radius:4px;background:" & _progColor & "} " &
 		    ".pg-th {position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;" &
@@ -1665,6 +1665,7 @@ function 'SVG.HtmlCard' =
 		    ".pg-lbl {font-size:10px;color:#444648;line-height:1.5;margin-top:5px;margin-bottom:8px} " &
 		    ".bul {border-top:1px dashed #e2e8f0;padding-top:8px;flex:1} " &
 		    ".bul ul {list-style:none;padding:0;margin:0} " &
+    ".bt {font-size:10px;font-weight:700;color:#444648;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:5px} " &
 		    ".bul li {font-size:11px;padding:3px 0;display:flex;justify-content:space-between;align-items:center} " &
 		    ".bn {color:#444648;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} " &
 		    ".bp {font-weight:700;color:#FF6600;margin-left:8px;flex-shrink:0}"
@@ -1682,7 +1683,7 @@ function 'SVG.HtmlCard' =
 		            "<div class='pg-th' style='left:" & _progWidth & "%'></div>" &
 		        "</div></div>" &
 		        "<div class='pg-lbl'>" & _pgLabel & "</div>" &
-		        "<div class='bul'><ul>" & bulletHtml & "</ul></div>" &
+		        "<div class='bul'>" & bulletHtml & "</div>" &
 		    "</div></body></html>"
 		// ── Wrap in SVG foreignObject data URI ───────────────────────────────
 		VAR _svg =
