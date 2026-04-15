@@ -1622,8 +1622,15 @@ function 'SVG.HtmlCard' =
 		VAR _isPositive = LEFT(yoyPercentFmt, 1) <> "-"
 		VAR _statusColor = IF(_isPositive, "#4CAF50", "#E53935")
 		VAR _direction = IF(_isPositive, "increased", "decreased")
+		VAR _metricLabel = SWITCH(iconType,
+		    "orders", "Orders",
+		    "revenue", "Revenue",
+		    "profit", "Profit",
+		    "customers", "Customers",
+		    "margin", "Profit Margin",
+		    subtitle)
 		VAR _pgLabel =
-		    title & " " & _direction & " by " &
+		    _metricLabel & " " & _direction & " by " &
 		    "<span style='color:" & _statusColor & ";font-weight:700'>" & yoyPercentFmt & "</span>" &
 		    " from prior year of " &
 		    "<span style='color:" & _statusColor & ";font-weight:700'>" & priorYearFmt & "</span>"

@@ -1021,9 +1021,9 @@ table Metrics
 			VAR _subtitle = "Year " & COALESCE(FORMAT(SELECTEDVALUE(DimDate[CalendarYear]), "0"), "YTD")
 			RETURN
 			    SVG.HtmlCard(
-			        FORMAT(_current, "+0.0%;-0.0%;0.0%"),
-			        FORMAT(_py, "+0.0%;-0.0%;0.0%"),
-			        FORMAT(_yoyAbs, "+0.0pp;-0.0pp;0.0pp"),
+			        FORMAT(_current, "0.0%"),
+			        FORMAT(_py, "0.0%"),
+			        FORMAT(DIVIDE(_yoyAbs, ABS(_py)), "+0.0%;-0.0%;0.0%"),
 			        "Profit Margin",
 			        _subtitle,
 			        "margin"
