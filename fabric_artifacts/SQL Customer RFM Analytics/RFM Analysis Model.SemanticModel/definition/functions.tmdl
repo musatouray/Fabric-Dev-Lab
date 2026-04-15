@@ -1339,7 +1339,7 @@ function 'PowerofBI.IBCS.ColumnChart.Stacked' =
 		VAR _MaxAbsPct = MAXX ( _D, ABS ( DIVIDE ( [@AC] - [@PY], ABS ( [@PY] ) ) ) )
 
 		//--- Dynamic label format: "$" prefix for Revenue/Profit, none for Orders; K/M scaling
-		VAR _isOrders = SELECTEDVALUE ( 'Fact Metric Selector'[Metric] ) = "Orders"
+		VAR _isOrders = SELECTEDVALUE ( 'Param: Fact Metrics'[Param: Fact Metrics] ) = "Orders"
 		VAR _pfx      = IF ( _isOrders, "", "$" )
 
 		//--- Y anchors
